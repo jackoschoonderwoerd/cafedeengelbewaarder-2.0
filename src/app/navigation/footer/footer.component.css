@@ -1,0 +1,121 @@
+.top-footer {
+  background-color: var(--header-blue);
+  padding: 5px;
+  /* padding: 10px 25px; */
+}
+.footer-section {
+  /* padding: 20px; */
+  background-color: var(--text-color-orange);
+  margin: 5px;
+  padding: 15px;
+  height: 100%;
+  /* margin-top: 2vh; */
+  /* border: 3px solid var(--header-blue); */
+  /* border: 1px solid red; */
+}
+.footer-section-title {
+  /* font-family: Playfair Display; */
+  color: var(--header-blue);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.footer-section-content {
+  
+  
+  
+  color: var(--header-blue);
+}
+.footer-section-content a {
+  color: var(--header-blue);
+  font-weight: 600;
+  
+}
+
+.bottom-footer {
+  background-color: var(--header-blue);
+  color: white;
+  
+  padding: 10px 25px;
+}
+.bottom-footer-content {
+  padding: 0px 0px;
+  
+  color: var(--text-color-bright-orange);
+}
+
+.social-media span a img {
+  width: 40px;
+  margin-right: 1rem;
+  color: var(--header-blue);
+}
+
+/* at least */
+@media (min-width: 320px) and (max-width: 480px) {
+  /* 
+    Device = Most of the Smartphones Mobiles (Portrait)
+    Screen = 320px to 479px
+  */
+  .top-footer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .footer-section {
+    padding: 40px;
+    border-bottom: 10px solid var(--header-blue);
+  }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  /* 
+    Device = Low Resolution Tablets, Mobiles (Landscape)
+    Screen = 481px to 767px
+  */
+  .top-footer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .footer-section {
+    padding: 40px;
+    border-bottom: 10px solid var(--header-blue);
+  }
+  
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* 
+    Device = Tablets, Ipads (portrait)
+    Screen = 768px to 1024px
+  */
+  .top-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .footer-section {
+    padding: 25px;
+  }
+
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* 
+  Device = Laptops, Desktops
+  Screen = 1025px to 1280px
+  */
+  .top-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .footer-section {
+    padding: 25px;
+  }
+}
+@media (min-width: 1281px) { 
+  /* 
+  Device = Desktops
+  Screen = 1281px to higher resolution desktops
+  */
+  .footer-section {
+    padding: 40px;
+  }
+  .top-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+  }
+}

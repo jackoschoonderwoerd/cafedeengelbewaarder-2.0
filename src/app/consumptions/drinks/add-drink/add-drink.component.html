@@ -1,0 +1,126 @@
+<form fxLayout="column" [formGroup]="addDrinkForm">
+  <mat-form-field  style="display: none;" appearance="outline" *ngIf="editMode">
+    <mat-label>ID</mat-label>
+    <input
+      type="text"
+      matInput
+      readonly
+      formControlName="drinkId"
+      placeholder="ID"/>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Category</mat-label>
+    <input
+      readonly
+      type="text"
+      matInput
+      formControlName="category"
+      placeholder="CATEGORY"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name Dutch</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="nameDutch"
+      placeholder="NAME DUTCH"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name Enlish</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="nameEnglish"
+      placeholder="NAME ENGLISH"
+    />
+  </mat-form-field>
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>CATEGORY</mat-label>
+    <mat-select formControlName="category" (selectionChange)="onSelectionChange($event)">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{category}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <mat-radio-group
+    *ngIf="category === 'wine'"
+    formControlName="wineType"
+    fxLayout
+    fxLayoutGap="20px"
+  >
+    <mat-radio-button value="red">
+      <div class="bottle-icon" fxLayout="column" fxLayoutAlign="center">
+        red
+      </div>
+    </mat-radio-button>
+    <mat-radio-button value="white">
+      <div class="glass-icon" fxLayout="column" fxLayoutAlign="center">
+        white
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <mat-radio-group
+    *ngIf="category === 'wine'"
+    formControlName="wineContainer"
+    fxLayout
+    fxLayoutGap="20px"
+  >
+    <mat-radio-button value="glass">
+      <div fxLayout="column" fxLayoutAlign="center">glass</div>
+    </mat-radio-button>
+    <mat-radio-button value="bottle">
+      <div class="glass-icon" fxLayout="column" fxLayoutAlign="center">
+        bottle
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input type="number" matInput formControlName="price" placeholder="PRICE" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>List Position</mat-label>
+    <input
+      type="number"
+      matInput
+      formControlName="listPosition"
+      placeholder="LIST POSITION"
+    />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="addDrinkForm.invalid"
+    [mat-dialog-close]="{
+      purpose: 'save changes',
+      formValue: addDrinkForm.value
+    }"
+  >
+    {{ editMode ? "SAVE CHANGES" : "ADD" }}
+  </button>
+
+  <!-- <button
+    *ngIf="editMode"
+    mat-raised-button
+    color="warn"
+    type="button"
+    [mat-dialog-close]="{ purpose: 'delete', formValue: addDrinkForm.value }">
+    DELETE
+  </button> -->
+
+  <button mat-raised-button color="primary" type="button" mat-dialog-close>
+    CANCEL
+  </button>
+</form>

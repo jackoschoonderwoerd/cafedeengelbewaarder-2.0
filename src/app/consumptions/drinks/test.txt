@@ -1,0 +1,81 @@
+Koffie en Thee
+Espresso € 2,30
+Koffie € 2,40
+Cappuccino € 2,70
+Koffie verkeerd € 3,00
+met Havermelk € 0,40
+Dubbele espresso € 3,00
+Thee € 2,50
+Muntthee € 3,00
+Gemberthee € 3,00
+Warme chocolademelk € 3,00
+met slagroom € 0,50
+Carajillo € 6,00
+Irish coffee € 7,50
+
+Frisdranken
+Coca Cola € 3,00
+Coca Cola zero € 3,00
+Chaudfontaine rood € 3,00
+Fanta orange € 3,00
+Fanta cassis € 3,00
+Sprite € 3,00
+Finley bitter lemon € 3,00
+Finley tonic € 3,00
+Finley ginger ale € 3,00
+Fuze Tea Black sparkling € 3,00
+Fuze Tea Green € 3,00
+Minute Maid tomatensap € 3,00
+Biologische sapjes (Rumpts of Schulp) € 3,50
+Chocolademelk € 2,50
+Siroop € 2,00
+Wijnen
+Wit Glas Fles
+Huiswijn € 4,00 € 20,00
+Rood
+Huiswijn € 4,00 € 20,00
+Vacqueyras, Le Poète 2014 (50cl) - € 17,50
+Rosé € 4,00 € 20,00
+Rode port € 4,00
+Prosecco - € 20,00
+
+Dutch Spirits
+Wees Young Jenever € 3,00
+Wees Old Jenever € 3,30
+Zuidam Young Jenever € 3,30
+Zuidam Old Jenever € 3,60
+Zuidam korenwijn € 4,10
+Beerenburg € 3,00
+Hoppe vieux € 3,00
+
+Foreign Spirits
+Glen Talloch € 4,00
+Jameson € 4,70
+Bushmills € 4,70
+Famous Grouse € 4,70
+Jack Daniel’s € 5,50
+Glenfiddich single malt € 6,50
+Osborne 103 € 4,00
+Hennessy € 4,70
+Martell VS € 4,70
+Courvoisier € 4,70
+Stolichnaya € 4,70
+Zubrowka € 4,70
+Calvados € 4,70
+Armagnac € 4,70
+Grappa € 5,00
+Martini € 3,70
+Campari € 4,70
+Bacardi € 4,70
+Bacardi black € 4,70
+Gordon’s Gin € 4,70
+Ricard € 4,70
+Tequila silver € 4,70
+Southern Comfort € 4,70
+Tia Maria € 4,70
+Licor 43 € 4,70
+Disaronno amaretto € 4,70
+Bailey’s € 4,70
+Grand Marnier € 4,70
+Drambuie € 4,70
+Sambuca € 4,70

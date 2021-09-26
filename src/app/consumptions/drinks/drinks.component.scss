@@ -1,0 +1,126 @@
+@import "./../../shared/css/banner.scss";
+// @import './../../shared/css/food.css';
+
+.background-image {
+  //
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 40%;
+  height: 70vh;
+  @media (max-width: 481px) {
+    background-image: url("./../../../assets/consumptions/drinks/images/engel-bar-2-1-481.jpg");
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    background-image: url("./../../../assets/consumptions/drinks/images/engel-bar-2-1-767.jpg");
+  }
+  @media (min-width: 768px) {
+    background-image: url("./../../../assets/consumptions/drinks/images/engel-bar-2-1-1024.jpg");
+  }
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    background-image: url("./../../../assets/consumptions/drinks/images/engel-bar-2-1-1280.jpg");
+  }
+  @media (min-width: 1281px) {
+    background-image: url("./../../../assets/consumptions/drinks/images/engel-bar-2-1-1280.jpg");
+  }
+}
+
+.category-containers {
+  display: grid;
+  padding: 0.2rem;
+  @media (min-width: 320px) and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (min-width: 1281px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .category-container {
+    background-color: var(--header-blue);
+    color: var(--text-color-bright-orange);
+    display: inline-block;
+    // margin: 0.5rem;
+    display: table-cell;
+    border: 0.2rem var(--text-color-orange) solid;
+    padding: 1rem;
+    .category-header {
+      text-transform: uppercase;
+      color: white;
+    }
+    ul {
+      margin-bottom: 0;
+
+      li {
+        hr {
+          height: 1px;
+          background-color: #ccc;
+          border: none;
+          padding: 0;
+          margin: 3px;
+          opacity: 0.3;
+        }
+        ul {
+          li {
+          }
+        }
+        // padding-bottom: 15px;
+        // border-bottom: 1px solid rgba(233, 233, 233, .2);
+      }
+    }
+  }
+}
+.edit-mode {
+  border: 3px solid red;
+  padding: 10px;
+}
+.add-button {
+  margin-top: 10px;
+}
+.name {
+  text-transform: capitalize;
+}
+.fa-circle-white {
+  margin-left: 0.6rem;
+  color: white;
+}
+.fa-circle-red {
+  color: red;
+  margin-left: 0.6rem;
+}
+.fa-bottle {
+  margin-left: 0.7rem;
+}
+.name-price {
+  // outline: 1px solid yellow;
+  width: 100%;
+}
+.price-list-position {
+  // outline: 1px solid pink;
+}
+.price {
+  // border: 1px solid yellow;
+  display: inline-block;
+  // outline: 1px solid orange;
+}
+.list-position {
+  // border: 1px solid orange;
+  text-align: right;
+  width: 35px;
+  display: inline-block;
+  color: lightgreen;
+  // outline: 1px solid lightgreen;
+}
+.trash {
+  color: red;
+  padding-left: .3rem;
+}
+.name-icons {
+  width: 100%;
+}

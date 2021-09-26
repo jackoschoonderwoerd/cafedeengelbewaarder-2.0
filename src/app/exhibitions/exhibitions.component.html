@@ -1,0 +1,43 @@
+<div id="top"></div>
+
+<router-outlet></router-outlet>
+
+<section>
+  <div class="background-image">
+    <div class="banner">
+      <p *ngIf="language === 'dutch'" class="banner-header">EVENTEMENTEN</p>
+      <p *ngIf="language === 'english'" class="banner-header">EVENTS</p>
+      <p *ngIf="language === 'dutch'" class="banner-course-name">Exposities</p>
+      <p *ngIf="language === 'english'" class="banner-course-name">Exhibitions</p>
+      <p *ngIf="language === 'dutch'" class="banner-text-content">
+        Op deze pagina vind je de alles over de seizoensexpo bij de Café de Engelbewaarder.
+
+      </p>
+
+      <p *ngIf="language === 'english'" class="banner-text-content">
+        Op deze pagina vind je de alles over de seizoensexpo bij de Café de Engelbewaarder.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="courses-container">
+
+  <div
+    *ngFor="let exposition of expositions"
+    class="pill-content"
+    [routerLink]="exposition.title"
+
+    (click)="onExposition(exposition.id)">
+    <div class="exposition-title">
+      {{exposition.title}}
+    </div>
+    <div class="artist-names-container" fxLayoutAlign="end">
+      <ul class="artist-names-list">
+        <li class="artist-names-list-item" *ngFor="let artistName of exposition.artistNames">
+          {{artistName}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

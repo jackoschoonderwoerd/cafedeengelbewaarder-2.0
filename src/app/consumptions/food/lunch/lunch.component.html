@@ -1,0 +1,198 @@
+
+<section>
+  <div class="background-image">
+    <div class="banner">
+      <p *ngIf="language === 'dutch'" class="banner-header">KEUKEN & DRANKEN</p>
+      <p *ngIf="language === 'english'" class="banner-header">KITCHEN & DRINKS</p>
+
+      <div *ngIf="linkSelected ==='dinner'" class="link-selected">
+        <p *ngIf="language === 'dutch'" class="banner-course-name">Diner</p>
+        <p *ngIf="language === 'english'" class="banner-course-name">Dinner</p>
+      </div>
+
+      <div *ngIf="linkSelected ==='lunch'" class="link-selected">
+        <p class="banner-course-name">Lunch</p>
+      </div>
+      <div *ngIf="linkSelected ==='snacks'" class="link-selected">
+        <p class="banner-course-name">Snacks</p>
+      </div>
+
+
+      <p *ngIf="language === 'dutch'" class="banner-text-content">De keuken is 7 dagen per week geopend.<br>
+        Lunch: {{openingHours.lunch}}<br>
+        Diner: {{openingHours.dinner}}<br>
+        Snacks: {{openingHours.snacks}}
+      </p>
+      <p *ngIf="language === 'english'" class="banner-text-content">Our kitchen is opened 7 days a week.<br>
+        Lunch: {{openingHours.lunch}}<br>
+        Dinner: {{openingHours.dinner}}<br>
+        Snacks: {{openingHours.snacks}}
+    </div>
+  </div>
+</section>
+
+<div class="courses">
+
+  <div class="course" fxLayout="column">
+    <button *ngIf="isAuthenticated$ | async" mat-raised-button class="add-course" (click)="onAddFoodItem('sourdoughs')">
+      add sourdoug
+    </button>
+    <div class="course-name">
+      <span *ngIf="language === 'dutch'">2 ZUURDESEM BOTERHAMEN MET:</span>
+      <span *ngIf="language === 'english'">2 SOURDOUGH SLICES WITH:</span>
+    </div>
+    <ul>
+      <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" *ngFor="let sourdough of sourdoughs$ | async">
+        <div class="name-price-list-position-delete" fxLayout fxLayoutAlign="space-between">
+          <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEditFoodItem(sourdough)">
+            <div class="name" *ngIf="language === 'dutch'">{{sourdough.nameDutch}}</div>
+            <div class="name" *ngIf="language === 'english'">{{sourdough.nameEnglish}}</div>
+            <div class="price">{{sourdough.price | currency:"EUR"}}</div>
+          </div>
+          <div *ngIf="isAuthenticated$ | async" class="list-position-delete" fxLayout>
+            <div class="list-position">{{sourdough.listPosition}}</div>
+            <div class="delete" (click)="onDelete($event, sourdough)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="ingredients" (click)="onEditFoodItem(sourdough)">
+          <span *ngIf="language === 'dutch'">{{sourdough.ingredientsDutch}}</span>
+          <span *ngIf="language === 'english'">{{sourdough.ingredientsEnglish}}</span>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  <div class="course" fxLayout="column">
+    <button *ngIf="isAuthenticated$ | async" mat-raised-button class="add-course" (click)="onAddFoodItem('eggs')">
+      add egg
+    </button>
+    <div class="course-name">
+      <span *ngIf="language === 'dutch'">eieren</span>
+      <span *ngIf="language === 'english'">eggs</span>
+    </div>
+    <ul>
+      <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" *ngFor="let egg of eggs$ | async">
+        <div class="name-price-list-position-delete" fxLayout fxLayoutAlign="space-between">
+          <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEditFoodItem(egg)">
+            <div class="name" *ngIf="language === 'dutch'">{{egg.nameDutch}}</div>
+            <div class="name" *ngIf="language === 'english'">{{egg.nameEnglish}}</div>
+            <div class="price">{{egg.price | currency:"EUR"}}</div>
+          </div>
+          <div *ngIf="isAuthenticated$ | async" class="list-position-delete" fxLayout>
+            <div class="list-position">{{egg.listPosition}}</div>
+            <div class="delete" (click)="onDelete($event, egg)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="ingredients" (click)="onEditFoodItem(egg)">
+          <span *ngIf="language === 'dutch'">{{egg.ingredientsDutch}}</span>
+          <span *ngIf="language === 'english'">{{egg.ingredientsEnglish}}</span>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  <div class="course" fxLayout="column">
+    <button *ngIf="isAuthenticated$ | async" mat-raised-button class="add-course" (click)="onAddFoodItem('toasties')">
+      add toastie
+    </button>
+    <div class="course-name">
+      <span *ngIf="language === 'dutch'">tosti's</span>
+      <span *ngIf="language === 'english'">toasties</span>
+    </div>
+    <ul>
+      <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" *ngFor="let toastie of toasties$ | async">
+        <div class="name-price-list-position-delete" fxLayout fxLayoutAlign="space-between">
+          <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEditFoodItem(toastie)">
+            <div class="name" *ngIf="language === 'dutch'">{{toastie.nameDutch}}</div>
+            <div class="name" *ngIf="language === 'english'">{{toastie.nameEnglish}}</div>
+            <div class="price">{{toastie.price | currency:"EUR"}}</div>
+          </div>
+          <div *ngIf="isAuthenticated$ | async" class="list-position-delete" fxLayout>
+            <div class="list-position">{{toastie.listPosition}}</div>
+            <div class="delete" (click)="onDelete($event, toastie)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="ingredients" (click)="onEditFoodItem(toastie)">
+          <span *ngIf="language === 'dutch'">{{toastie.ingredientsDutch}}</span>
+          <span *ngIf="language === 'english'">{{toastie.ingredientsEnglish}}</span>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  <div class="course" fxLayout="column">
+    <button *ngIf="isAuthenticated$ | async" mat-raised-button class="add-course" (click)="onAddFoodItem('others')">
+      add other
+    </button>
+    <div class="course-name">
+      <span *ngIf="language === 'dutch'">overig</span>
+      <span *ngIf="language === 'english'">other</span>
+    </div>
+    <ul>
+      <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" *ngFor="let other of others$ | async">
+        <div class="name-price-list-position-delete" fxLayout fxLayoutAlign="space-between">
+          <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEditFoodItem(other)">
+            <div class="name" *ngIf="language === 'dutch'">{{other.nameDutch}}</div>
+            <div class="name" *ngIf="language === 'english'">{{other.nameEnglish}}</div>
+            <div class="price">{{other.price | currency:"EUR"}}</div>
+          </div>
+          <div *ngIf="isAuthenticated$ | async" class="list-position-delete" fxLayout>
+            <div class="list-position">{{other.listPosition}}</div>
+            <div class="delete" (click)="onDelete($event, other)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="ingredients" (click)="onEditFoodItem(other)">
+          <span *ngIf="language === 'dutch'">{{other.ingredientsDutch}}</span>
+          <span *ngIf="language === 'english'">{{other.ingredientsEnglish}}</span>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  <div class="course" fxLayout="column">
+    <button *ngIf="isAuthenticated$ | async" mat-raised-button class="add-course" (click)="onAddFoodItem('sweets')">
+      add sweet
+    </button>
+    <div class="course-name">
+      <span *ngIf="language === 'dutch'">zoet</span>
+      <span *ngIf="language === 'english'">sweet</span>
+    </div>
+    <ul>
+      <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" *ngFor="let sweet of sweets$ | async">
+        <div class="name-price-list-position-delete" fxLayout fxLayoutAlign="space-between">
+          <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEditFoodItem(sweet)">
+            <div class="name" *ngIf="language === 'dutch'">{{sweet.nameDutch}}</div>
+            <div class="name" *ngIf="language === 'english'">{{sweet.nameEnglish}}</div>
+            <div class="price">{{sweet.price | currency:"EUR"}}</div>
+          </div>
+          <div *ngIf="isAuthenticated$ | async" class="list-position-delete" fxLayout>
+            <div class="list-position">{{sweet.listPosition}}</div>
+            <div class="delete" (click)="onDelete($event, sweet)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="ingredients" (click)="onEditFoodItem(sweet)">
+          <span *ngIf="language === 'dutch'">{{sweet.ingredientsDutch}}</span>
+          <span *ngIf="language === 'english'">{{sweet.ingredientsEnglish}}</span>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  
+
+</div>

@@ -1,0 +1,79 @@
+mat-toolbar {
+  background-color: var(--header-blue);
+  .toolbar-left {
+    .menu-icon {
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      color: var(--text-color-bright-orange);
+      margin-right: 10px;
+    }
+  }
+  .toolbar-right {
+    .list-container {
+      padding-right: 0px;
+      ul {
+        li {
+          cursor: pointer;
+          a {
+            color: var(--text-color-bright-orange);
+            padding: 3px 6px;
+          }
+          .active-link {
+            color: var(--header-blue);
+            background-color: var(--text-color-orange);
+          }
+        }
+      }
+      .list-container {
+        .expositions-link-container {
+          padding: 0px;
+          .expositions-link {
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
+    .flag-list {
+      padding: 0px;
+      margin-top: 29px;
+      .flag-list-item {
+        margin: 7px;
+        .flag {
+          width: 40px;
+          height: 30px;
+          -webkit-box-sizing: initial;
+          -moz-box-sizing: initial;
+          box-sizing: content-box;
+          border: 3px solid transparent;
+        }
+        .selected-flag {
+          -webkit-box-sizing: initial;
+          -moz-box-sizing: initial;
+          box-sizing: content-box;
+          border: 3px solid var(--text-color-orange);
+        }
+      }
+    }
+  }
+  .routerlink-active {
+    background-color: var(--text-color-bright-orange);
+    color: var(--header-blue);
+  }
+  .routerlink-active span {
+    color: var(--header-blue);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

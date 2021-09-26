@@ -1,0 +1,19 @@
+<div class="admin-only">ADMIN ONLY</div>
+<div class="login-form" fxLayout fxLayoutAlign="center">
+  <form [formGroup]="loginForm">
+    <mat-form-field appearance="fill">
+      <mat-label>EMAIL</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>PASSWORD</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="PASSWORD">
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+    <div class="buttons" fxLayout="column" fxLayoutGap="1rem">
+      <button mat-raised-button [mat-dialog-close]="loginForm.value">submit</button>
+      <button mat-raised-button mat-dialog-close>cancel</button>
+    </div>
+    <!-- <button *ngIf="!(isLoading$ | async)" mat-raised-button color="primary" type="submit">LOG IN</button> -->
+  </form>
+</div>

@@ -1,0 +1,85 @@
+@import './../shared/css/banner.scss';
+
+.background-image {
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 40%;
+  height: 70vh;
+
+  @media (max-width: 480px) {
+    background-image: url('./../../assets/exhibitions/background/40-jaar-bimhuis-2-480.jpg');
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    background-image: url('./../../assets/exhibitions/background/40-jaar-bimhuis-2-767.jpg');
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    background-image: url('./../../assets/exhibitions/background/40-jaar-bimhuis-2-1024.jpg');
+  }
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    background-image: url('./../../assets/exhibitions/background/40-jaar-bimhuis-2-1280.jpg');
+  }
+  @media (min-width: 1281px) {
+    background-image: url('./../../assets/exhibitions/background/40-jaar-bimhuis-2-1280.jpg');
+  }
+}
+
+.courses-container {
+  background-color: var(--text-color-orange);
+  display: grid;
+  padding: 5px;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    display: grid;
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1281px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .pill-content {
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(89, 89, 89);
+    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 0px 0px 5px 0px rgb(89, 89, 89);
+    /* Firefox 3.5 - 3.6 */
+    box-shadow: 0px 0px 5px 0px rgb(89, 89, 89);
+    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+    color: var(--text-color-bright-orange);
+    background-color: var(--header-blue);
+    padding: 15px;
+    margin: 5px;
+    font-weight: 400;
+
+    .exposition-title {
+      text-transform: uppercase;
+      margin: 0px 0px 5px 0px;
+    }
+
+    .artist-names-container {
+      .artist-names-list {
+        margin: 0px;
+        padding: 0px;
+
+        .artist-names-list-item {
+          margin: 0px;
+          padding: 0px;
+          text-align: right;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,233 @@
+<section>
+  <div class="background-image">
+    <div class="banner">
+      <p *ngIf="language === 'dutch'" class="banner-header">KEUKEN & DRANKEN</p>
+      <p *ngIf="language === 'english'" class="banner-header">
+        KITCHEN & DRINKS
+      </p>
+      <p *ngIf="language === 'dutch'" class="banner-course-name">Dranken</p>
+      <p *ngIf="language === 'english'" class="banner-course-name">Drinks</p>
+      <p *ngIf="language === 'dutch'" class="banner-text-content">
+        De keuken is 7 dagen per week geopend.<br />
+        Lunch: {{ openingHours.lunch }}<br />
+        Dinner: {{ openingHours.dinner }}<br />
+        Snacks: {{ openingHours.snacks }}
+      </p>
+      <p *ngIf="language === 'english'" class="banner-text-content">
+        Our kitchen is opened 7 days a week.<br />
+        Lunch: {{ openingHours.lunch }}<br />
+        Diner: {{ openingHours.dinner }}<br />
+        Snacks: {{ openingHours.snacks }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="category-containers">
+
+  <div class="category-container" fxLayout="column">
+    <div class="category-header">coffee and tea</div>
+    <button *ngIf="isAuthenticated$ | async" mat-raised-button (click)="onAddDrink('coffee and tea')"
+      class="add-button">
+      ADD COFFEE OR TEA
+    </button>
+    <ul>
+      <li *ngFor="let hot of coffeeAndTea$ | async">
+        <ul>
+          
+          <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" fxLayout fxLayoutAlign="space-between">
+            
+            <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEdit(hot)">
+              
+              <div class="names">
+                <span class="dutch" *ngIf="language === 'dutch'">{{hot.nameDutch | titlecase}}</span>
+                <span class="english" *ngIf="language === 'english'">{{hot.nameEnglish | titlecase}}</span>
+              </div>
+
+              <div class="price-list-position" fxLayout>
+                <div class="price">{{ hot.price | currency: "EUR" }}</div>
+                <div class="list-position" *ngIf="isAuthenticated$ | async">{{ hot.listPosition }}</div>
+              </div>
+
+            </div>
+
+            <div class="trash" (click)="onDelete(hot)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </li>
+
+          <hr/>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-container" fxLayout="column">
+    <div class="category-header">soft drinks</div>
+    <button class="add-button" *ngIf="isAuthenticated$ | async" mat-raised-button (click)="onAddDrink('soft drinks')">
+      ADD SOFT DRINK
+    </button>
+
+    <ul>
+      <li *ngFor="let softDrink of softDrinks$ | async">
+        <ul>
+          <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" fxLayout fxLayoutAlign="space">
+            <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEdit(softDrink)">
+              <div class="names">
+                <span class="dutch" *ngIf="language === 'dutch'">{{softDrink.nameDutch | titlecase}}</span>
+                <span class="english" *ngIf="language === 'english'">{{softDrink.nameEnglish | titlecase}}</span>
+              </div>
+              <div class="price-list-position" fxLayout>
+                <div class="price"> {{ softDrink.price | currency: "EUR" }}</div>
+                <div class="list-position" *ngIf="isAuthenticated$ | async">
+                  {{softDrink.listPosition}}
+                </div>
+              </div>
+            </div>
+            <div class="trash" (click)="onDelete(softDrink)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+
+          </li>
+        </ul>
+        <hr />
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-container" fxLayout="column">
+    <div class="category-header">wines</div>
+    <button class="add-button" *ngIf="isAuthenticated$ | async" mat-raised-button (click)="onAddDrink('wine')">
+      ADD WINE
+    </button>
+    <ul>
+      <li *ngFor="let wine of wines$ | async">
+        <ul>
+          <li fxLayout fxLayoutAlign="space-between" [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''"
+            >
+            <div class="name-icons" (click)="onEdit(wine)">
+              <span class="name" *ngIf="language === 'dutch'">{{
+                wine.nameDutch
+                }}
+              </span>
+              <span class="name" *ngIf="language === 'english'">{{
+                wine.nameEnglish
+                }}</span>
+              <!-- <span clas="container">{{ wine.wineContainer }}</span> -->
+              <fa-icon *ngIf="wine.wineType === 'white'" class="fa-circle-white icon" [icon]="faCircle"></fa-icon>
+              <fa-icon *ngIf="wine.wineType === 'red'" class="fa-circle-red icon" [icon]="faCircle"></fa-icon>
+              <fa-icon *ngIf="wine.wineContainer === 'bottle'" [icon]="faWineBottle" class="fa-bottle"></fa-icon>
+              <!-- <span class="wine-type">{{ wine.wineType === 'red' ? 'rood' : 'wit' }}</span> -->
+            </div>
+            <div class="price-list-position" fxLayout>
+              <span class="price">{{ wine.price | currency: "EUR" }}</span>
+              <span class="list-position" *ngIf="isAuthenticated$ | async">{{wine.listPosition}}</span>
+            </div>
+            <div class="trash" (click)="onDelete(wine)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </li>
+          <hr />
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-container" fxLayout="column">
+    <div class="category-header">dutch spirits</div>
+    <button class="add-button" *ngIf="isAuthenticated$ | async" mat-raised-button (click)="onAddDrink('dutch spirits')">
+      ADD DUTCH SPIRIT
+    </button>
+
+    <ul>
+      <li *ngFor="let dutchSpirit of dutchSpirits$ | async">
+        <ul>
+          <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''"  fxLayout fxLayoutAlign="space-between">
+            <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEdit(dutchSpirit)">
+              <div class="names">
+                <span class="dutch" *ngIf="language === 'dutch'">{{dutchSpirit.nameDutch}}</span>
+                <span class="english" *ngIf="language === 'english'">{{dutchSpirit.nameEnglish}}</span>
+              </div>
+              <div class="price-list-position" fxLayout>
+                <div class="price">{{dutchSpirit.price | currency:"EUR"}}</div>
+                <div class="list-position" *ngIf="isAuthenticated$">
+                  {{dutchSpirit.listPosition}}
+                </div>
+              </div>
+            </div>
+            <!-- {{ dutchSpirit.nameEnglish }} {{ dutchSpirit.price }} -->
+            <div class="trash" (click)="onDelete(dutchSpirit)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </li>
+        </ul>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-container" fxLayout="column">
+    <div class="category-header">foreign spirits</div>
+    <button class="add-button" *ngIf="isAuthenticated$ | async" mat-raised-button (click)="onAddDrink('foreign spirits')">
+      ADD FOREIGN SPIRIT
+    </button>
+    <ul>
+      <li *ngFor="let foreignSpirit of foreignSpirits$ | async">
+        <ul>
+          <li [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''" fxLayout fxLayoutAlign="space-between">
+            <div class="name-price" fxLayout fxLayoutAlign="space-between" (click)="onEdit(foreignSpirit)">
+              <div class="names">
+                <span class="english" *ngIf="language === 'english'">{{foreignSpirit.nameEnglish}}</span>
+                <span class="dutch" *ngIf="language === 'dutch'">{{foreignSpirit.nameDutch}}</span>
+              </div>
+              <div class="price-list-position" fxLayout>
+                <div class="price">{{foreignSpirit.price | currency:"EUR"}}</div>
+                <div class="list-position" *ngIf="isAuthenticated$">
+                  {{foreignSpirit.listPosition}}
+                </div>
+              </div>
+            </div>
+            <div class="trash" (click)="onDelete(foreignSpirit)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </li>
+        </ul>
+        <hr>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <div class="beverage-type-container">
+  <div
+    class="beverage-type"
+    *ngFor="let beverageType of beverageTypes">
+    <div class="beverage-type-name">
+      <span *ngIf="language === 'dutch'">{{beverageType.nameDutch | uppercase}}</span>
+      <span *ngIf="language === 'english'">{{beverageType.nameEnglish | uppercase}}</span>
+    </div>
+    <ul class="beverage-list">
+      <li class="beverage-list-item" *ngFor="let beverage of beverageType.beverages">
+        <div class="beverage-name-and-price" fxLayout fxLayoutAlign="space-between">
+          <div class="name">
+            <span *ngIf="language === 'dutch'">{{beverage.nameDutch}}</span>
+            <span *ngIf="language === 'english'">{{beverage.nameEnglish}}</span>
+            <span *ngIf="beverage.color" class="color">
+              <fa-icon *ngIf="beverage.color ==='white'" class="fa-circle-white" [icon]="faCircle"></fa-icon>
+              <fa-icon *ngIf="beverage.color ==='red'" class="fa-circle-red" [icon]="faCircle"></fa-icon>
+            </span>
+          </div>
+          <div class="price">
+            <span>{{beverage.priceUnit | currency:"EUR"}}</span>
+            <span
+              *ngIf="beverage.priceBottle">
+              <fa-icon *ngIf="beverage.bottle" [icon]="faWineBottle" class="fa-bottle"></fa-icon>
+              <span>{{beverage.priceBottle | currency:"EUR"}}</span>
+            </span>
+          </div>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+</div> -->

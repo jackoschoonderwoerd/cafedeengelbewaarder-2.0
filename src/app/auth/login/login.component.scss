@@ -1,0 +1,26 @@
+.admin-only {
+  color: var(--text-color-bright-orange);
+  background-color: var(--header-blue);
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.login-form {
+  display: block;
+  width: 100%;
+  // outline: 1px solid red;
+  form {
+    width: 100%;
+    display: block;
+    // outline: 2px solid green;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    
+    
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}

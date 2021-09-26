@@ -1,0 +1,69 @@
+<div id="top"></div>
+<section>
+  <div class="background-image">
+    <div class="banner">
+      <p class="banner-header">HET AMSTERDAMSCH LITTERAIR CAFE</p>
+      <div class="banner-content" fxLayout>
+        <!-- <img src="'./../../../assets/images/uithangbord3.svg" alt=""> -->
+        <div class="capital">D</div>
+        <div class="non-capital">E</div>
+        <div class="capital">E</div>
+        <div class="non-capital">NGELBEWAARDER</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content" fxLayout="column" fxLayoutAlign="center center">
+
+    <div *ngIf="language === 'dutch'" class="openingstijden" fxLayout="column" fxLayoutAlign="center center">
+      <div class="tijden">
+        <p class="openingHours">
+          Het café is iedere dag open van {{openingHours.openingHoursOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursClose}}<br>
+        </p>
+        <!-- <p class="openingHours">
+          Het café is open van {{openingHours.openingHoursOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursClose}}<br>
+        </p>
+        <p class="openingHoursWeekend">
+          Op vrijdag en zaterdag van {{openingHours.openingHoursWeekendOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursWeekendClose}}
+        </p> -->
+      </div>
+      <div class="reserveren">
+        <p>Als u binnen wilt eten kunt u reserveren.</p>
+        <p>Het is niet mogelijk om op het terras te reserveren maar er is vast wel een plekje te
+          vinden. Hopelijk tot snel!
+        </p>
+      </div>
+      <div class="menu">
+        <span
+          class="menu-item"
+          *ngFor="let menuItemDutch of menuItemsDutch"
+          (click)="onLinkSelected(menuItemDutch)">
+          {{menuItemDutch}}
+        </span>
+      </div>
+    </div>
+    <div *ngIf="language === 'english'" class="openingstijden" fxLayout="column" fxLayoutAlign="center center">
+      <div class="tijden">
+        <p class="openingHours">
+          Our cafe is opened daily from {{openingHours.openingHoursOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursClose}}
+        </p>
+        <!-- <p class="openingHoursWeekend">
+          Fridays and Saturdays from {{openingHours.openingHoursWeekendOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursWeekendClose}}
+        </p> -->
+      </div>
+      <p class="reserveren">For reservations please call 020 625 37 72</p>
+      <p class="reserveren">It's not possible to make
+        resevations for terrace seats. Hope to see you soon!
+      </p>
+      <div class="menu">
+        <span
+          class="menu-item"
+          *ngFor="let menuItemEnglish of menuItemsEnglish"
+          (click)="onLinkSelected(menuItemEnglish)">
+          {{menuItemEnglish}}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>

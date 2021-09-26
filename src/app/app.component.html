@@ -1,0 +1,13 @@
+<mat-sidenav-container>
+  <mat-sidenav role="navigation" [opened]="isOpened" (closed)="closed()">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header></app-header>
+    <main>
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+      <app-footer></app-footer>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

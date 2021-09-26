@@ -1,0 +1,18 @@
+
+<div class="">
+  Add course to {{mealTypeName}}{{mealTypeId}}
+</div>
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      formControlName="name"
+      placeholder="Course name">
+  </mat-form-field>
+</form>
+<div class="buttons" fxLayout="column" fxLayoutGap="1rem">
+  <button mat-raised-button [mat-dialog-close]="form.value">Submit</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</div>

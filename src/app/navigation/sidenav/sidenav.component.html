@@ -1,0 +1,62 @@
+<mat-nav-list>
+  <a class="nav-list-item" mat-list-item routerLink="home"
+    (click)="onCloseSidenav()">
+    HOME
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+
+  <a (click)="onCloseSidenav()" class="nav-list-item" mat-list-item routerLink="drinks">
+    <span *ngIf="language === 'dutch'">DRANKEN</span>
+    <span *ngIf="language === 'english'">DRINKS</span>
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+
+  <a (click)="onCloseSidenav()"  class="nav-list-item" mat-list-item routerLink="food/lunch">
+    LUNCH&nbsp;&nbsp;{{ openingHours.lunch }}
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+
+  <a (click)="onCloseSidenav()"  class="nav-list-item" mat-list-item routerLink="food/dinner">
+    <span *ngIf="language === 'dutch'">
+      DINER&nbsp;&nbsp;{{ openingHours.dinner }}
+    </span>
+    <span *ngIf="language === 'english'">DINNER&nbsp;&nbsp;{{ openingHours.dinner }}</span>
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+
+  <a (click)="onCloseSidenav()"  class="nav-list-item" mat-list-item routerLink="food/snacks">
+    <span>SNACKS&nbsp;&nbsp;{{ openingHours.snacks }}</span>
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+
+  <a (click)="onCloseSidenav()"  class="nav-list-item" mat-list-item routerLink="beers">
+    <span *ngIf="language === 'dutch'">BIEREN</span>
+    <span *ngIf="language === 'english'">BEERS</span>
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+  <a (click)="onCloseSidenav()"  class="nav-list-item" mat-list-item routerLink="exhibitions">
+    <span *ngIf="language === 'dutch'">EXPOSITIES</span>
+    <span *ngIf="language === 'english'">EXHIBITIONS</span>
+  </a>
+  <div class="hr-container">
+    <hr class="hr" />
+  </div>
+  <a (click)="onCloseSidenav()"  *ngIf="!(isAuthenticated$ | async)" class="nav-list-item" mat-list-item (click)="onLogIn()">
+    <span> LOG IN </span>
+  </a>
+  <a (click)="onCloseSidenav()"  *ngIf="isAuthenticated$ | async" class="nav-list-item" mat-list-item (click)="onLogOut()">
+    <span> LOG OUT </span>
+  </a>
+</mat-nav-list>

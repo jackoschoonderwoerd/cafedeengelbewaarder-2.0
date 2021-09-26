@@ -1,0 +1,173 @@
+@import "./../../../shared/css/banner.scss";
+
+.edit-mode {
+  border: 3px solid red;
+  padding: 10px;
+}
+
+.background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 60%;
+  height: 70vh;
+
+  @media (max-width: 480px) {
+    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-480.jpg");
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-767.jpg");
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-1024.jpg");
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
+  }
+
+  @media (min-width: 1281px) {
+    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
+  }
+}
+.courses {
+  // padding: 1rem;
+  .course {
+    background-color: var(--header-blue);
+    max-width: 400px;
+    padding: 2rem;
+    margin: .5rem .5rem 0 .5rem;
+    
+    .add-course {
+      margin-bottom: 1rem;
+    }
+    .course-name {
+      color: white;
+      text-transform: uppercase;
+    }
+    ul {
+      padding: 0;
+      li {
+        width: 100%;
+        // outline: 2px solid orange;
+        .name-price-list-position-delete {
+          // outline: 3px solid lightblue;
+          width: 100%;
+          .name-price-amount {
+            // border: 1px solid yellow;
+            width: 100%;
+            cursor: pointer;
+            .name-amount {
+              // border: 3px solid white;  
+              text-transform: uppercase;
+              color: var(--text-color-bright-orange);
+              width: 100%;
+              .name {
+                // border: 3px solid lightgreen;
+              }
+              .amount {
+                margin-left: .3rem;
+              }
+            }
+            .price {
+              padding-left: .5rem;
+              color: var(--text-color-bright-orange);
+            }
+          }
+          .list-position-delete {
+            // outline: 3px solid lightgreen;
+            .list-position {
+              width: 2rem;
+              text-align: right;
+              color: lightgreen;
+            }
+            .delete {
+              color: red;
+              margin-left: 0.5rem;
+            }
+          }
+        }
+        .ingredients {
+          cursor: pointer;
+          padding-left: 1rem;
+          font-size: .9rem;
+          span {
+            color: var(--text-color-bright-orange);
+          }
+        }
+        hr {
+          width: 80%;
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+}
+.edit-mode {
+  border: 3px solid red;
+  border-radius: 2px;
+  margin: 2px 0;
+}
+.courses {
+  display: grid;
+  border: 5px solid var(--text-color-orange);
+
+  // background-color: var(--text-color-orange);
+  @media (min-width: 320px) and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1399px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 1400px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+//   .course {
+//     background-color: var(--header-blue);
+//     border: 5px solid var(--text-color-orange);
+//     // border-color: solid var(--text-color-orange);
+//     padding: 30px;
+//     min-width: 250px;
+
+//     .course-name {
+//       color: white;
+//       font-weight: 400;
+//       font-size: 1.2rem;
+//       text-transform: uppercase;
+//     }
+
+//     .course-list {
+//       color: var(--text-color-bright-orange);
+
+//       .course-list-item {
+//         .name-price {}
+
+//         .ingredients {
+//           padding-left: 1rem;
+//           font-size: .9rem;
+//         }
+//       }
+
+//       hr {
+//         width: 80%;
+//         opacity: 0.3;
+//       }
+//     }
+
+//     .remark {
+//       color: white;
+//     }
+//   }
+}

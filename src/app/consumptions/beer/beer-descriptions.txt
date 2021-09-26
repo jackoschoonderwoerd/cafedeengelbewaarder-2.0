@@ -1,0 +1,264 @@
+
+import { Injectable } from '@angular/core';
+import { BeerItem } from './beer-item.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BeerService {
+
+
+
+  constructor(
+    
+  ) { }
+
+  beers: BeerItem[] = [
+    {
+      beerId: '',
+      name: 'Estaminet',
+      amount: 25,
+      percentage: 5.2,
+      draught: true,
+      price: 3,
+      descriptionDutch: 'Pils met subtiel hoparoma, licht fruitig. De ‘little black dress’ onder de pilseners. Dorstlessend, verfrissend bier.',
+      descriptionEnglish: 'Pilsner with subtle hop aroma, slightly fruity. The "little black dress" among pilseners. Thirst-quenching, refreshing beer.'
+    },
+    {
+      beerId: '',
+      name: 'Palm',
+      amount: 25,
+      percentage: 5.4,
+      draught: true,
+      price: 4,
+      descriptionDutch: '‘Spéciale Belge’, de nummer één onder de Belgische amberkleurige bieren. Toegankelijk en vlotdrinkend met een honingachtige toets.',
+      descriptionEnglish: '"The Belgian Special", the number one among Belgian amber-coloured beers. Accessible and smooth drinking with a honey-like touch.'
+    },
+    {
+      beerId: '',
+      name: 'Steenbrugge Blond',
+      amount: 25,
+      percentage: 6.3,
+      draught: true,
+      price: 4.5,
+      descriptionDutch: 'Kruidig, lichtfruitig blond bier met een volle smaak. De kruidige toets van de Steenbrugge-biertjes komt tot stand door toevoeging van Brugse gruut. Authentiek Belgisch blond.',
+      descriptionEnglish: 'Spicy, slightly fruity blond beer with a full flavour. The spicy touch of the Steenbrugge beers is created by adding Brugse Gruut, a spice mix. Authentic Belgian blonde.'
+    },
+    {
+      beerId: '',
+      name: 'Steenbrugge Dubbel',
+      amount: 25,
+      percentage: 6.3,
+      draught: true,
+      price: 4.5,
+      descriptionDutch: 'Donker, moutig bier met een karamelachtige zoetheid. Het Brugse gruut legt hier de nadruk op kaneel en zorgt voor een lichtgerookt aroma.',
+      descriptionEnglish: 'Dark, malty beer with a caramelly sweetness. The Bruges Gruut emphasizes cinnamon here and ensures for a slightly smoked aroma.'
+    },
+    {
+      beerId: '',
+      name: 'Steenbrugge Wit ',
+      amount: 25,
+      percentage: 4.8,
+      draught: true,
+      price: 4,
+      descriptionDutch: 'Belgisch witbier gebrouwen met 40% ongemouten tarwe en 60% mout. Een verfrissend troebel tarwebier met hints van grapefruit, limoenblad en koriander.',
+      descriptionEnglish: 'Belgian white beer brewed with 40% unmalted wheat and 60% malt. A refreshingly cloudy wheat beer with hints of grapefruit, lime leaf and coriander.'
+    },
+    {
+      beerId: '',
+      name: 'Brugge Tripel',
+      amount: 25,
+      percentage: 8.5,
+      draught: true,
+      price: 4,
+      descriptionDutch: 'Rijk en romig goudblond bier. Brugge Tripel heeft een forse tinteling, een geparfumeerde hoptoets en is lichtzoetig met een lavas-achtige kruidigheid.',
+      descriptionEnglish: 'Rich and creamy golden blond beer. Brugge Tripel has a strong tingling sensation, a scented hop touch and is slightly sweet with a lovage-like spiciness.'
+    },
+    {
+      beerId: '',
+      name: 'Cornet',
+      amount: 25,
+      percentage: 8.5,
+      draught: true,
+      price: 4.8,
+      descriptionDutch: 'Voluptueus, zwaar blond bier met eikenhouten toets. Vindt de balans tussen de fruitigheid van de gist en de vanille-zoetheid van het hout. Cornet heeft een lange, zacht bittere afdronk.',
+      descriptionEnglish: 'Voluptuous, heavy blond beer with an oak touch. Finds the balance between the fruitiness of the yeast and the vanilla sweetness of the wood. Cornet has a long, soft bitter aftertaste.'
+    },
+    {
+      beerId: '',
+      name: 'Rodenbach',
+      amount: 25,
+      percentage: 5.2,
+      draught: true,
+      price: 7,
+      descriptionDutch: 'Op eikenhouten vaten (foeders) gerijpt, geeft dit bier een zachtzuur karakter en een complexe cranberry-achtige fruitigheid. Rodenbach bestaat uit 3/4 jong bier en 1/4 gedurende twee jaar gerijpt bier.',
+      descriptionEnglish: 'Matured in oak barrels casks, this beer has a soft acidity and a complex cranberry-like fruitiness. Rodenbach consists of 3/4 young beer and 1/4 beer matured for two years.'
+    },
+    {
+      beerId: '',
+      name: 'Rodenbach Grand Cru',
+      amount: 25,
+      percentage: 6,
+      draught: true,
+      price: 4.5,
+      descriptionDutch: 'De Grand Cru van Rodenbach bestaat uit 1/3 jong en 2/3 gerijpt bier en is daarom een meer uitgesproken versie van zijn jongere broertje. Een rijk en complex bier met hints naar hout, rabarber en balsamico.',
+      descriptionEnglish: 'The Grand Cru from Rodenbach consists of 1/3 young and 2/3 matured beer and is therefore a more pronounced Version from his younger brother. A rich and complex beer with hints of wood, rhubarb and balsamic vinegar.'
+    },
+    {
+      beerId: '',
+      name: 'La Trappe Isid’or',
+      amount: 25,
+      percentage: 7.5,
+      draught: true,
+      price: 4.8,
+      descriptionDutch: 'La Trappe is Neerlands enige trappistenbier. De Isid’or is een lichtzoetig, ongefilterd amberbier met een subtiele hint naar karamel en een zacht bittere afdronk.',
+      descriptionEnglish: 'La Trappe is The Netherland’s only Trappist beer. The Isid\'or is a slightly sweet unfiltered amber beer with a subtle hint of caramel and a soft bitter aftertaste.'
+    },
+    {
+      beerId: '',
+      name: 'La Trappe PUUR',
+      amount: 25,
+      percentage: 4.7,
+      draught: true,
+      price: 4.5,
+      descriptionDutch: 'Een fris, hoppig trappistenbier, bereid met biologische grondstoffen. kruidig alternatief voor een tradionele pils',
+      descriptionEnglish: 'A fresh, hoppy Trappist beer, prepared with organic raw materials. Spicy alternative to a traditional lager.'
+    },
+    {
+      beerId: '',
+      name: 'Davo Darkness',
+      amount: 25,
+      percentage: 7.5,
+      draught: true,
+      price: 4.5,
+      descriptionDutch: 'Het onwettige kind van een Dubbel en een Stout. Deze hybride zorgt voor intense smaken van gebrande mouten eneen verfijnd aroma van karamel',
+      descriptionEnglish: 'The illegitimate child of a Double and a Stout. This hybrid provides intense flavours of roasted malts and a refined aroma of caramel'
+    },
+    {
+      beerId: '',
+      name: 'Weihenstephaner Hefeweissbier',
+      amount: 25,
+      percentage: 5.4,
+      draught: true,
+      price: 4.3,
+      descriptionDutch: 'Geldt als wereldwijde benchmark voor willekeurig welk tarwebier dan ook. Het aroma en smaak worden gedomineerd door fruitige tonen waarin banaan en abrikoos de boventoon voeren',
+      descriptionEnglish: 'A global benchmark for any wheat beer. The aroma and taste are dominated through fruity notes in which banana and apricot predominate'
+    },
+    {
+      beerId: '',
+      name: 'Uiltje Brewing Company',
+      amount: 25,
+      percentage: null,
+      draught: true,
+      price: 4.8,
+      descriptionDutch: 'Wisseltap, vraag personeel',
+      descriptionEnglish: 'Changes regularly – ask staff for current selection from this Dutch brewery'
+    },
+    {
+      beerId: '',
+      name: 'Brewdog Punk IPA',
+      amount: 25,
+      percentage: 5.4,
+      draught: true,
+      price: 4.8,
+      descriptionDutch: 'Deze transatlantische fusion Indian Pale Ale is een ode aan de klassieke IPA’s van vroeger. De zeer fruitige hop brengt een explosie aan tropische vruchten en smaken samen met een bittere afsluiter, wat het bier een moderne twist geeft.',
+      descriptionEnglish: 'This transatlantic fusion Indian Pale Ale is an ode to the classic IPAs of the past. The very fruity hops bring an explosion of tropical fruits and flavours together with a bitter ending, which gives the beer a modern twist.'
+    },
+    {
+      beerId: '',
+      name: 'Brouwerij de Molen Op & Top',
+      amount: 25,
+      percentage: 4.5,
+      draught: true,
+      price: 4.5,
+      descriptionDutch: 'Een lichttroebel, ale-ish achtig bier van deze Nederlandse brouwerij. Op & Top is verfrissend en hoppig, met een karakter dat wordt bepaald door de smaak van citrus en lychee.',
+      descriptionEnglish: 'A slightly cloudy, ale-ish beer from this Dutch brewery. Op & Top is refreshing and hoppy, with a character determined by the taste of citrus and lychee.'
+    },
+    {
+      beerId: '',
+      name: 'Duvel',
+      amount: 33,
+      percentage: 8.5,
+      draught: false,
+      price: 5,
+      descriptionDutch: 'Klassiek zwaar Belgisch blond met een zeer uitgesproken smaak. Vol, rond en een bijzondere, van oorsprong Schotse gist, die Duvel een prettig aromatisch zuurtje meegeeft. Licht hoppig met een subtiele bitterheid en nauwelijks zoet.',
+      descriptionEnglish: 'Classic heavy Belgian blonde with a very distinct taste. Full, round and special, originally Scottish yeast, which gives Duvel a pleasant aromatic acidity. Slightly hoppy with a subtle bitterness and hardly sweet.'
+    },
+    {
+      beerId: '',
+      name: 'Westmalle Tripel',
+      amount: 33,
+      percentage: 9.5,
+      draught: false,
+      price: 5,
+      descriptionDutch: 'De moeder der Tripels. Een goudgeel trappistenbier met een fruitige geur en een zachte, romige smaak. Lichtzoetig maar met een bittere toets door het fruitaroma.',
+      descriptionEnglish: 'The mother of the Triples. A golden yellow Trappist beer with a fruity aroma and a soft, creamy taste. Slightly sweet but with a bitter touch due to the fruit aroma.'
+    },
+    {
+      beerId: '',
+      name: 'St. Louis Kriek Lambic ',
+      amount: 25,
+      percentage: 4,
+      draught: false,
+      price: 4.5,
+      descriptionDutch: 'Gedurende een periode van zes maanden worden voor dit bier krieken verteerd in geuze-lambiek en vervolgens gemengd met oude lambiek. Een verfijnd fruitig bier met een iets zoete smaak en lichtzurige ondertoon is het resultaat.',
+      descriptionEnglish: 'For this beer, cherries are digested into Queuze-Lambic and then for a period of six months mixed with old Lambic. The result is a refined fruity beer with a slightly sweet taste and slightly acidic undertone.'
+    },
+    {
+      beerId: '',
+      name: 'Palm 0.0',
+      amount: 25,
+      percentage: 0,
+      draught: false,
+      price: 3,
+      descriptionDutch: 'De alcoholvrije variant van Palm. Een amber bier, iets kruidig, zoetig en honingzacht.',
+      descriptionEnglish: 'The alcohol-free version of Palm. An amber beer, slightly spicy, sweet and honey soft.'
+    },
+    {
+      beerId: '',
+      name: 'Jever Fun',
+      amount: 33,
+      percentage: 0.5,
+      draught: false,
+      price: 3.2,
+      descriptionDutch: 'Perfect voor diegenen die weinig alcohol willen drinken maar niet willen inboeten aan biersmaak. Jever Fun wordt gebrouwen als een volwaardig bier waarna de alcohol wordt onttrokken. Het behoudt hierbij zijn typische biersmaak.',
+      descriptionEnglish: 'Perfect for those who want to drink little alcohol but don\'t want to lose beer flavour. Jever Fun is brewed as a full-fledged beer, after which the alcohol is extracted. It retains its typical beer taste.'
+    },
+    {
+      beerId: '',
+      name: 'Bière des Amis 0.0',
+      amount: 33,
+      percentage: 0,
+      draught: false,
+      price: 3.2,
+      descriptionDutch: 'Alcoholvrije variant van een typische Belgisch blond. Het bier wordt onder vacuum gebracht en lichtjes onder druk gezetzodat de alcohol onder lage temperatuur verdampt. Zo blijken de smaken en aroma’s behouden.',
+      descriptionEnglish: 'Alcohol-free variant of a typical Belgian blonde. The beer is placed in a vacuum and slightly pressurized so that the alcohol evaporates under low temperature. In this way, the flavours and aromas appear to be preserved.'
+    },
+  ]
+
+  
+
+  
+
+  getBeers() {
+    return this.beers;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,189 @@
+section {
+  background-color: var(--header-blue)
+}
+
+.background-image {
+
+  // background-image: url('./../../assets/images/terras-boot-vanaf-cafe-\ W-480px.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 40% 60%;
+  height: 70vh;
+
+  @media (max-width: 480px) {
+    background-image: url('./../../assets/home/images/terras-boot-vanaf-cafe-480px.jpg');
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    background-image: url('./../../assets/home/images/terras-boot-vanaf-cafe-767px.jpg');
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    background-image: url('./../../assets/home/images/terras-boot-vanaf-cafe-1024px.jpg');
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    background-image: url('./../../assets/home/images/terras-boot-vanaf-cafe-1280px.jpg');
+  }
+
+  @media (min-width: 1281px) {
+    background-image: url('./../../assets/home/images/terras-boot-vanaf-cafe-1280px.jpg');
+  }
+
+  .banner {
+    top: 130px;
+    left: 30px;
+    max-width: 70vw;
+    position: absolute;
+    background-color: var(--header-blue);
+    color: var(--text-color-bright-orange);
+    padding: 25px;
+    opacity: 0.8;
+    border: 2px solid var(--text-color-orange);
+
+    .banner-header {
+      color: var(--text-color-bright-orange);
+      font-size: 0.8rem;
+
+      @media (max-width: 480px) {
+        font-size: 0.5rem
+      }
+
+      @media (min-width: 481px) and (max-width: 767px) {
+        font-size: 0.7rem
+      }
+
+      @media (min-width: 768px) and (max-width: 1024px) {
+        font-size: 1.3rem
+      }
+
+      @media (min-width: 1025px) and (max-width: 1280px) {
+        font-size: 1.7rem
+      }
+
+      @media (min-width: 1281px) {
+        font-size: 2.2rem
+      }
+    }
+
+    .banner-content {
+      font-family: 'Crimson Pro', serif;
+
+      .capital {
+        padding: 0px;
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.5rem;
+        color: red;
+        background-color: #fff;
+
+        @media (max-width: 480px) {
+          font-size: 1.5rem;
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+          font-size: 2rem;
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+          font-size: 3.5rem
+        }
+
+        @media (min-width: 1025px) and (max-width: 1280px) {
+          font-size: 5rem
+        }
+
+        @media (min-width: 1281px) {
+          font-size: 7rem;
+        }
+      }
+
+      .non-capital {
+        margin-top: 3px;
+        /* border: 1px solid lightblue; */
+        font-family: 'Crimson Pro', serif;
+        font-size: 1rem;
+        color: #fff;
+
+        @media (max-width: 480px) {
+          margin-top: 3px;
+          font-size: 1rem;
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+          margin-top: 3px;
+          font-size: 1.5rem;
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+          margin-top: 5px;
+          font-size: 2.5rem;
+        }
+
+        @media (min-width: 1025px) and (max-width: 1280px) {
+          margin-top: 8px;
+          font-size: 3.5rem;
+        }
+
+        @media (min-width: 1281px) {
+          margin-top: 10px;
+          font-size: 5rem;
+        }
+      }
+    }
+  }
+}
+
+.page-content {
+  .openingstijden {
+    margin: 35px;
+    padding: 10px;
+    border: 3px solid var(--text-color-orange);
+
+    .tijden {
+      font-size: 1.5rem;
+      color: var(--text-color-bright-orange);
+      /* color: white; */
+      text-align: center;
+      .openingHours {
+        // border: 1px solid green;
+        margin-top: 0;
+      }
+      .openingHoursWeekend {
+        // border: 1px solid red;
+        margin-top: 0;
+      }
+    }
+
+    .reserveren {
+      font-size: 1.1rem;
+      text-align: center;
+      color: var(--text-color-bright-orange)
+    }
+
+    .menu {
+      
+      text-align: center;
+      .menu-item {
+        border: 1px solid var(--text-color-orange);
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        margin: 5px 0;
+        text-transform: uppercase;
+        display: block;
+        color: var(--text-color-bright-orange)
+
+      }
+
+    }
+  }
+}
+
+// @media (max-width: 480px) {}
+
+// @media (min-width: 481px) and (max-width: 767px) {}
+
+// @media (min-width: 768px) and (max-width: 1024px) {}
+
+// @media (min-width: 1025px) and (max-width: 1280px) {}
+
+// @media (min-width: 1281px) {}

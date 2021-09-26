@@ -1,0 +1,116 @@
+@import './../../shared/css/banner.scss';
+
+.background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 55%;
+  height: 70vh;
+  @media (max-width: 481px) {
+    background-image: url('./../../../assets/consumptions/beer/images/tapoverzicht-van-verder-af-W-0-480.jpg');
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    background-image: url('./../../../assets/consumptions/beer/images/tapoverzicht-van-verder-af-W-0-767.jpg');
+  }
+  @media (min-width: 768px){
+    background-image: url('./../../../assets/consumptions/beer/images/tapoverzicht-van-verder-af-W-0-1024.jpg');
+  }
+  // @media (min-width: 1025px) and (max-width: 1280px) {
+  //   background-image: url('./../../../assets/consumptions/beer/images/tapoverzicht-van-verder-af-W-0-1500.jpg');
+  // }
+  // @media (min-width: 1281px) {  
+  //   background-image: url('./../../../assets/consumptions/beer/images/tapoverzicht-van-verder-af-W-0-1500.jpg');
+  // }
+}
+
+.beer-container {
+  @media (min-width: 481px) and (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1281px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  background-color: var(--text-color-orange);
+  padding: 3px;
+  display: grid;
+
+  .beer-accordion {
+    margin: 3px;
+    max-width: 500px;
+    display: inline;
+
+    mat-accordion {
+      margin: 0px;
+      padding: 0px;
+
+      mat-expansion-panel {
+        color: var(--text-color-bright-orange);
+        background-color: var(--header-blue);
+
+        mat-expansion-panel-header {
+          color: var(--text-color-bright-orange);
+          background-color: var(--header-blue);
+          padding: 0px 0px 0px 0px;
+
+          mat-panel-title {
+            color: var(--text-color-bright-orange);
+            padding-left: 15px;
+            width: 100%;
+            .icon-name-price {
+              // border: 1px solid pink;
+              width: 100%;
+              padding-right: .3rem;
+              .bottle-icon {
+                padding-right: .3rem;
+              }
+              .glass-icon {
+                padding-right: .3rem;
+              } 
+            }
+
+            
+
+            .beer-name {
+              display: block
+            }
+          }
+          .beer-price {
+            
+          }
+          .list-position {
+            color: lightgreen;
+          }
+          .trash {
+            color: red;
+          }
+        }
+      }
+      .beer-description {
+        padding: 7px;
+        border-radius: 3px;
+        color: var(--header-blue);
+        background-color: var(--text-color-orange);
+      }
+    }
+  }
+}
+.add-beer {
+
+  margin: 0.7rem;
+  mat-radio-group {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+  }
+}
+.edit-mode {
+  border: 3px solid red;
+} 

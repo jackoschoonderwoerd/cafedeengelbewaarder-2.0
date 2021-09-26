@@ -1,0 +1,38 @@
+@import './styles/variables';
+@import './styles/mixins';
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 1.2px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.panelClassFailure {
+  border: 10px solid red
+}
+.panelClassSuccess {
+  border: 10px solid lightgreen
+}
+button {
+  text-transform: uppercase;
+}
