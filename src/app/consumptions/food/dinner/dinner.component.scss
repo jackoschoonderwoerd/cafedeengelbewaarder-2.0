@@ -33,138 +33,112 @@
 }
 .courses {
   padding: 1rem;
-  ul {
+  .first-list {
+    // border: 1px solid red;
     li {
       .add-course {
-        
-      }
-      hr {
-
+        margin-bottom: .5rem; 
       }
       .courses-list {
-        border: 2px solid black;
-        .course {
-          background-color: lightblue;
+        // border: 2px solid black;
+        .edit-name-list-trash__list-item {
+          background-color: var(--header-blue);
           padding: 1rem;
-          min-width: 350px;
-          text-transform: uppercase;
-          .delete-add-course {
-            
+          .edit-name__list-trash {
+            min-width: 350px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            // border: 1px solid blue;
+            .edit-name {
+              // border: 1px solid green;
+              .edit {
+                color: white;
+              }
+              .name {
+                border-bottom: 1px solid var(--text-color-orange);
+                color: var(--text-color-bright-orange);
+                font-size: 1.2rem;
+              }            
+            }
+            .list-trash {
+              .list {
+                padding: 0 .2rem;
+                background-color: lightgreen;
+                
+              }
+              .trash {
+                color: red;
+              }
+            }
           }
           .food-item-list {
-            .food-item {
-              .name-ingredients {
-                .name {
-
+            // border: 3px solid white;
+            .food-item-list-item {
+              .food-item {
+                .edit-name-ingredients {
+                  .edit-food-item {
+                    color: white;
+                  }
+                  .name-ingredients {
+                    color: var(--text-color-bright-orange);
+                    .food-item-name {
+                      text-transform: uppercase;
+                      margin-bottom: .3rem;
+                      
+                    }
+                    .ingredients {
+                      padding-left: 1rem;
+                      font-size: .8rem;
+                    }
+                  }
                 }
-                .ingredients {
-
+                .price-list-trash {
+                  .price {
+                    color: var(--text-color-bright-orange)
+                  }
+                  .list {
+                    padding: 0 .2rem;
+                    color: lightgreen;
+                  }
+                  .trash {
+                    color: red;
+                  }
                 }
               }
             }
           }
         }
       }
+      .remark {
+        color: white;
+        margin-bottom: .5rem;
+      }
     }
   }
 }
+
 // .courses {
-//   padding: 1rem;
-//   .add-course-type {
+//   display: grid;
+//   border: 5px solid var(--text-color-orange);
 
+//   // background-color: var(--text-color-orange);
+//   @media (min-width: 320px) and (max-width: 480px) {
+//     grid-template-columns: 1fr;
 //   }
-//   .course {
-//     padding: .5rem;
-//     background-color: lightblue;
-//     min-width: 350px;
-//     margin-right: .5rem;
-//     .course-name {
-//       text-transform: uppercase;
-//       font-size: 1.3rem;
-//       letter-spacing: .3rem;
-      
-//     }
-//     .add-course {
 
-//     }
-//     ul {
-//       .food-item {
-//         .name-ingredients {
-//           .name {
-//             text-transform: uppercase;
-//           }
-//           .ingredients {
-//             padding: 0 .5rem;
-//             font-size: .8rem;
-//           }
-//         }
-//         .price {
-
-//         }
-//       }
-//     }
+//   @media (min-width: 481px) and (max-width: 767px) {
+//     grid-template-columns: 1fr;
 //   }
-//    margin: 2px 0;
+
+//   @media (min-width: 768px) and (max-width: 1024px) {
+//     grid-template-columns: 1fr 1fr;
+//   }
+
+//   @media (min-width: 1025px) and (max-width: 1399px) {
+//     grid-template-columns: 1fr 1fr 1fr;
+//   }
+
+//   @media (min-width: 1400px) {
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//   }
 // }
-.courses {
-  display: grid;
-  border: 5px solid var(--text-color-orange);
-
-  // background-color: var(--text-color-orange);
-  @media (min-width: 320px) and (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 481px) and (max-width: 767px) {
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 768px) and (max-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 1025px) and (max-width: 1399px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media (min-width: 1400px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-//   .course {
-//     background-color: var(--header-blue);
-//     border: 5px solid var(--text-color-orange);
-//     // border-color: solid var(--text-color-orange);
-//     padding: 30px;
-//     min-width: 250px;
-
-//     .course-name {
-//       color: white;
-//       font-weight: 400;
-//       font-size: 1.2rem;
-//       text-transform: uppercase;
-//     }
-
-//     .course-list {
-//       color: var(--text-color-bright-orange);
-
-//       .course-list-item {
-//         .name-price {}
-
-//         .ingredients {
-//           padding-left: 1rem;
-//           font-size: .9rem;
-//         }
-//       }
-
-//       hr {
-//         width: 80%;
-//         opacity: 0.3;
-//       }
-//     }
-
-//     .remark {
-//       color: white;
-//     }
-//   }
-}

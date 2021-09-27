@@ -1,5 +1,10 @@
 
-
+<div class="english">
+  Adding dish to {{passedData.courseNameEnglish}}
+</div>
+<div class="dutch">
+  Voeg gerecht toe aan {{passedData.courseNameDutch}}
+</div>
 
 <form [formGroup]="addFoodItemForm"
   fxLayout="column">
@@ -44,7 +49,7 @@
       </textarea>
     </mat-form-field>
   </div>
-  <!-- <div class="english-section" fxLayout="column">
+  <div class="english-section" fxLayout="column">
     <mat-form-field appearance="fill">
       <input
         type="text"
@@ -59,7 +64,7 @@
         formControlName="ingredientsEnglish"
         placeholder="INGREDIENTS ENGLISH"></textarea>
     </mat-form-field>
-  </div> -->
+  </div>
 
   <div class="amount-vegetarian-price-list" fxLayout fxLayoutAlign="space-between center center">
     <mat-form-field appearance="fill" class="price">
@@ -78,7 +83,7 @@
         matInput
         formControlName="amount"
         placeholder="amount">
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field class="list-position" appearance="fill">
       <mat-label>LIST</mat-label>
       <input
@@ -86,7 +91,7 @@
       matInput
       formControlName="listPosition">
     </mat-form-field>
-    <mat-checkbox class="vega" formControlName="vegetarian">VEGA</mat-checkbox> -->
+    <!-- <mat-checkbox class="vega" formControlName="vegetarian">VEGA</mat-checkbox> -->
   </div>
   <button
     [disabled]="addFoodItemForm.invalid"

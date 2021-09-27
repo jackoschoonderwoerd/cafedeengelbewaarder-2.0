@@ -60,13 +60,11 @@ export class LunchComponent implements OnInit {
     this.store.subscribe(storeContent => {
       if(storeContent.ui.selectedLink === 'lunch') {
         this.linkSelected = 'lunch'
-        // this.courses = this.lunchService.fetchCourses();    
+ 
       } else if (storeContent.ui.selectedLink === 'snacks') {
         this.linkSelected = 'snacks'
-        // this.courses = this.snackService.fetchCourses();
       } else if (storeContent.ui.selectedLink === 'food') {
         this.linkSelected = 'food'
-        // this.courses = this.dinnerService.fetchCourses();
       }
     })
   }

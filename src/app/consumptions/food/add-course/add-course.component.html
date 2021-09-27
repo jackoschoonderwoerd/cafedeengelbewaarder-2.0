@@ -1,15 +1,45 @@
 
-<div class="">
+<div class="" *ngIf="!editMode">
   Add course to {{mealTypeName}}{{mealTypeId}}
 </div>
 
-<form [formGroup]="form">
+<form [formGroup]="form" fxLayout="column">
   <mat-form-field>
     <input
       type="text"
       matInput
-      formControlName="name"
-      placeholder="Course name">
+      formControlName="nameDutch"
+      placeholder="Course name Dutch">
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      formControlName="nameEnglish"
+      placeholder="Course name English">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      type="text"
+      matInput
+      formControlName="remarkDutch"
+      placeholder="Opmerkingen">
+    </textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      type="text"
+      matInput
+      formControlName="remarkEnglish"
+      placeholder="Remark">
+    </textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="number"
+      matInput
+      formControlName="listPosition"
+      placeholder="list position">
   </mat-form-field>
 </form>
 <div class="buttons" fxLayout="column" fxLayoutGap="1rem">

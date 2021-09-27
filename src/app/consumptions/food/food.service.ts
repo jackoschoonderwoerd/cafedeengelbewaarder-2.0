@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ComplexOuterSubscriber } from 'rxjs/internal/innerSubscribe';
 import { map } from 'rxjs/operators';
 import { UIService } from 'src/app/shared/ui.service';
-import { Course, FoodItem, MealType, NewCourse, NewFoodItem } from '../models/food-item.model';
+import { Course, FoodItem, MealType } from '../models/food-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,21 +17,38 @@ export class FoodService {
     name: 'dinner'
   }
 
+  constructor(
+    private db: AngularFirestore,
+    private uiService: UIService
+  ) { }
 
-  addCourse(mealTypeName, mealTypeId, courseName) {
-    console.log(courseName, this.newDinner);
+  addCourse(mealTypeName, course: Course) {
+    console.log(course, this.newDinner);
     this.newDinner.courses.push({
-      name: courseName,
+      nameDutch: course.nameDutch,
+      nameEnglish: course.nameEnglish,
       foodItems: [],
+      listPosition: course.listPosition,
+      remarkDutch: course.remarkDutch,
+      remarkEnglish: course.remarkEnglish,
       id: new Date().getTime().toString()
     })
     console.log(this.newDinner);
     this.updateNewDinner();    
   }
 
+  editCourse(updatedCourse: Course) {
+    console.log(updatedCourse);
+    const index = this.newDinner.courses.findIndex((course: Course) => {
+      return course.id === updatedCourse.id
+    })
+    this.newDinner.courses[index] = updatedCourse
+    this.updateNewDinner();
+  }
+
   deleteCourse(dinnerName, courseId) {
     console.log(dinnerName, courseId, this.newDinner);
-    const index = this.newDinner.courses.findIndex((course: NewCourse) => {
+    const index = this.newDinner.courses.findIndex((course: Course) => {
       return course.id === courseId
     });
 
@@ -40,55 +57,65 @@ export class FoodService {
     this.updateNewDinner();
   }
   
-  constructor(
-    private db: AngularFirestore,
-    private uiService: UIService
-  ) { }
-
   addFoodItem(dinnerName, courseId, foodItem: FoodItem) {
     foodItem.id = new Date().getTime().toString();
-    console.log(foodItem);
-    this.newDinner.courses.forEach((course: NewCourse) => {
+    
+    this.newDinner.courses.forEach((course: Course) => {
       if(course.id === courseId) {
+        if (!course.foodItems) {
+          course.foodItems = [];
+        } 
         course.foodItems.push(foodItem)
+        course.foodItems.sort((a,b) => (a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
       }
     })
+    
     this.updateNewDinner()
-    // return this.db.collection(`food/categories/${foodItem.category}`).add(foodItem)
   }
 
   deleteFoodItem(dinnerName, courseId, foodItemId) {
     console.log(dinnerName, courseId, foodItemId)
-    this.newDinner.courses.forEach((course: NewCourse) => {
+    this.newDinner.courses.forEach((course: Course) => {
       if(course.id === courseId) {
-        const index = course.foodItems.findIndex((foodItem: NewFoodItem) => {
+        const index = course.foodItems.findIndex((foodItem: FoodItem) => {
           return foodItem.id === foodItemId
         })
         course.foodItems.splice(index, 1)
+        course.foodItems.sort((a,b) => (a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
         this.updateNewDinner();
       }
     })
   }
-  editFoodItem(mealTypeName: string, courseId: string, newFoodItem: NewFoodItem) {
-    console.log(mealTypeName, courseId, newFoodItem);
-    this.newDinner.courses.forEach((course: NewCourse) => {
+
+  editFoodItem(mealTypeName: string, courseId: string, updatedFoodItem: FoodItem) {
+    console.log(mealTypeName, courseId, updatedFoodItem);
+    this.newDinner.courses.forEach((course: Course) => {
       if(course.id === courseId) {
-        const index = course.foodItems.findIndex((foodItem: NewFoodItem) => {
-          return foodItem.id === newFoodItem.id;
+        const index = course.foodItems.findIndex((foodItem: FoodItem) => {
+          return foodItem.id === updatedFoodItem.id;
         });
         console.log(index);
-        course.foodItems[index] = newFoodItem;
+        course.foodItems[index] = updatedFoodItem;
+        course.foodItems.sort((a,b) => (a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
+        
         this.updateNewDinner()
       }
     })
   }
 
-
-  fetchDinnerValueChanges() {
-    this.db.collection('dinner').valueChanges().subscribe(data => {
-      console.log(data)
-    })
+  private sortFoodItems(foodItems: FoodItem[]) {
+    return foodItems.sort((a,b) => (a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
   }
+
+
+  // fetchDinnerValueChanges() {
+  //   this.db
+  //     .collection('dinner')
+  //     .valueChanges()
+  //     .subscribe(data => {
+  //     console.log(data)
+  //   })
+  // }
 
   fetchDinnerSnapshotChangesForLocalUse() {
     console.log('fetching')
@@ -137,32 +164,7 @@ export class FoodService {
         }
       }
     )
-    // console.log('initializing')
-    // if(!this.db.collection('dinner')) {
-    //   console.log('no dinner yet')
-    //   this.db.collection('dinner').add({
-    //     courses: []
-    //   })
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
-    // }
   }
-
-
-  // fetchDinnerSnapshotChanges() {
-  //   return this.db.collection('dinner')
-  //     .snapshotChanges()
-  //     .pipe(
-  //       map((docArray: any) => {
-  //         return docArray.map((doc: any) => {
-  //           return {
-  //             id: doc.payload.doc.id,
-  //             dinner: doc.payload.doc.data().dinner,
-  //           }
-  //         })
-  //       })
-  //     )
-  // }
 
   fetchNewDinnerSnapshotChanges() {
     return this.db.collection('dinner')
@@ -171,41 +173,17 @@ export class FoodService {
     .pipe(
       map((docArray: any) => {
         return docArray.map((doc: any) => {
+          console.log(doc.payload.doc)
           return {
             id: doc.payload.doc.id,
-            courses: doc.payload.doc.data().courses,
-            name: doc.payload.doc. data().name
+            courses: doc.payload.doc.data().courses.sort((a, b) => (a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a. listPosition) ? -1 : 0)),
           }
         })
       })
-    // ).subscribe(data => {
-    //   console.log(data)
-    // }
     )
   }
   
-  // fetchDinnerSnapshotChanges() {
-  // this.db.collection('dinner')
-  //   .snapshotChanges()
-  //   .pipe(
-  //     map((docArray: any) => {
-  //       return docArray.map((doc: any) => {
-  //         return {
-  //           id: doc.payload.doc.id,
-  //           dinner: doc.payload.doc.data().dinner
-  //         }
-  //       })
-  //     })
-  //   ).subscribe(data => console.log(data));
-  // }
 
-
-  // editFoodItem(foodItem: FoodItem) {
-  //   return this.db.collection(`food/categories/${foodItem.category}`).doc(foodItem.id).update(foodItem)
-  // }
-  // deleteFoodItem(foodItem: FoodItem) {
-  //   return this.db.collection(`food/categories/${foodItem.category}`).doc(foodItem.id).delete()
-  // }
 
   getFoodCategory(category: string) {
     console.log(category)
@@ -232,48 +210,4 @@ export class FoodService {
         })
       )
   }
-
-
-  // drinks = []
-
-  // categories: string[] = [
-  //   'coffee and tea',
-  //   'soft drinks',
-  //   'wine',
-  //   'dutch spirits',
-  //   'foreign spirits'
-  // ]
-
-  // fetchDrinks() {
-  //   let drinks = []
-  //   this.categories.forEach((category: string) => {
-  //   return this.db
-  //     .collection(`drinks/categories/${category}`)
-  //     // .collection(`drinks/categories/wine`)
-  //     .snapshotChanges()
-  //     .pipe(
-  //       map(dutchSpiritsArray => {
-  //         return dutchSpiritsArray.map((doc: any) => {
-  //           return {
-  //             drinkId: doc.payload.doc.id,
-  //             nameDutch: doc.payload.doc.data().nameDutch,
-  //             nameEnglish: doc.payload.doc.data().nameEnglish,
-  //             category: doc.payload.doc.data().category,
-  //             price: doc.payload.doc.data().price,
-  //             listPosition: doc.payload.doc.data().listPosition,
-  //             wineType: doc.payload.doc.data().wineType,
-  //             wineContainer: doc.payload.doc.data().wineContainer
-  //           }
-  //         })
-  //       })
-  //     ).subscribe(data => {
-  //       this.drinks.push(data)
-
-  //     })
-  //   })
-  // }
-  // getDrinks() {
-  //   return this.drinks
-  // }
-
 }

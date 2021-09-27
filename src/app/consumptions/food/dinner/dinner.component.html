@@ -29,38 +29,55 @@
     </div>
   </div>
 </section>
-
 <!-- {{newDinner$ | async | json}} -->
 <div class="courses" fxLayout="column">
-  <ul>
-    <li *ngFor="let dinner of newDinner$ | async">DINNER: {{dinner.name | json}}
+  <ul class="first-list">
+    <li *ngFor="let dinner of newDinner$ | async">
+      <!-- <div class="">DINNER: {{dinner.name | json}}</div> -->
       <button class="add-course" mat-raised-button (click)="onAddCourse('dinner')">add course</button>
-      <hr>
       <ul class="courses-list" fxLayout fxLayoutGap="1rem">
-        <li fxLayout="column" fxLayoutGap="1rem" class="course" *ngFor="let course of dinner.courses">
-          <div class="name-delete">
-            {{course.name}} - {{course.id}}
-            <button mat-raised-button (click)="onDeleteCourse(dinner.name, course.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
+        <li fxLayout="column"  class="edit-name-list-trash__list-item" *ngFor="let course of dinner.courses">
+          <div class="edit-name__list-trash" fxLayout  fxLayoutAlign="space-between">
+            <div class="edit-name" fxLayout fxLayoutGap=".5rem">
+              <fa-icon class="edit" [icon]="faEdit" (click)="onEditCourse(
+                      course.id, 
+                      course.nameDutch, 
+                      course.nameEnglish,
+                      course.remarkDutch,
+                      course.remarkEnglish, 
+                      course.listPosition
+                    )">
+              </fa-icon>
+              <div *ngIf="language ==='dutch'" class="name">{{ course.nameDutch}}</div>
+              <div *ngIf="language ==='english'" class="name">{{ course.nameEnglish}}</div>
+            </div>
+            <div class="list-trash" fxLayout fxLayoutGap="1rem">
+              <div class="list">{{course.listPosition}}</div>
+              <fa-icon class="trash" (click)="onDeleteCourse(dinner.name, course.id)" [icon]="faTrash"></fa-icon>
+            </div>
           </div>
-          <div class="delete-add-course" fxLayout fxLayoutAlign="space-between" >
-            <button mat-raised-button (click)="onAddFoodItem(dinner.name, course.id, course.name)">add fooditem</button>
-          </div>
-          <ul class="food-item-list">
-            <li  class="food-item" *ngFor="let foodItem of course.foodItems">
-              <div fxLayout fxLayoutAlign="space-between" class="foodItem" fxLayout>
-                <div (click)="onEditFoodItem('dinner', course.id, foodItem)" class="name-ingredients">
-                  <div class="name">{{foodItem.nameDutch}}</div>
-                  <div class="ingredients">{{foodItem.ingredientsDutch}}</div>
+          
+          <ul class="food-item-list" *ngIf="course.foodItems">
+            <li class="food-item-list-item" *ngFor="let foodItem of course.foodItems">
+              <div fxLayout fxLayoutAlign="space-between" class="food-item" fxLayout>
+                <div class="edit-name-ingredients" fxLayout fxLayoutGap=".5rem">
+                  <div class="edit-food-item" (click)="onEditFoodItem('dinner', course.id, foodItem)">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                  </div>
+                  <div class="name-ingredients" *ngIf="language === 'dutch'">
+                    <div class="food-item-name">{{foodItem.nameDutch}}</div>
+                    <div class="ingredients">{{foodItem.ingredientsDutch}}</div>
+                  </div>
+                  <div class="name-ingredients" *ngIf="language ==='english'">
+                    <div class="food-item-name">{{foodItem.nameEnglish}}</div>
+                    <div class="ingredients">{{foodItem.ingredientsEnglish}}</div>
+                  </div>
                 </div>
                 <div class="price-list-trash" fxLayout="column" fxLayoutGap=".5rem">
                   <div fxLayout fxLayoutAlign="end" class="price">{{foodItem.price | currency:"EUR"}}</div>
-                  <div fxLayout fxLayoutAlign="end" class="list">1</div>
-                  
-                  <div
-                    (click)="onDeleteFoodItem('dinner', course.id, foodItem.id)"
-                    fxLayout 
-                    fxLayoutAlign="end" 
-                    class="trash">
+                  <div fxLayout fxLayoutAlign="end" class="list">{{foodItem.listPosition}}</div>
+                  <div (click)="onDeleteFoodItem('dinner', course.id, foodItem.id)" fxLayout fxLayoutAlign="end"
+                    fxLayoutGap="1rem" class="trash">
                     <fa-icon [icon]="faTrash"></fa-icon>
                   </div>
                 </div>
@@ -69,8 +86,15 @@
                 <hr>
               </div>
             </li>
-            <hr>
           </ul>
+          <div *ngIf="language === 'dutch'" class="remark">{{course.remarkDutch}}</div>
+          <div *ngIf="language === 'english'" class="remark">{{course.remarkEnglish}}</div>
+          <button
+            mat-raised-button
+            
+            (click)="onAddFoodItem(dinner.name, course.id, course.nameDutch, course.nameEnglish)">
+            add fooditem
+          </button>
         </li>
       </ul>
     </li>
