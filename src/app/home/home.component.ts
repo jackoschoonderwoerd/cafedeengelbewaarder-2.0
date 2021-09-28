@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     console.log(menuItem)
     switch(menuItem) {
       case 'dranken':
-        this.store.dispatch(new UI.SelectedLink('drinks'));
+        this.store.dispatch(new UI.SelectedLink('dranken'));
         this.router.navigate(['/drinks']);
         break;
       case 'drinks' :
@@ -67,23 +67,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
         break;
       case 'lunch':
         this.store.dispatch(new UI.SelectedLink('lunch'));
-        this.router.navigate(['/dinner']);
+        this.router.navigate(['food/lunch']);
         break;
       case 'diner' :
-        this.store.dispatch(new UI.SelectedLink('dinner'));
-        this.router.navigate(['/dinner']);
+        this.store.dispatch(new UI.SelectedLink('diner'));
+        this.router.navigate(['food/dinner']);
         break;
       case 'dinner':
         this.store.dispatch(new UI.SelectedLink('dinner'));
-        this.router.navigate(['/dinner']);
+        this.router.navigate(['food/dinner']);
         break;
       case 'snacks':
         this.store.dispatch(new UI.SelectedLink('snacks'));
-        this.router.navigate(['/dinner']);
+        this.router.navigate(['food/snacks']);
         break;
       case 'bieren':
         console.log(menuItem)
-        this.store.dispatch(new UI.SelectedLink('beers'));
+        this.store.dispatch(new UI.SelectedLink('bieren'));
         this.router.navigate(['/beers']);
         break;
       case 'beers':
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/beers']);
         break;
       case 'exposities':
-        this.store.dispatch(new UI.SelectedLink('exhibitions'));
+        this.store.dispatch(new UI.SelectedLink('exposities'));
         this.router.navigate(['/exhibitions'])
         break;
       case 'exhibitions':

@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class AddCourseComponent implements OnInit {
 
   form: FormGroup
-  mealTypeName: string;
+  mealType: string;
   mealTypeId: string;
   editMode: boolean = false;
   courseName: string
@@ -33,7 +33,7 @@ export class AddCourseComponent implements OnInit {
         remarkEnglish: new FormControl(this.data.remarkEnglish)
       })
     } else {
-      this.mealTypeName = this.data.mealTypeName,
+      this.mealType = this.data.mealType,
       this.mealTypeId = this.data.mealTypeId
       this.initForm()
     }

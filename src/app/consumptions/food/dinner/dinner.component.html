@@ -30,16 +30,19 @@
   </div>
 </section>
 <!-- {{newDinner$ | async | json}} -->
-<div class="courses" fxLayout="column">
+<div class="courses">
+  <button mat-raised-button (click)="onSelectSnacks()">select 'snacks'</button>
+  <button mat-raised-button (click)="onSelectLunch()">select 'lunch'</button>
+  <button mat-raised-button (click)="onSelectDinner()">select 'dinner'</button>
   <ul class="first-list">
-    <li *ngFor="let dinner of newDinner$ | async">
+    <li *ngFor="let dinner of dinner$ | async">
       <!-- <div class="">DINNER: {{dinner.name | json}}</div> -->
-      <button class="add-course" mat-raised-button (click)="onAddCourse('dinner')">add course</button>
-      <ul class="courses-list" fxLayout fxLayoutGap="1rem">
+      <button  *ngIf="isAuthenticated$ | async"  class="add-course" mat-raised-button (click)="onAddCourse()">add course</button>
+      <ul class="courses-list">
         <li fxLayout="column"  class="edit-name-list-trash__list-item" *ngFor="let course of dinner.courses">
           <div class="edit-name__list-trash" fxLayout  fxLayoutAlign="space-between">
             <div class="edit-name" fxLayout fxLayoutGap=".5rem">
-              <fa-icon class="edit" [icon]="faEdit" (click)="onEditCourse(
+              <fa-icon *ngIf="isAuthenticated$ | async" class="edit" [icon]="faEdit" (click)="onEditCourse(
                       course.id, 
                       course.nameDutch, 
                       course.nameEnglish,
@@ -51,9 +54,9 @@
               <div *ngIf="language ==='dutch'" class="name">{{ course.nameDutch}}</div>
               <div *ngIf="language ==='english'" class="name">{{ course.nameEnglish}}</div>
             </div>
-            <div class="list-trash" fxLayout fxLayoutGap="1rem">
+            <div  *ngIf="isAuthenticated$ | async"  class="list-trash" fxLayout fxLayoutGap="1rem">
               <div class="list">{{course.listPosition}}</div>
-              <fa-icon class="trash" (click)="onDeleteCourse(dinner.name, course.id)" [icon]="faTrash"></fa-icon>
+              <fa-icon class="trash" (click)="onDeleteCourse(course.id)" [icon]="faTrash"></fa-icon>
             </div>
           </div>
           
@@ -61,7 +64,7 @@
             <li class="food-item-list-item" *ngFor="let foodItem of course.foodItems">
               <div fxLayout fxLayoutAlign="space-between" class="food-item" fxLayout>
                 <div class="edit-name-ingredients" fxLayout fxLayoutGap=".5rem">
-                  <div class="edit-food-item" (click)="onEditFoodItem('dinner', course.id, foodItem)">
+                  <div *ngIf="isAuthenticated$ | async" class="edit-food-item" (click)="onEditFoodItem(course.id, foodItem)">
                     <fa-icon [icon]="faEdit"></fa-icon>
                   </div>
                   <div class="name-ingredients" *ngIf="language === 'dutch'">
@@ -75,8 +78,8 @@
                 </div>
                 <div class="price-list-trash" fxLayout="column" fxLayoutGap=".5rem">
                   <div fxLayout fxLayoutAlign="end" class="price">{{foodItem.price | currency:"EUR"}}</div>
-                  <div fxLayout fxLayoutAlign="end" class="list">{{foodItem.listPosition}}</div>
-                  <div (click)="onDeleteFoodItem('dinner', course.id, foodItem.id)" fxLayout fxLayoutAlign="end"
+                  <div  *ngIf="isAuthenticated$ | async"  fxLayout fxLayoutAlign="end" class="list">{{foodItem.listPosition}}</div>
+                  <div  *ngIf="isAuthenticated$ | async"  (click)="onDeleteFoodItem('dinner', course.id, foodItem.id)" fxLayout fxLayoutAlign="end"
                     fxLayoutGap="1rem" class="trash">
                     <fa-icon [icon]="faTrash"></fa-icon>
                   </div>
@@ -91,7 +94,7 @@
           <div *ngIf="language === 'english'" class="remark">{{course.remarkEnglish}}</div>
           <button
             mat-raised-button
-            
+            *ngIf="isAuthenticated$ | async" 
             (click)="onAddFoodItem(dinner.name, course.id, course.nameDutch, course.nameEnglish)">
             add fooditem
           </button>

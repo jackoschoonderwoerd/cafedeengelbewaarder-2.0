@@ -56,17 +56,14 @@ export class AddFoodComponent implements OnInit {
   }
 
   initForm() {
-    console.log('initializing form');
     if(this.passedData.courseNameDutch) {
-      console.log(this.passedData.courseNameDutch);
       this.addFoodItemForm = this.fb.group({
         id: new FormControl(null),
         section: new FormControl(this.section),
-        // category: new FormControl(this.passedData.courseName, Validators.required),
-        nameDutch: new FormControl('nieuw gerecht', Validators.required),
-        nameEnglish: new FormControl('new dish', Validators.required),
-        ingredientsDutch: new FormControl('nieuwe ingredienten'),
-        ingredientsEnglish: new FormControl('new ingredients'),
+        nameDutch: new FormControl(null, Validators.required),
+        nameEnglish: new FormControl(null, Validators.required),
+        ingredientsDutch: new FormControl(null),
+        ingredientsEnglish: new FormControl(null),
         vegetarian: new FormControl(false, Validators.required),
         amount: new FormControl(1),
         price: new FormControl(1, Validators.required),

@@ -39,10 +39,10 @@ export class DinnerComponent implements OnInit {
   faEdit = faEdit;
   isAuthenticated$: Observable<boolean>;
   dinner: MealType;
-  // dinner$: Observable<any>
+  
   allFood: MealType[];
   mealType: string = 'dinner'
-  newDinner$: Observable<any>
+  dinner$: Observable<any>
 
 
   constructor(
@@ -53,14 +53,11 @@ export class DinnerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.foodService.fetchDinnerValueChanges()
-    this.foodService.initializeDinner();
-    this.newDinner$ = this.foodService.fetchNewDinnerSnapshotChanges()
-    this.foodService.fetchNewDinnerSnapshotChanges()
+    this.foodService.checkForMealtypeDb(this.mealType);
+    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth);
-    // this.foodService.fetchNewDinnerSnapshotChanges()
 
-    this.foodService.fetchDinnerSnapshotChangesForLocalUse();    
+    this.foodService.fetchMealTypeSnapshotChangesForLocalUse(this.mealType);    
     
     this.store.select(fromApp.getSelectedLanguage).subscribe((language: string) => {
       this.language = language
@@ -70,10 +67,26 @@ export class DinnerComponent implements OnInit {
     })
   }
 
-  onAddCourse(mealTypeName) {
+  onSelectSnacks() {
+    this.mealType = 'snacks';
+    this.foodService.checkForMealtypeDb('snacks')
+    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
+  }
+  onSelectLunch() {
+    this.mealType = 'lunch';
+    this.foodService.checkForMealtypeDb('lunch')
+    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
+  }
+  onSelectDinner() {
+    this.foodService.checkForMealtypeDb('dinner')
+    this.mealType = 'dinner';
+    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
+  }
+
+  onAddCourse() {
     const dialogRef = this.dialog.open(AddCourseComponent, {
       data: {
-        mealTypeName: mealTypeName,
+        mealType: this.mealType,
       },
       width: '300px'
     })
@@ -81,7 +94,7 @@ export class DinnerComponent implements OnInit {
       if(course) {
         console.log(course);
         course.foodItems = [];
-        this.foodService.addCourse('dinner', course);
+        this.foodService.addCourse(this.mealType, course);
       }
       return
     })
@@ -106,24 +119,22 @@ export class DinnerComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe((course: Course) => {
       course.id = courseId
-      this.foodService.editCourse(course);
+      this.foodService.editCourse(this.mealType, course);
     })
   }
 
-  onDeleteCourse(dinnerName, courseId) {
+  onDeleteCourse(courseId) {
+    console.log(courseId);
     const dialogRef =  this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(data => {
       if(data) {
-        this.foodService.deleteCourse(dinnerName, courseId);
+        this.foodService.deleteCourse(this.mealType, courseId);
       }
       return
     })
   }
 
-  
-
-  onAddFoodItem(dinnerName, courseId, courseNameDutch, courseNameEnglish) {
-    console.log(dinnerName, courseId, courseNameDutch, courseNameEnglish)
+  onAddFoodItem(courseId, courseNameDutch, courseNameEnglish) {
     if(courseId) {
       const dialogRef =  this.dialog.open(AddFoodComponent, {
         data: {
@@ -138,23 +149,24 @@ export class DinnerComponent implements OnInit {
           this.uiService.addingFailed('')
         } else {
           console.log(foodItem);
-          this.foodService.addFoodItem(dinnerName, courseId, foodItem)
+          this.foodService.addFoodItem(this.mealType, courseId, foodItem)
         }
       })
     }
+    return;
   }
 
-  onDeleteFoodItem(dinnerName, courseId, foodItemId) {
+  onDeleteFoodItem(courseId, foodItemId) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent)
     dialogRef.afterClosed().subscribe(data => {
       if(data) {
-        this.foodService.deleteFoodItem(dinnerName, courseId, foodItemId)
+        this.foodService.deleteFoodItem(this.mealType, courseId, foodItemId)
       }
       return
     })
   }
-  onEditFoodItem(mealTypeName, courseId, foodItem) {
-    console.log(mealTypeName, courseId, foodItem)
+
+  onEditFoodItem(courseId, foodItem) {  
     const dialogRef = this.dialog.open(AddFoodComponent, {
       data: {
         foodItem: foodItem
@@ -163,7 +175,7 @@ export class DinnerComponent implements OnInit {
     dialogRef.afterClosed().subscribe((foodItem: FoodItem) => {
       if(foodItem) {
         console.log(foodItem);
-        this.foodService.editFoodItem(mealTypeName, courseId, foodItem)
+        this.foodService.editFoodItem(this.mealType, courseId, foodItem)
       }
       return
     })
