@@ -4,13 +4,15 @@ import { DrinksService } from './drinks.service';
 import * as fromApp from './../../app.reducer';
 import { Store } from '@ngrx/store';
 import { OpeningHours } from 'src/app/shared/opening-hours.model';
+
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+
 import { MatDialog } from '@angular/material/dialog';
 
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { AddDrinkComponent } from './add-drink/add-drink.component';
 // import { drinksService } from '../consumptions.service';
 import { UIService } from 'src/app/shared/ui.service';

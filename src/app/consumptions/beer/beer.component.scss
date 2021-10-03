@@ -65,32 +65,37 @@
             color: var(--text-color-bright-orange);
             padding-left: 15px;
             width: 100%;
-            .icon-name-price {
+            .beer-item {
               // border: 1px solid pink;
               width: 100%;
-              padding-right: .3rem;
-              .bottle-icon {
-                padding-right: .3rem;
+              // padding-right: .3rem;
+              .container-edit-name {
+                // border: 1px solid red;
+                .container-edit-wrapper {
+                  // .container-edit {
+                    // border: 10px solid lightblue;
+                    .beer-edit {
+                      // border: 10px solid red;
+                      .edit-icon {
+                        color: white;
+                      }
+                    }
+                  // }
+                }
               }
-              .glass-icon {
-                padding-right: .3rem;
-              } 
+              .price-list-trash {
+                // border: 1px solid lightgreen;
+                .beer-price {
+                  
+                }
+                .beer-list {
+                  color: lightgreen;
+                }
+                .beer-trash {
+                  color: red;
+                }
+              }
             }
-
-            
-
-            .beer-name {
-              display: block
-            }
-          }
-          .beer-price {
-            
-          }
-          .list-position {
-            color: lightgreen;
-          }
-          .trash {
-            color: red;
           }
         }
       }

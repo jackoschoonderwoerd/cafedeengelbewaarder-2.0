@@ -8,6 +8,7 @@ import { BeerService } from './beer.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons';
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
   FormBuilder,
@@ -35,11 +36,13 @@ export class BeerComponent implements OnInit {
   addBeerForm: FormGroup;
   beers$: Observable<any>;
   isAuthenticated$: Observable<any>;
+  isAuthenticated: boolean = false
 
   faTrash = faTrash;
   faCoffee = faCoffee;
   faWineBottle = faWineBottle;
   faWineGlass = faWineGlass;
+  faEdit = faEdit;
 
   constructor(
     private store: Store<fromApp.GlobalState>,
@@ -57,7 +60,11 @@ export class BeerComponent implements OnInit {
       .subscribe((language: string) => {
         this.language = language;
       });
-    
+    this.store
+      .select(fromApp.getIsAuth)
+      .subscribe((isAuthenticated: boolean) => {
+        this.isAuthenticated = isAuthenticated
+      })
     this.beers$ = this.beerService.fetchBeers();
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth);
   }
@@ -75,21 +82,23 @@ export class BeerComponent implements OnInit {
   }
 
   onEdit(event, beer: Beer) {
-    event.stopPropagation();
-    const dialogRef = this.dialog.open(AddBeerComponent, {
-      data: {
-        beer
-      }
-    });
-    dialogRef.afterClosed().subscribe((beer: Beer) => {
-      if(beer) {
-        this.beerService.editBeer(beer).subscribe(res => {
-          this.uiService.showSnackbar('database updated', null, 5000)
-        });
-      } else {
-        this.uiService.showSnackbar('nothing was edited', null, 5000);
-      }
-    })
+    if(this.isAuthenticated) {
+      event.stopPropagation();
+      const dialogRef = this.dialog.open(AddBeerComponent, {
+        data: {
+          beer
+        }
+      });
+      dialogRef.afterClosed().subscribe((beer: Beer) => {
+        if(beer) {
+          this.beerService.editBeer(beer).subscribe(res => {
+            this.uiService.showSnackbar('database updated', null, 5000)
+          });
+        } else {
+          this.uiService.showSnackbar('nothing was edited', null, 5000);
+        }
+      })
+    }
   }
 
   onDelete(event, beerItem: Beer) {

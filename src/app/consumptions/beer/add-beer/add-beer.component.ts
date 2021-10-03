@@ -54,14 +54,14 @@ export class AddBeerComponent implements OnInit {
   initForm() {
     this.addBeerForm = this.fb.group({
       id: new FormControl(null),
-      name: new FormControl('bier', Validators.required),
+      name: new FormControl(null, Validators.required),
       draught: new FormControl(true),
       price: new FormControl(1, Validators.required),
       content: new FormControl(1, Validators.required),
       percentage: new FormControl(5, Validators.required),
       listPosition: new FormControl(1, Validators.required),
-      descriptionDutch: new FormControl('null', Validators.required),
-      descriptionEnglish: new FormControl('null', Validators.required),   
+      descriptionDutch: new FormControl(null, Validators.required),
+      descriptionEnglish: new FormControl(null, Validators.required),   
     })
   }
   // submit() {

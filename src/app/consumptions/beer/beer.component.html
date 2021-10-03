@@ -23,58 +23,43 @@
 <div class="beer-container">
   <div *ngFor="let beer of beers$ | async" class="beer-accordion">
     <mat-accordion class="mat-accordion">
-      <mat-expansion-panel
-        
-        class="mat-expansion-panel"
-        hideToggle
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-        [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''"
-      >
+      <mat-expansion-panel class="mat-expansion-panel" hideToggle (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false" [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''">
         <mat-expansion-panel-header class="mat-expansion-panel-header">
-          <mat-panel-title
-            class="mat-panel-title"
-            fxLayout
-            fxLayoutAlign="space-between"
-            (click)="onEdit($event, beer)">
 
-            <div class="icon-name-price"
-              fxLayout 
-              fxLayoutAlign="space-between"
-              >
-              <div class="icon-name" fxLayout fxLayoutAlign="space-between">
-                <div
-                  *ngIf="!beer.draught"
-                  class="bottle-icon"
-                  fxLayout="column"
-                  fxLayoutAlign="center">
-                  <fa-icon [icon]="faWineBottle"></fa-icon>
-                </div>
-                <div
-                  *ngIf="beer.draught"
-                  class="glass-icon"
-                  fxLayout="column"
-                  fxLayoutAlign="center">
-                  <fa-icon [icon]="faWineGlass"></fa-icon>
+          <mat-panel-title class="mat-panel-title">
+            <div class="beer-item" fxLayout fxLayoutAlign="space-between"  fxLayoutGap=".5rem">
+              <div class="container-edit-name" fxLayout fxLayoutGap=".5rem">
+                <div class="container-edit-wrapper" fxLayout fxLayoutAlign="center center" fxLayoutGap=".5rem">
+                  <div class="beer-edit" *ngIf="isAuthenticated$ | async"
+                    (click)="onEditCategory(category)" fxLayout>
+                    <fa-icon (click)="onEdit($event, beer)" [icon]="faEdit" class="edit-icon"></fa-icon>
+                  </div>
+                  <div class="beer-container" class="bottle-icon">
+                    <fa-icon *ngIf="beer.draught" [icon]="faWineGlass"></fa-icon>
+                    <fa-icon *ngIf="!beer.draught" [icon]="faWineBottle"></fa-icon>
+                  </div>
                 </div>
                 <div class="beer-name">{{ beer.name }}</div>
               </div>
-              <div class="beer-price">{{ beer.price | currency: "EUR" }}</div>
-            </div>
-
-            <div *ngIf="isAuthenticated$ | async" class="list-trash" fxLayout fxLayoutGap="0.3rem">
-              <div class="list-position">{{beer.listPosition}}</div>
-              <div class="trash" (click)="onDelete($event, beer)">
-                <fa-icon [icon]="faTrash"></fa-icon>
+              <div class="price-list-trash-wrapper" fxLayout fxLayoutAlign="center center">
+                <div class="price-list-trash" fxLayout fxLayoutGap=".5rem">
+                  <div class="beer-price">{{ beer.price | currency: "EUR" }}</div>
+                  <div *ngIf="isAuthenticated$ | async" class="beer-list">{{beer.listPosition}}</div>
+                  <div *ngIf="isAuthenticated$ | async" class="beer-trash" (click)="onDelete($event, beer)">
+                    <fa-icon [icon]="faTrash"></fa-icon>
+                  </div>
+                </div>
               </div>
             </div>
+
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="beer-description">
           <p *ngIf="language === 'dutch'">{{ beer.descriptionDutch }}</p>
           <p *ngIf="language === 'english'">{{ beer.descriptionEnglish }}</p>
-          <p>content: {{ beer.amount }} cl.</p>
-          <p>alcohol: {{ beer.percentage }}%</p>
+          <p *ngIf="beer.content !== -1">content: {{ beer.content}} cl.</p>
+          <p *ngIf="beer.percentage !== -1">alcohol: {{ beer.percentage}}%</p>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
@@ -83,5 +68,3 @@
     <button class="add-beer" mat-raised-button (click)="onAddBeer()">ADD BEER</button>
   </div>
 </div>
-
-

@@ -16,7 +16,7 @@ import * as UI from './../shared/ui.actions'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
 
   selectedLanguage$: Observable<string>
   openingHours: OpeningHours;
@@ -67,19 +67,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
         break;
       case 'lunch':
         this.store.dispatch(new UI.SelectedLink('lunch'));
-        this.router.navigate(['food/lunch']);
+        this.router.navigate(['/food']);
         break;
       case 'diner' :
-        this.store.dispatch(new UI.SelectedLink('diner'));
-        this.router.navigate(['food/dinner']);
+        this.store.dispatch(new UI.SelectedLink('dinner'));
+        this.router.navigate(['/food']);
         break;
       case 'dinner':
         this.store.dispatch(new UI.SelectedLink('dinner'));
-        this.router.navigate(['food/dinner']);
+        this.router.navigate(['/food']);
         break;
       case 'snacks':
         this.store.dispatch(new UI.SelectedLink('snacks'));
-        this.router.navigate(['food/snacks']);
+        this.router.navigate(['/food']);
         break;
       case 'bieren':
         console.log(menuItem)
@@ -104,14 +104,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/home']);
         break
       }
-    }
-  }
-  ngAfterViewInit() {
-    // Hack: Scrolls to top of Page after page view initialized
-    let top = document.getElementById('top');
-    if (top !== null) {
-      top.scrollIntoView();
-      top = null;
     }
   }
 }
