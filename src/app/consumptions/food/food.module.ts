@@ -9,9 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FoodRoutingModule } from './food-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { DinnerComponent } from './dinner/dinner.component';
-import { SnacksComponent } from './snacks/snacks.component';
-import { LunchComponent } from './lunch/lunch.component';
+import { FoodComponent } from './food.component';
+
 import { AddCourseComponent } from './add-course/add-course.component';
 
 
@@ -19,9 +18,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
 
 @NgModule({
   declarations: [
-    DinnerComponent,
-    SnacksComponent,
-    LunchComponent,
+    FoodComponent,
     AddFoodComponent,
     AddCourseComponent,
 

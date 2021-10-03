@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Beverage, BeverageType, DbDrink, DrinkItem } from './drink-item.model';
-import { WineItem } from './drink-item.model';
+import { Beverage, BeverageType, DrinkItem, AllDrinks, Drink, DrinkCategory } from './drink.model';
+import { WineItem } from './drink.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { map } from 'rxjs/operators';
@@ -13,70 +13,177 @@ import { UIService } from 'src/app/shared/ui.service';
 })
 export class DrinksService {
 
-  categories: string[] = [
-    'coffee and tea',
-    'soft drinks',
-    'wine',
-    'dutch spirits',
-    'foreign spirits'
-  ]
+ 
+  allDrinks: AllDrinks
 
-  getCategories() {
-    return this.categories;
-  }
+  
 
   constructor(
     private db: AngularFirestore,
     private uiService: UIService
   ) { }
 
-  storeDrink(drinkInfo: any) {
-    console.log(drinkInfo);
-    return this.db.collection(`drinks/categories/${drinkInfo.formValue.category}`).add(drinkInfo.formValue)
-    .then(res => {
-      console.log(res)
-      this.uiService.showSnackbar('drink added' + res, null, 5000)
-    })
-    .catch(err => {
-      this.uiService.showSnackbar('no drink added' + err, null, 5000);
-    })
-  }
-
-  editDrink(drink: DbDrink) {
-    return from(this.db.doc(`drinks/categories/${drink.category}/${drink.drinkId}`).update(drink))
-  }
-  deleteDrink(drink: DbDrink) {
-    console.log(drink)
-    return from(this.db.doc(`drinks/categories/${drink.category}/${drink.drinkId}`).delete());
-  }
-
-  fetchDrinks(category) {
-    console.log(category)
-    return this.db
-    .collection(`drinks/categories/` + category, ref => ref.orderBy('listPosition'))
-    .snapshotChanges()
-    .pipe(
-      map(docArray => {
-        return docArray.map((doc: any) => {
-          // console.log(doc.payload.doc.data());
-          return {
-            drinkId: doc.payload.doc.id,
-            nameDutch: doc.payload.doc.data().nameDutch,
-            nameEnglish: doc.payload.doc.data().nameEnglish,
-            category: doc.payload.doc.data().category,
-            price: doc.payload.doc.data().price,
-            listPosition: doc.payload.doc.data().listPosition,
-            wineType: doc.payload.doc.data().wineType,
-            wineContainer: doc.payload.doc.data().wineContainer
-          }
-        })
-      })
+  initializeDrinks() {
+    this.db.collection('drinks').valueChanges().subscribe(
+      data => {
+        if (data.length === 0) {
+          this.db.collection('drinks').add({
+            categories: [
+              {
+                name: 'hot',
+                drinks: [1, 2, 3]
+              }
+            ]
+          })
+        }
+      }
     )
   }
 
+  fetchDrinksForLocalUse() {
+    this.db.collection('drinks')
+      .snapshotChanges()
+      .pipe(
+        map((docArray: any) => {
+          return docArray.map((doc: any) => {
+            return {
+              id: doc.payload.doc.id,
+              categories: doc.payload.doc.data().categories
+            }
+          })
+        })
+      )
+      .subscribe((allDrinks: AllDrinks) => {
+        this.allDrinks = allDrinks[0];
+        console.log(this.allDrinks);
+      });
+  }
+  
+    fetchDrinks() {
+      return this.db
+        .collection('drinks')
+        .snapshotChanges()
+        .pipe(
+          map((docArray: any) => {
+            return docArray.map((doc: any) => {
+              return {
+                id: doc.payload.doc.id,
+                categories: doc.payload.doc.data().categories.sort((a, b) => (a.listPosition > b.listPosition) ? 1 : (b.listPosition > a.listPosition) ? -1 : 0),
+              }
+            })
+          })
+        )
+    }
+
+  addCategory(drinkCategory: DrinkCategory) {
+    console.log(drinkCategory.nameDutch);
+    console.log(this.allDrinks);
+    console.log(typeof this.allDrinks.categories);
+    this.allDrinks.categories.push({
+      nameDutch: drinkCategory.nameDutch,
+      nameEnglish: drinkCategory.nameEnglish,
+      drinks:
+      [],
+      listPosition: drinkCategory.listPosition,
+      id: new Date().getTime().toString()
+    });
+    this.updateDrinks()
+  }
+
+  editCategory(updatedCategory: DrinkCategory) {
+    console.log(updatedCategory);
+    const index = this.allDrinks.categories.findIndex((category: DrinkCategory) => {
+      return category.id === updatedCategory.id
+    })
+    console.log(index);
+    this.allDrinks.categories[index] = updatedCategory;
+    this.updateDrinks();
+  }
+
+
+  deleteCategory(id: string) {
+    const index = this.allDrinks.categories.findIndex((categorie: DrinkCategory) => {
+      return categorie.id === id
+    })
+    console.log(index);
+    this.allDrinks.categories.splice(index, 1)
+    this.updateDrinks()
+  }
+
+  addDrink(categoryId: string, drink: Drink) {
+    console.log(drink)
+    this.allDrinks.categories.forEach((category: DrinkCategory) => {
+      if(category.id === categoryId) {
+        category.drinks.push(drink)
+        category.drinks.sort((a, b) =>(a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
+      }
+      this.updateDrinks();
+    })
+  }
+
+  editDrink(categoryId: string, updatedDrink: Drink) {
+    console.log(categoryId, updatedDrink);
+    this.allDrinks.categories.forEach((category: DrinkCategory) => {
+      if(category.id === categoryId) {
+        console.log('found')
+        const index = category.drinks.findIndex((drink: Drink) => {
+          return drink.id === updatedDrink.id
+        })
+        console.log(index);
+        category.drinks[index] = updatedDrink;
+        category.drinks.sort((a, b) =>(a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
+        console.log(this.allDrinks)
+        this.updateDrinks();
+        // this.storeAllNewDrinks()
+      }
+    })
+  }
+  deleteDrink(categoryId: string, drinkId: string) {
+    this.allDrinks.categories.forEach((category: DrinkCategory) => {
+      if(category.id === categoryId) {
+        const index = category.drinks.findIndex((drink: Drink) => {
+          return drink.id === drinkId;
+        });
+        console.log(index);
+        category.drinks.splice(index, 1)
+        this.updateDrinks();
+      }
+    })
+  }
+
+  updateDrinks() {
+    this.db.collection('drinks').doc(this.allDrinks.id).update(this.allDrinks)
+      .then(result => {
+        this.uiService.showSnackbar('database updated', null, 5000);
+      })
+      .catch(err => console.log(err));
+  }
+  private storeAllNewDrinks() {
+    console.log(this.allDrinks);
+    const myObject = {
+      name: 'jacko',
+      age: 20
+    }
+    // this.db.collection('new drinks').add(myObject);
+  }
+
+  storeDrink(drinkInfo: any) {
+    return this.db.collection(`drinks/categories/${drinkInfo.formValue.category}`).add(drinkInfo.formValue)
+      .then(res => {
+        this.uiService.showSnackbar('drink added' + res, null, 5000)
+      })
+      .catch(err => {
+        this.uiService.showSnackbar('no drink added' + err, null, 5000);
+      })
+  }
+
+
+
+
+
   beverageTypes: BeverageType[] = [
     {
-      nameDutch:'koffie en thee',
+      nameDutch: 'koffie en thee',
       nameEnglish: 'coffee and tea',
       beverages: [
         {
@@ -149,7 +256,7 @@ export class DrinksService {
     {
       nameDutch: 'frisdranken',
       nameEnglish: 'soft drinks',
-      beverages : [
+      beverages: [
         {
           nameDutch: 'Coca Cola',
           nameEnglish: 'Coca Cola',
@@ -278,7 +385,7 @@ export class DrinksService {
     },
     {
       nameDutch: 'binnenlands gedestileerd',
-      nameEnglish: 'dutch spirits', 
+      nameEnglish: 'dutch spirits',
       beverages: [
         {
           nameDutch: 'Wees jonge jenever',
@@ -857,8 +964,8 @@ export class DrinksService {
     //   priceUnit: 4.7
     // },
   ];
-  
- 
+
+
 
   getCoffeeAndTeas() {
     return this.coffeeAndTeas;

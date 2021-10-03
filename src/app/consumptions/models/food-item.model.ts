@@ -12,6 +12,7 @@ export interface Course { // meat fish omabob
   foodItems: FoodItem[];
   remarkDutch?: string;
   remarkEnglish?: string;
+  showCourseName: boolean;
   id?: any;
 }
 
@@ -23,11 +24,11 @@ export interface FoodItem { // steak nuts
   listPosition: number;
   price: number;
   id?: string;
+  amount?: number;
   section?: string;
   category?: string;
   course?: string;
   vegetarian?: boolean;
-  amount?: number;
 }
 
 export interface Remark {

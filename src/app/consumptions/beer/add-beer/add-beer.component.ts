@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons'
 import { ConsumptionsService } from '../../consumptions.service';
-import { BeerItem } from '../beer-item.model';
+import { Beer } from '../beer.model';
 import { BeerService } from '../beer.service';
 
 
@@ -32,19 +32,18 @@ export class AddBeerComponent implements OnInit {
     this.dialogRef.updateSize('350px');
     this.initForm()
     if(this.data) {
-      const beerItem: BeerItem = this.data.beerItem
-      console.log(beerItem);
+      const beer: Beer = this.data.beer
       this.editMode = true
       this.addBeerForm.setValue({
-        beerId: beerItem.beerId,
-        name: beerItem.name,
-        draught: beerItem.draught,
-        price: beerItem.price,
-        amount: beerItem.amount,
-        percentage: beerItem.percentage,
-        listPosition: beerItem.listPosition,
-        descriptionDutch: beerItem.descriptionDutch,
-        descriptionEnglish: beerItem.descriptionEnglish
+        id: beer.id,
+        name: beer.name,
+        draught: beer.draught,
+        price: beer.price,
+        content: beer.content,
+        percentage: beer.percentage,
+        listPosition: beer.listPosition,
+        descriptionDutch: beer.descriptionDutch,
+        descriptionEnglish: beer.descriptionEnglish
       })
     } else {
       this.editMode = false;
@@ -54,15 +53,15 @@ export class AddBeerComponent implements OnInit {
   
   initForm() {
     this.addBeerForm = this.fb.group({
-      beerId: new FormControl(null),
-      name: new FormControl(null, Validators.required),
+      id: new FormControl(null),
+      name: new FormControl('bier', Validators.required),
       draught: new FormControl(true),
-      price: new FormControl(null, Validators.required),
-      amount: new FormControl(null, Validators.required),
-      percentage: new FormControl(null, Validators.required),
-      listPosition: new FormControl(null, Validators.required),
-      descriptionDutch: new FormControl(null, Validators.required),
-      descriptionEnglish: new FormControl(null, Validators.required),   
+      price: new FormControl(1, Validators.required),
+      content: new FormControl(1, Validators.required),
+      percentage: new FormControl(5, Validators.required),
+      listPosition: new FormControl(1, Validators.required),
+      descriptionDutch: new FormControl('null', Validators.required),
+      descriptionEnglish: new FormControl('null', Validators.required),   
     })
   }
   // submit() {

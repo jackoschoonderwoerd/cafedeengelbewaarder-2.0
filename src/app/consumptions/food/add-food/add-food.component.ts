@@ -26,37 +26,32 @@ export class AddFoodComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.passedData)
-    this.foodItem = this.passedData.foodItem
-    console.log(this.foodItem);
+    this.initForm();
     if(this.passedData.foodItem) {
       this.foodItem = this.passedData.foodItem
-      console.log('edit')
-      this.addFoodItemForm = this.fb.group({
-        
-        id: new FormControl(this.foodItem.id),
+      if(!this.foodItem.amount) {
+        this.foodItem.amount === 0;
+      }
+      this.addFoodItemForm.setValue({
+        id: this.foodItem.id,
         // section: new FormControl(this.section),
         // category: new FormControl(this.foodItem.category, Validators.required),
-        nameDutch: new FormControl(this.foodItem.nameDutch, Validators.required),
-        nameEnglish: new FormControl(this.foodItem.nameEnglish, Validators.required),
-        ingredientsDutch: new FormControl(this.foodItem.ingredientsDutch),
-        ingredientsEnglish: new FormControl(this.foodItem.ingredientsEnglish),
+        nameDutch: this.foodItem.nameDutch,
+        nameEnglish: this.foodItem.nameEnglish,
+        ingredientsDutch: this.foodItem.ingredientsDutch,
+        ingredientsEnglish: this.foodItem.ingredientsEnglish,
         // vegetarian: new FormControl(this.foodItem.vegetarian, Validators.required),
-        // amount: new FormControl(this.foodItem.amount),
-        price: new FormControl(this.foodItem.price, Validators.required),
-        listPosition: new FormControl(this.foodItem.listPosition, Validators.required)
+        amount: this.foodItem.amount,
+        price: this.foodItem.price,
+        listPosition: this.foodItem.listPosition,
+        section: null,
+        vegetarian: null,
       });
-    } else {
-      console.log('new')
-      this.initForm()
-    }
-    // this.foodItemName = this.data.name;
-    // this.section = this.data.section;
-    console.log(this.passedData)
+    } 
   }
 
   initForm() {
-    if(this.passedData.courseNameDutch) {
+    
       this.addFoodItemForm = this.fb.group({
         id: new FormControl(null),
         section: new FormControl(this.section),
@@ -64,11 +59,11 @@ export class AddFoodComponent implements OnInit {
         nameEnglish: new FormControl(null, Validators.required),
         ingredientsDutch: new FormControl(null),
         ingredientsEnglish: new FormControl(null),
-        vegetarian: new FormControl(false, Validators.required),
-        amount: new FormControl(1),
-        price: new FormControl(1, Validators.required),
-        listPosition: new FormControl(null, Validators.required)
+        vegetarian: new FormControl(false),
+        amount: new FormControl(0),
+        price: new FormControl(0, Validators.required),
+        listPosition: new FormControl(null, Validators.required),
       })
-    } 
+    
   }
 }

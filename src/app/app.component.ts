@@ -40,12 +40,12 @@ export class AppComponent implements OnInit {
   closed() {
     this.store.dispatch(new UI.CloseSidenav);
   }
-  onActivate(event) {
-    console.log(event)
-    // window.scroll(0,0);
-    // document.body.scrollTop = 0
-    document.querySelector('body').scrollTo(0,0)
-  }
+  // onActivate(event) {
+  //   console.log(event)
+  //   // window.scroll(0,0);
+  //   // document.body.scrollTop = 0
+  //   document.querySelector('body').scrollTo(0,0)
+  // }
 
 }
 

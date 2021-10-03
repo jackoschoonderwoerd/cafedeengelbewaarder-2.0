@@ -1,0 +1,19 @@
+
+<form [formGroup]="form" fxLayout="column">
+  <mat-form-field>
+    <input type="text" matInput formControlName="nameDutch" placeholder="Category name Dutch">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput formControlName="nameEnglish" placeholder="Category name English" >
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" matInput formControlName="listPosition" placeholder="List Position" >
+  </mat-form-field>
+</form>
+
+<div class="buttons">
+  <button mat-raised-button [mat-dialog-close]="form.value">
+    {{editMode ? 'Update Category' : 'add category' }}
+  </button>
+  <button mat-raised-button mat-dialog-close>cancel</button>
+</div>

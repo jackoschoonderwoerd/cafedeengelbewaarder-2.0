@@ -26,14 +26,12 @@
         Lunch: {{openingHours.lunch}}<br>
         Dinner: {{openingHours.dinner}}<br>
         Snacks: {{openingHours.snacks}}
+      </p>
     </div>
   </div>
 </section>
 <!-- {{newDinner$ | async | json}} -->
 <div class="courses">
-  <button mat-raised-button (click)="onSelectSnacks()">select 'snacks'</button>
-  <button mat-raised-button (click)="onSelectLunch()">select 'lunch'</button>
-  <button mat-raised-button (click)="onSelectDinner()">select 'dinner'</button>
   <ul class="first-list">
     <li *ngFor="let dinner of dinner$ | async">
       <!-- <div class="">DINNER: {{dinner.name | json}}</div> -->
@@ -42,7 +40,7 @@
         <li fxLayout="column"  class="edit-name-list-trash__list-item" *ngFor="let course of dinner.courses">
           <div class="edit-name__list-trash" fxLayout  fxLayoutAlign="space-between">
             <div class="edit-name" fxLayout fxLayoutGap=".5rem">
-              <fa-icon *ngIf="isAuthenticated$ | async" class="edit" [icon]="faEdit" (click)="onEditCourse(
+              <!-- <fa-icon *ngIf="isAuthenticated$ | async" class="edit" [icon]="faEdit" (click)="onEditCourse(
                       course.id, 
                       course.nameDutch, 
                       course.nameEnglish,
@@ -50,9 +48,15 @@
                       course.remarkEnglish, 
                       course.listPosition
                     )">
+              </fa-icon> -->
+              
+              <fa-icon *ngIf="isAuthenticated$ | async" class="edit" [icon]="faEdit" (click)="onEditCourse(course)">
               </fa-icon>
-              <div *ngIf="language ==='dutch'" class="name">{{ course.nameDutch}}</div>
-              <div *ngIf="language ==='english'" class="name">{{ course.nameEnglish}}</div>
+              <div class="courseNames" *ngIf="course.showCourseName === 'true'">
+                <div *ngIf="language ==='dutch'" class="name">{{ course.nameDutch}}</div>
+                <div *ngIf="language ==='english'" class="name">{{ course.nameEnglish}}</div>
+                
+              </div>
             </div>
             <div  *ngIf="isAuthenticated$ | async"  class="list-trash" fxLayout fxLayoutGap="1rem">
               <div class="list">{{course.listPosition}}</div>
@@ -68,12 +72,17 @@
                     <fa-icon [icon]="faEdit"></fa-icon>
                   </div>
                   <div class="name-ingredients" *ngIf="language === 'dutch'">
-                    <div class="food-item-name">{{foodItem.nameDutch}}</div>
+                    <div class="food-item-name">
+                      {{foodItem.nameDutch}}
+                      <span class="amount"  *ngIf="foodItem.amount > 1">({{foodItem.amount}}X)</span></div>
                     <div class="ingredients">{{foodItem.ingredientsDutch}}</div>
                   </div>
-                  <div class="name-ingredients" *ngIf="language ==='english'">
-                    <div class="food-item-name">{{foodItem.nameEnglish}}</div>
+                  <div class="name-ingredients" *ngIf="language ==='english'" fxLayout fxLayoutAlign="space">
+                    <div class="food-item-name">
+                      {{foodItem.nameEnglish}}
+                      <span class="amount" *ngIf="foodItem.amount > 1">({{foodItem.amount}}X)</span></div>
                     <div class="ingredients">{{foodItem.ingredientsEnglish}}</div>
+                    
                   </div>
                 </div>
                 <div class="price-list-trash" fxLayout="column" fxLayoutGap=".5rem">
@@ -95,7 +104,7 @@
           <button
             mat-raised-button
             *ngIf="isAuthenticated$ | async" 
-            (click)="onAddFoodItem(dinner.name, course.id, course.nameDutch, course.nameEnglish)">
+            (click)="onAddFoodItem(course.id, course.nameDutch, course.nameEnglish)">
             add fooditem
           </button>
         </li>

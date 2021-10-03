@@ -1,7 +1,7 @@
 <form fxLayout="column" [formGroup]="addBeerForm">
 
   <mat-form-field *ngIf="editMode" style="display: none;">
-    <input type="text" matInput formControlName="beerId" placeholder="ID" />
+    <input type="text" matInput formControlName="id" placeholder="ID" />
   </mat-form-field>
 
   <mat-form-field>
@@ -32,7 +32,7 @@
     <input
       type="number"
       matInput
-      formControlName="amount"
+      formControlName="content"
       placeholder="INHOUD / CL"
     />
   </mat-form-field>
@@ -77,7 +77,7 @@
     color="primary"
     type="submit"
     [disabled]="addBeerForm.invalid"
-    [mat-dialog-close]="{purpose: 'save changes', formValue: addBeerForm.value}"
+    [mat-dialog-close]="addBeerForm.value"
   >
     {{editMode ? "SAVE CHANGES" : "ADD"}}
   </button>

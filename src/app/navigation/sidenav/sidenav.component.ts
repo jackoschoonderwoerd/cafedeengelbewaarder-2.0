@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 import { User } from 'src/app/auth/user.model';
+import { NavigationService } from '../navigation.service';
 // import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.css']
+  styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
 
@@ -23,23 +24,25 @@ export class SidenavComponent implements OnInit {
   language: string = 'dutch'
   linkSelected: string = null;
   openingHours;
+  mealTypes: string[]
 
   constructor(
     private store: Store<fromApp.GlobalState>,
     private authService: AuthService,
-    private router: Router,
-    private dialog: MatDialog
+    
+    private dialog: MatDialog,
+    private navigationService: NavigationService
 
   ) { }
 
   ngOnInit(): void {
+    this.mealTypes = this.navigationService.getMealTypes();
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth);
     this.store.select(fromApp.getSelectedLanguage).subscribe((language: string) => {
       this.language = language
     })
     this.store.select(fromApp.getOpeningHours).subscribe(openingHours => {
       this.openingHours = openingHours;
-      console.log(this.openingHours)
     });
   }
   onCloseSidenav() {
@@ -48,21 +51,12 @@ export class SidenavComponent implements OnInit {
   onLogOut() {
     this.authService.logOut()
   }
-  onLinkSelected(selectedLink) {
-    // this.store.dispatch(new UI.CloseSidenav);
-    // this.linkSelected = selectedLink;
-    // this.store.dispatch(new UI.SelectedLink(selectedLink));
-    // if(selectedLink === 'lunch') {
-    //   this.router.navigate(['/dinner'])  
-    // } else if(selectedLink === 'snacks') {
-    //   this.router.navigate(['/dinner'])  
-    // } else if (selectedLink === 'log-out') {
-    //   this.authService.logOut();
-    // } else {
-    //   console.log(selectedLink);
-    //   this.router.navigate(['/' + selectedLink])
-    // }
+ 
+  mealTypeSelected(mealType) {
+    this.store.dispatch(new UI.SelectedLink(mealType));
+    this.onCloseSidenav();
   }
+
   onLogIn() {
     this.store.dispatch(new UI.CloseSidenav);
     const dialogRef = this.dialog.open(LoginComponent);

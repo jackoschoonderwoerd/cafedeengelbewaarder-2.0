@@ -1,4 +1,4 @@
-@import "./../../../shared/css/banner.scss";
+@import "./../../shared/css/banner.scss";
 
 .edit-mode {
   border: 3px solid red;
@@ -12,27 +12,27 @@
   height: 70vh;
 
   @media (max-width: 480px) {
-    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-480.jpg");
+    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-480.jpg");
   }
 
   @media (min-width: 481px) and (max-width: 767px) {
-    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-767.jpg");
+    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-767.jpg");
   }
 
   @media (min-width: 768px) and (max-width: 1024px) {
-    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-1024.jpg");
+    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1024.jpg");
   }
 
   @media (min-width: 1025px) and (max-width: 1280px) {
-    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
+    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
   }
 
   @media (min-width: 1281px) {
-    background-image: url("./../../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
+    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
   }
 }
 .courses {
-  padding: 0 1rem;
+  padding: 0 .5rem;
   .first-list {
     // border: 1px solid red;
     li {
@@ -82,11 +82,16 @@
                     color: white;
                   }
                   .name-ingredients {
+                    // border: 1px solid red;
                     color: var(--text-color-bright-orange);
                     .food-item-name {
                       text-transform: uppercase;
                       margin-bottom: .3rem;
-                      
+                      .amount {
+                        padding-left: .5rem;
+                        // border: 1px solid lightgreen;
+                        color: var(--text-color-bright-orange)
+                      }
                     }
                     .ingredients {
                       padding-left: 1rem;
@@ -96,6 +101,7 @@
                   }
                 }
                 .price-list-trash {
+                  // border: 1px solid pink;
                   .price {
                     color: var(--text-color-bright-orange)
                   }
@@ -128,7 +134,7 @@
 
 .courses-list {
   display: grid;
-  grid-column-gap: 1rem;
+  grid-column-gap: 0.5rem;
   grid-row-gap: 1rem;
   // border: 5px solid var(--text-color-orange);
   // border: 10px solid green;

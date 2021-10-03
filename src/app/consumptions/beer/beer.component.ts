@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import * as fromApp from './../../app.reducer';
 // import { BeerDialogComponent } from './beer-dialog/beer-dialog.component';
-import { BeerItem } from './beer-item.model';
+import { Beer } from './beer.model';
 import { BeerService } from './beer.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +30,7 @@ export class BeerComponent implements OnInit {
   language: string = 'dutch';
   // draughtBeers: BeerItem[] = [];
   // bottledBeers: BeerItem[] = [];
-  beers: BeerItem[] = [];
+  beers: Beer[] = [];
   panelOpenState: boolean = true;
   addBeerForm: FormGroup;
   beers$: Observable<any>;
@@ -57,95 +57,42 @@ export class BeerComponent implements OnInit {
       .subscribe((language: string) => {
         this.language = language;
       });
-    // this.beers = this.beerService.getBeers();
-    this.initForm();
-    this.getBeers();
-    // this.beers$ = this.consumptionsService.fetchBeers()
+    
     this.beers$ = this.beerService.fetchBeers();
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth);
   }
 
-  initForm() {
-    this.addBeerForm = this.fb.group({
-      name: new FormControl('lekker bier', Validators.required),
-      draught: new FormControl(true),
-      price: new FormControl(50, Validators.required),
-      content: new FormControl(250, Validators.required),
-      percentage: new FormControl(7.5, Validators.required),
-      descriptionDutch: new FormControl(
-        'heel lekker bier',
-        Validators.required
-      ),
-      descriptionEnglish: new FormControl(
-        'very nice beer',
-        Validators.required
-      ),
-    });
-  }
-
-  submit() {
-    console.log(this.addBeerForm.value);
-    // this.consumptionsService.storeBeer(this.addBeerForm.value)
-    this.beerService.storeBeer(this.addBeerForm.value);
-  }
-
-  onEdit(event, beerItem: BeerItem) {
-    this.store.select(fromApp.getIsAuth).subscribe((isAuth: boolean) => {
-      console.log(isAuth);
-      if (isAuth) {
-        event.stopPropagation();
-        console.log(beerItem);
-        const dialogRef = this.dialog.open(AddBeerComponent, {
-          data: { beerItem: beerItem },
-        });
-        dialogRef.afterClosed().subscribe((beerItemInfo: any) => {
-          if (!beerItemInfo) {
-            this.uiService.showSnackbar(
-              'no beers were edited or added',
-              null,
-              5000
-            );
-          } else {
-            console.log(beerItemInfo);
-            if (beerItemInfo.purpose === 'delete') {
-              const dialogRef = this.dialog.open(ConfirmDeleteComponent);
-              dialogRef.afterClosed().subscribe((data) => {
-                if (data === 'confirmed') {
-                  console.log(beerItemInfo.formValue);
-                  this.beerService.deleteBeer(beerItemInfo.formValue);
-                } else if (data === 'cancelled') {
-                  this.uiService.showSnackbar(
-                    'Cancelled, nothing was deleted',
-                    null,
-                    5000
-                  );
-                }
-              });
-            } else if (beerItemInfo.purpose === 'save changes') {
-              this.beerService.editBeer(beerItemInfo.formValue);
-            }
-          }
-        });
-      } 
-    });
-  }
 
   onAddBeer() {
     const dialogRef = this.dialog.open(AddBeerComponent, { width: '500px' });
-    dialogRef.afterClosed().subscribe((beerItemInfo: any) => {
-      if (beerItemInfo) {
-        // this.consumptionsService.storeBeer(beerItem);
-        this.beerService.storeBeer(beerItemInfo.formValue);
+    dialogRef.afterClosed().subscribe((beer: Beer) => {
+      if (beer) {
+        this.beerService.storeBeer(beer);
       } else {
         this.uiService.showSnackbar('nothing was added', null, 5000);
       }
     });
   }
-  getBeers() {
-    // this.consumptionsService.fetchBeers().subscribe(beer => console.log(beer));
-    this.beerService.fetchBeers().subscribe((beer) => console.log(beer));
+
+  onEdit(event, beer: Beer) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(AddBeerComponent, {
+      data: {
+        beer
+      }
+    });
+    dialogRef.afterClosed().subscribe((beer: Beer) => {
+      if(beer) {
+        this.beerService.editBeer(beer).subscribe(res => {
+          this.uiService.showSnackbar('database updated', null, 5000)
+        });
+      } else {
+        this.uiService.showSnackbar('nothing was edited', null, 5000);
+      }
+    })
   }
-  onDelete(event, beerItem: BeerItem) {
+
+  onDelete(event, beerItem: Beer) {
     event.stopPropagation();
     console.log(beerItem);
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
@@ -154,7 +101,12 @@ export class BeerComponent implements OnInit {
         this.beerService.deleteBeer(beerItem).subscribe(data => {
           this.uiService.deletingSucceeded(beerItem.name);
         })
+      } else {
+        this.uiService.showSnackbar('nothing was deleted', null, 5000);
       }
     })
   }
+
+
+
 }

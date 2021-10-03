@@ -7,13 +7,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AddDrinkComponent } from './add-drink/add-drink.component';
 import { DrinksMaterialModule } from './drinks-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 
 
 @NgModule({
   declarations: [
     DrinksComponent,
-    AddDrinkComponent
+    AddDrinkComponent,
+    AddCategoryComponent
   ],
   imports: [
     CommonModule,

@@ -58,11 +58,17 @@ mat-toolbar {
   }
   .routerlink-active {
     background-color: var(--text-color-bright-orange);
-    color: var(--header-blue);
+    // color: var(--header-blue);
+    color: red;
   }
   .routerlink-active span {
     color: var(--header-blue);
   }
+}
+
+.linkSelected {
+  background-color: red;
+  color: white;
 }
 
 

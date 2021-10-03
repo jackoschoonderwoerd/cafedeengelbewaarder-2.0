@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Beverage, BeverageType, DbDrink, DrinkItem, WineItem } from './drink-item.model';
+import { Beverage, BeverageType, Drink, DrinkCategory, DrinkItem, WineItem } from './drink.model';
 import { DrinksService } from './drinks.service';
 import * as fromApp from './../../app.reducer';
 import { Store } from '@ngrx/store';
@@ -9,11 +9,14 @@ import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
+
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { AddDrinkComponent } from './add-drink/add-drink.component';
 // import { drinksService } from '../consumptions.service';
 import { UIService } from 'src/app/shared/ui.service';
 import { Observable } from 'rxjs';
 import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @Component({
   selector: 'app-drinks',
@@ -26,6 +29,7 @@ export class DrinksComponent implements OnInit , AfterViewInit {
   faWineGlass = faWineGlass;
   faWineBottle = faWineBottle;
   faTrash = faTrash;
+  faEdit = faEdit;
 
   language: string = 'dutch';
   coffeeAndTeas: DrinkItem[] = [];
@@ -44,7 +48,7 @@ export class DrinksComponent implements OnInit , AfterViewInit {
   dutchSpirits$: Observable<any>
   foreignSpirits$: Observable<any>
   
-  categories: string[];
+  categories: [];
 
   isAuthenticated$: Observable<any>
 
@@ -60,60 +64,123 @@ export class DrinksComponent implements OnInit , AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.drinksService.fetchDrinks('soft drinks').subscribe(data => {
-      console.log(data);
-    })
+
+    this.drinksService.initializeDrinks();
+    this.drinksService.fetchDrinksForLocalUse();
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth)
-    // this.drinksService.fetchAllDrinks()
-    // this.categories = this.drinksService.getCategories();
-    this.coffeeAndTea$ = this.drinksService.fetchDrinks('coffee and tea')
-    this.softDrinks$ = this.drinksService.fetchDrinks('soft drinks')
-    this.wines$ = this.drinksService.fetchDrinks('wine')
-    this.dutchSpirits$ = this.drinksService.fetchDrinks('dutch spirits')
-    this.foreignSpirits$ = this.drinksService.fetchDrinks('foreign spirits')
+
     
+    this.drinks$ = this.drinksService.fetchDrinks()
+
     this.store.select(fromApp.getSelectedLanguage).subscribe((language: string) => {
       this.language = language;
-      console.log(language)
     })
     this.store.select(fromApp.getOpeningHours).subscribe((openingHours: OpeningHours) => {
       this.openingHours = openingHours
     })
-    // this.beverageTypes = this.drinksService.getBeverageTypes();
   }
 
-  onAddDrink(category) {
-    this.store.select(fromApp.getIsAuth).subscribe((isAuth: boolean) => {
-      console.log(isAuth)
-    })
-    console.log(category)
-    const dialogRef = this.dialog.open(AddDrinkComponent, {data: {action: 'add', category: category}});
-    dialogRef.afterClosed().subscribe((drink: DbDrink) => {
-      if(drink) {
-        this.drinksService.storeDrink(drink)
-      } else {
-        this.uiService.showSnackbar('no drinks were added', null, 5000);
+  onAddCategory () {
+    const dialogRef = this.dialog.open(AddCategoryComponent)
+    dialogRef.afterClosed().subscribe((drinkCategory: DrinkCategory) => {
+      if(drinkCategory) {
+        console.log(drinkCategory)
+        this.drinksService.addCategory(drinkCategory)
       }
-    });
+    })
   }
 
-  onDelete(event, drinkItem: DbDrink) {
-    event.stopPropagation();
-    console.log(event, drinkItem)
+  onEditCategory(category: DrinkCategory) {
+    console.log(category);
+    const dialogRef = this.dialog.open(AddCategoryComponent, {
+      data: {
+        category
+      }
+    })
+    dialogRef.afterClosed().subscribe((updatedCategory: DrinkCategory) => {
+      console.log(updatedCategory);
+      updatedCategory.id = category.id;
+      updatedCategory.drinks = category.drinks
+      this.drinksService.editCategory(updatedCategory)
+      
+    })
+  }
+
+  onDeleteCategory(id: string) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent);
+    dialogRef.afterClosed().subscribe(data => {
+      if(data) {
+        this.drinksService.deleteCategory(id);
+      }
+      return
+    })
+  }
+
+  onAddDrink(categoryId: string, categoryName: string) {
+    console.log(categoryId, categoryName);
+    const dialogRef = this.dialog.open(AddDrinkComponent, {
+      data: {
+        categoryName: categoryName
+      }
+    })
+    dialogRef.afterClosed().subscribe((drink: Drink) => {
+      if(drink) {
+        drink.id = new Date().getTime().toString();
+        this.drinksService.addDrink(categoryId, drink)
+      }
+      return
+    })
+  }
+
+  onEditDrink(category: DrinkCategory, drink: Drink) {
+    console.log(drink);
+    const dialogRef =  this.dialog.open(AddDrinkComponent, {
+      data: {
+        drink: drink,
+        category: category
+      }
+    })
+    dialogRef.afterClosed().subscribe((drink: Drink) => {
+      console.log(drink);
+      this.drinksService.editDrink(category.id, drink)
+    })
+  }
+
+  onDeleteDrink(categoryId: string, drinkId: string) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent)
     dialogRef.afterClosed().subscribe(data => {
-      console.log(data);
       if(data) {
-        console.log(data);
-        this.drinksService.deleteDrink(drinkItem)
-        .subscribe(res => {
-          console.log(res);
-        })
-      } else {
-        return
+        this.drinksService.deleteDrink(categoryId, drinkId);
       }
     })
+    return
   }
+
+  // onAddDrink() {
+    
+  //   const dialogRef = this.dialog.open(AddDrinkComponent);
+  //   dialogRef.afterClosed().subscribe((drink: Drink) => {
+  //     if(drink) {
+  //       this.drinksService.storeDrink(drink)
+  //     } else {
+  //       this.uiService.showSnackbar('no drinks were added', null, 5000);
+  //     }
+  //   });
+  // }
+
+  // onDelete(event, drinkItem: DbDrink) {
+  //   event.stopPropagation();
+  //   const dialogRef = this.dialog.open(ConfirmDeleteComponent)
+  //   dialogRef.afterClosed().subscribe(data => {
+  //     if(data) {
+  //       this.drinksService.deleteDrink(drinkItem)
+  //       .subscribe(res => {
+  //       })
+  //     } else {
+  //       return
+  //     }
+  //   })
+  // }
 
   ngAfterViewInit() {
     // Hack: Scrolls to top of Page after page view initialized
@@ -123,24 +190,23 @@ export class DrinksComponent implements OnInit , AfterViewInit {
       top = null;
     }
   }
-  onEdit(drink: DbDrink) {
-    console.log(drink)
-    this.store.select(fromApp.getIsAuth).subscribe((isAuth: boolean) => {
-      console.log(isAuth)
-      if(isAuth) {
-        const dialogRef = this.dialog.open(AddDrinkComponent, {data: {drink: drink}})
-        dialogRef.afterClosed().subscribe((drinkInfo: any) => {
+  // onEdit(drink: DbDrink) {
+  //   this.store.select(fromApp.getIsAuth).subscribe((isAuth: boolean) => {
+  //     console.log(isAuth)
+  //     if(isAuth) {
+  //       const dialogRef = this.dialog.open(AddDrinkComponent, {data: {drink: drink}})
+  //       dialogRef.afterClosed().subscribe((drinkInfo: any) => {
           
-          if(!drinkInfo) {
-            this.uiService.showSnackbar('no drinks have been deleted or edited', null, 5000);
-            return;
-          } else {
-            this.drinksService.editDrink(drinkInfo.formValue).subscribe(res => {
-              this.uiService.editingSucceeded(drinkInfo.formValue.nameEnglish);
-            })
-          }
-        })
-      }
-    })
-  }
+  //         if(!drinkInfo) {
+  //           this.uiService.showSnackbar('no drinks have been deleted or edited', null, 5000);
+  //           return;
+  //         } else {
+  //           this.drinksService.editDrink(drinkInfo.formValue).subscribe(res => {
+  //             this.uiService.editingSucceeded(drinkInfo.formValue.nameEnglish);
+  //           })
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
 }

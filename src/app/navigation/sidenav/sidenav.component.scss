@@ -1,0 +1,25 @@
+mat-nav-list {
+  .nav-list-item {
+    text-decoration: none;
+    color: var(--text-color-bright-orange);
+    font-size: 1.1rem;
+    margin: .5rem;
+    // border: 1px solid red;
+    text-transform: uppercase;
+  }
+  .nested-list-item {
+    
+  }
+  .hr {
+    opacity: 0.1;
+    width: 80%;
+    margin: .3rem 0;
+  }
+}
+
+
+
+a:hover,
+a:active {
+
+}

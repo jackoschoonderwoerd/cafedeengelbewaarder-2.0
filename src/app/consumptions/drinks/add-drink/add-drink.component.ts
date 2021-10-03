@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConsumptionsService } from '../../consumptions.service';
-import { DbDrink } from '../drink-item.model';
-import { DrinksService } from '../drinks.service';
+import { Drink } from '../drink.model';
+
 
 @Component({
   selector: 'app-add-drink',
@@ -17,8 +17,9 @@ export class AddDrinkComponent implements OnInit {
   editMode: boolean = false;
   categories: string[];
   wineSelected: boolean = false;
-  category: string = 'general';
+  categoryName: string;
   listPositions: number[] = []
+  drink: Drink;
   
   
   
@@ -32,68 +33,47 @@ export class AddDrinkComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('350px');
-    for(let i = 1; i < 31; i++) {
-      this.listPositions.push(i);
-    }
-    console.log(this.listPositions)
-    console.log(this.data)
-    if(this.data.drink) {
-      console.log('edit')
-      if(this.data.drink.wineType) {
-        console.log('edit wine')
-        this.category = 'wine'
-      }
-    } else {
-      console.log('new')
-      this.category = this.data.category
-    }
-    // if(this.data.drink.wineType !== null) {
-    //   this.category = 'wine'
-    // } else {
-    //   this.category = this.data.category
-    // }
+    
     this.initForm()
-    if(this.data.action !== 'add') {
-      this.editMode = true;
-      const drink: DbDrink = this.data.drink
+    this.dialogRef.updateSize('350px');
+    if(this.data.drink) {
+      console.log(this.data);
+      this.categoryName = this.data.category.nameEnglish
+      this.editMode = true
+      this.drink = this.data.drink;
+      console.log(this.drink)
       this.addDrinkForm.setValue({
-        drinkId: drink.drinkId,
-        nameDutch: drink.nameDutch,
-        nameEnglish: drink.nameEnglish,
-        price: drink.price,
-        category: drink.category,
-        listPosition: drink.listPosition,
-        wineType: drink.wineType,
-        wineContainer: drink.wineContainer
+        id: this.drink.id,
+        nameDutch: this.drink.nameDutch,
+        nameEnglish: this.drink.nameEnglish,
+        listPosition: this.drink.listPosition,
+        wineType: this.categoryName === 'wine' ? this.drink.wineType : null,
+        wineContainer: this.categoryName === 'wine' ? this.drink.wineContainer : null,
+        price: this.drink.price
       })
-      this.addDrinkForm.updateValueAndValidity()
     } else {
-      this.editMode = false;
-      this.addDrinkForm.patchValue({
-        category: this.category
-      })
+      this.categoryName = this.data.categoryName
+      console.log(this.categoryName);
     }
   }
 
   initForm() {
     // this.categories = this.drinksService.getCategories()
     this.addDrinkForm = this.fb.group({
-      drinkId: new FormControl(null),
+      id: new FormControl(null),
       nameDutch: new FormControl(null, Validators.required),
       nameEnglish: new FormControl(null, Validators.required),
-      category: new FormControl(null, Validators.required),
       listPosition: new FormControl(null, Validators.required),
-      wineType: new FormControl(),
-      wineContainer: new FormControl(),
+      wineType: new FormControl(null),
+      wineContainer: new FormControl(null),
       price: new FormControl(null, Validators.required),
     })
   }
-  onSelectionChange(e) {
-    if(e.value === 'wine') {
-      this.category = 'wine';
-    } else {
-      this.category = 'general';
-    }
-  }
+  // onSelectionChange(e) {
+  //   if(e.value === 'wine') {
+  //     this.category = 'wine';
+  //   } else {
+  //     this.category = 'general';
+  //   }
+  // }
 }

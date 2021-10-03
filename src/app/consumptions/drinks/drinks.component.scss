@@ -2,7 +2,7 @@
 // @import './../../shared/css/food.css';
 
 .background-image {
-  //
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0% 40%;
@@ -24,9 +24,106 @@
   }
 }
 
-.category-containers {
+
+
+.main-list {
+  margin: 0;
+  padding: .5rem;
+  // padding: .1rem;
+
+  .add-category {
+    margin-bottom: .5em;
+  }
+  .all-drinks {
+    // padding: 1rem;
+    .category-list {
+      .category-list-item {
+        // min-width: 300px;
+        // display: flex;
+        padding: 1rem;
+        background-color: var(--header-blue);
+        color: var(--text-color-bright-orange);
+        // text-transform: uppercase;
+        .category {
+          margin-bottom: 1rem;
+          .edit-name {
+            .edit{
+              color: white;
+            }
+            .category-name {
+              text-transform: uppercase;
+              color: white;
+            }
+          }
+          .list-trash {
+            .list{
+              background-color: lightgreen;
+              color: var(--header-blue);
+              padding: 0 .2rem;
+            }
+            .trash {
+              color: red
+            }
+          }
+        }
+        .drink-list {
+          .drink-list-item {
+
+            .drink {
+
+              .edit-name {
+                .edit {
+                  color: white;
+                }
+                .name {
+                  // border: 1px solid pink;
+                }
+                .type {
+                  // margin-right: .5rem;
+                  font-size: .8rem;
+                }
+                .container {
+
+                }
+              }
+              .price-list-trash {
+                .price {}
+                .list{
+                  color: lightgreen
+                }
+                .trash {
+                  color: red;
+                }
+              }
+            }
+            .hr {
+              hr {
+                opacity: .3;
+                width: 80%
+              }
+              
+            }
+            // border: 1px solid red;
+          }
+        }
+      }
+    }
+  }
+}
+  
+.red-circle {
+  color: red;
+}
+.white-circle {
+  color: white;
+}
+
+
+.lists {
   display: grid;
-  padding: 0.2rem;
+  grid-column-gap: .5rem;
+  grid-row-gap: 0.5rem;
+  
   @media (min-width: 320px) and (max-width: 480px) {
     grid-template-columns: 1fr;
   }
@@ -42,85 +139,4 @@
   @media (min-width: 1281px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  .category-container {
-    background-color: var(--header-blue);
-    color: var(--text-color-bright-orange);
-    display: inline-block;
-    // margin: 0.5rem;
-    display: table-cell;
-    border: 0.2rem var(--text-color-orange) solid;
-    padding: 1rem;
-    .category-header {
-      text-transform: uppercase;
-      color: white;
-    }
-    ul {
-      margin-bottom: 0;
-
-      li {
-        hr {
-          height: 1px;
-          background-color: #ccc;
-          border: none;
-          padding: 0;
-          margin: 3px;
-          opacity: 0.3;
-        }
-        ul {
-          li {
-          }
-        }
-        // padding-bottom: 15px;
-        // border-bottom: 1px solid rgba(233, 233, 233, .2);
-      }
-    }
-  }
-}
-.edit-mode {
-  border: 3px solid red;
-  padding: 10px;
-}
-.add-button {
-  margin-top: 10px;
-}
-.name {
-  text-transform: capitalize;
-}
-.fa-circle-white {
-  margin-left: 0.6rem;
-  color: white;
-}
-.fa-circle-red {
-  color: red;
-  margin-left: 0.6rem;
-}
-.fa-bottle {
-  margin-left: 0.7rem;
-}
-.name-price {
-  // outline: 1px solid yellow;
-  width: 100%;
-}
-.price-list-position {
-  // outline: 1px solid pink;
-}
-.price {
-  // border: 1px solid yellow;
-  display: inline-block;
-  // outline: 1px solid orange;
-}
-.list-position {
-  // border: 1px solid orange;
-  text-align: right;
-  width: 35px;
-  display: inline-block;
-  color: lightgreen;
-  // outline: 1px solid lightgreen;
-}
-.trash {
-  color: red;
-  padding-left: .3rem;
-}
-.name-icons {
-  width: 100%;
 }

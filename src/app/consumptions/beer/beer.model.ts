@@ -1,10 +1,10 @@
 
 
-export interface BeerItem {
-  beerId: string
+export interface Beer {
+  id: string
   name: string,
   price: number
-  amount: number;
+  content: number;
   percentage: number;
   listPosition: number;
   draught: boolean;

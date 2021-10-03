@@ -16,6 +16,7 @@ export const reducers: ActionReducerMap<GlobalState> = {
 }
 
 export const getUiState = createFeatureSelector<fromUI.UIState>('ui');
+
 export const getIsSidenavOpen = createSelector(getUiState, fromUI.getIsSidenavOpen);
 export const getIsLoading = createSelector(getUiState, fromUI.getIsLoading);
 export const getSelectedLanguage = createSelector(getUiState, fromUI.getSelectedLanguage);
@@ -26,6 +27,7 @@ export const getIsDinnerOrLunchOrSnacks = createSelector(getUiState, fromUI.getS
 
 
 export const getAuthState = createFeatureSelector<fromAuth.AuthState>('auth');
+
 export const getIsAuth = createSelector(getAuthState, fromAuth.getIsAuth)
 export const getUserEmail = createSelector(getAuthState, fromAuth.getUserEmail);
 export const getIsAdmin = createSelector(getAuthState, fromAuth.getIsAdmin);

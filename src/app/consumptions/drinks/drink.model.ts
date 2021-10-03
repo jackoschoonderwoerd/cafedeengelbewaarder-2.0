@@ -1,13 +1,28 @@
-export interface DbDrink {
-  drinkId: string;
+export interface AllDrinks {
+  categories: DrinkCategory[];
+  id?: string
+}
+
+export interface DrinkCategory {
+  nameDutch: string,
+  nameEnglish: string
+  drinks: Drink[] 
+  listPosition: number,
+  id: string;
+}
+
+export interface Drink {
   nameDutch: string;
   nameEnglish: string;
-  category: string;
   price: number;
   listPosition: number;
+  id?: string,
+  comment?: string;
   wineType?: string;
   wineContainer?: string;
 }
+
+
 
 export interface Beverage {
   nameDutch: string;

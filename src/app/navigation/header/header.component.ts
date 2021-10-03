@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 import { User } from 'src/app/auth/user.model';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ import { User } from 'src/app/auth/user.model';
 })
 export class HeaderComponent implements OnInit {
 
+  mealTypes: string[];
   userEmail$: Observable<string>
   isAdmin$: Observable<boolean>
   selectedLanguage$: Observable<string>
@@ -27,16 +29,18 @@ export class HeaderComponent implements OnInit {
   isShowcaseActive: boolean = false;
   lunchActive = 'no';
   linkSelected: string;
+  selectedMealType: string;
 
   constructor(
     private store: Store<fromRoot.GlobalState>,
     private authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit(): void {
-    this.store.subscribe(data => console.log(data));
+    this.mealTypes = this.navigationService.getMealTypes();
     this.store.select(fromRoot.getSelectedLanguage).subscribe((language: string) => {
       this.language = language;
     });
@@ -61,6 +65,10 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(new UI.SelectedLanguage(language))
   }
 
+  mealTypeSelected(mealType) {
+    this.selectedMealType = mealType;
+    this.store.dispatch(new UI.SelectedLink(mealType))
+  }
   
   expositionSelected() {
     this.store.dispatch(new EXPOSITION.SetExhibitionId(null))

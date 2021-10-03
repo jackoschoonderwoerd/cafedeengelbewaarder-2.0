@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UIService } from 'src/app/shared/ui.service';
-import { BeerItem } from './beer-item.model';
+import { Beer } from './beer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,26 +19,21 @@ export class BeerService {
   ) { }
   
   
-  storeBeer(beerItem: BeerItem) {
-    console.log(beerItem)
-    return this.db.collection('beers').add(beerItem)
-    .then(res => console.log(res))
-    .catch(err => {
-      this.uiService.showSnackbar('There was a problem adding beer to the data base' + err, null, 50000)
-    });
+  storeBeer(beer: Beer) {
+    return this.db.collection('beers').add(beer)
   }
 
-  editBeer(beerItem: BeerItem) {
-    console.log(beerItem.beerId);
-    return from(this.db.doc(`beers/${beerItem.beerId}`).update(beerItem));
+  editBeer(beer: Beer) {
+    return from(this.db.doc(`beers/${beer.id}`).update(beer));
   }
 
-  deleteBeer(beerItem: BeerItem) {
-    console.log('deleteing' + beerItem.beerId);
-    return from(this.db.doc(`beers/${beerItem.beerId}`).delete());
+  deleteBeer(beerItem: Beer) {
+    console.log('deleting' + beerItem.id);
+    return from(this.db.doc(`beers/${beerItem.id}`).delete());
   }
 
-  fetchBeers(): Observable<BeerItem[]> {
+
+  fetchBeers(): Observable<Beer[]> {
     return this.db
     .collection('beers', ref => ref.orderBy('listPosition'))
     .snapshotChanges()
@@ -46,10 +41,10 @@ export class BeerService {
       map(docArray => {
         return docArray.map((doc: any) => {
           return {
-            beerId: doc.payload.doc.id,
+            id: doc.payload.doc.id,
             name: doc.payload.doc.data().name,
             price: doc.payload.doc.data().price,
-            amount: doc.payload.doc.data().amount,
+            content: doc.payload.doc.data().content,
             percentage: doc.payload.doc.data().percentage,
             listPosition: doc.payload.doc.data().listPosition,
             draught: doc.payload.doc.data().draught,
@@ -60,13 +55,6 @@ export class BeerService {
       })
     )
   }
-
-  // fetchBeers() {
-  //   console.log('fetching', ref => ref.orderBy('listPosition'));
-  //   return this.db
-  //   .collection('beers')
-  //   .valueChanges()
-  // }
 }
 
 

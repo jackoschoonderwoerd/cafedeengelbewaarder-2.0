@@ -35,12 +35,13 @@
           <mat-panel-title
             class="mat-panel-title"
             fxLayout
-            fxLayoutAlign="space-between">
+            fxLayoutAlign="space-between"
+            (click)="onEdit($event, beer)">
 
             <div class="icon-name-price"
               fxLayout 
               fxLayoutAlign="space-between"
-              (click)="onEdit($event, beer)">
+              >
               <div class="icon-name" fxLayout fxLayoutAlign="space-between">
                 <div
                   *ngIf="!beer.draught"
@@ -67,11 +68,6 @@
                 <fa-icon [icon]="faTrash"></fa-icon>
               </div>
             </div>
-            <!-- <button 
-              *ngIf="isAuthenticated$ | async"
-              (click)="onEdit(beer)">
-              EDIT
-            </button> -->
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="beer-description">
@@ -88,103 +84,4 @@
   </div>
 </div>
 
-<!-- <div class="add-beer">
-  <div>
-    <mat-accordion class="mat-accordion">
-      <mat-expansion-panel
-        class="mat-expansion-panel"
-        hideToggle
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-      >
-        <mat-expansion-panel-header class="mat-expansion-panel-header">
-          <mat-panel-title
-            class="mat-panel-title"
-          >
-          Add beer
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="beer-description">
-          <form
-            fxLayout="column"
-            [formGroup]="addBeerForm"
-            (ngSubmit)="submit()"
-          >
-            <mat-form-field>
-              <input
-                type="text"
-                matInput
-                formControlName="name"
-                placeholder="NAME"
-              />
-            </mat-form-field>
 
-            <mat-radio-group formControlName="draught" fxLayout fxLayoutGap="20px">
-              <mat-radio-button [value]="true">
-                <div 
-                  class="glass-icon" 
-                  fxLayout="column" 
-                  fxLayoutAlign="center">
-                <fa-icon [icon]="faWineGlass"></fa-icon>
-              </div></mat-radio-button>
-              <mat-radio-button [value]="false">
-                <div
-                  class="bottle-icon"
-                  fxLayout="column"
-                  fxLayoutAlign="center"
-                >
-                  <fa-icon [icon]="faWineBottle"></fa-icon>
-                </div>
-              </mat-radio-button>
-            </mat-radio-group>
-            <hr>
-            <mat-form-field>
-              <input
-                type="number"
-                matInput
-                formControlName="price"
-                placeholder="PRIJS"
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <input
-                type="number"
-                matInput
-                formControlName="content"
-                placeholder="INHOUD / CL"
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <input
-                type="number"
-                matInput
-                formControlName="percentage"
-                placeholder="ALCOHOLPERCENTAGE / %"
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <textarea
-                type="text"
-                matInput
-                formControlName="descriptionDutch"
-                placeholder="BESCHRIJVING NEDERLANDS"
-              >
-              </textarea>
-            </mat-form-field>
-            <mat-form-field>
-              <textarea
-                type="text"
-                matInput
-                formControlName="descriptionEnglish"
-                placeholder="BESCHRIJVING ENGELS"
-              ></textarea>
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit" [disabled]="addBeerForm.invalid">
-              SUBMIT
-            </button>
-          </form>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-</div> -->

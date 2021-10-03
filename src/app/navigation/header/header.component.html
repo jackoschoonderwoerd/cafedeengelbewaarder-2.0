@@ -12,6 +12,7 @@
         <ul fxLayout fxLayoutGap="15px">
           <li>
             <a
+            (click)="mealTypeSelected('home')"
               routerLink="home"
               routerLinkActive="routerlink-active"> 
               <span>HOME</span>
@@ -19,38 +20,26 @@
           </li>
           <li>
             <a
+            (click)="mealTypeSelected('drinks')"
               routerLink="drinks"
               routerLinkActive="routerlink-active">
               <span *ngIf="language === 'dutch'">DRANKEN</span>
               <span *ngIf="language === 'english'">DRINKS</span>
             </a>
-          </li>     
-          <li>
-            <a
-              routerLink="food/lunch"
-              routerLinkActive="routerlink-active">
-              <span>
-                LUNCH
-              </span>
-            </a>
           </li>
+          <ul fxLayout fxLayoutGap="15px">
+            <li *ngFor="let mealType of mealTypes">
+              <a
+                routerLink="food"
+                (click)="mealTypeSelected(mealType)"
+                [ngClass]="{'routerlink-active' : selectedMealType === mealType}">
+                <span style="text-transform: uppercase;">{{mealType}}</span></a>
+            </li>
+          </ul>
+          
           <li>
             <a
-              routerLink="food/dinner"
-              routerLinkActive="routerlink-active">
-              <span *ngIf="language === 'dutch'">DINER</span>
-              <span *ngIf="language === 'english'">DINNER</span>
-            </a>
-          </li>
-          <li>
-            <a
-              routerLink="food/snacks"
-              routerLinkActive="routerlink-active">
-              <span>SNACKS</span>
-            </a>
-          </li>
-          <li>
-            <a
+            (click)="mealTypeSelected('beers')"
               routerLink="beers"
               routerLinkActive="routerlink-active">
               <span *ngIf="language === 'dutch'">BIEREN</span>
@@ -60,6 +49,7 @@
           <li>
             <a
               routerLink="exhibitions"
+              (click)="mealTypeSelected('exhibitions')"
               routerLinkActive="routerlink-active">
               <span *ngIf="language === 'dutch'">EXPOSITIES</span>
               <span *ngIf="language === 'english'">EXHIBITIONS</span>
@@ -77,13 +67,13 @@
               (click)="onLogOut()">LOG OUT
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a
               *ngIf="!(userEmail$ | async)"
               [ngClass]="{'active-link': linkSelected === 'exhibitions'}"
               routerLink="auth/sign-up">SIGN UP
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div fxHide.gt-sm class="list-container" fxLayout fxLayoutAlign="center center">

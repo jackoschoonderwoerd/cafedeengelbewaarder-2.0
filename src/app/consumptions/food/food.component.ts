@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OpeningHours } from 'src/app/shared/opening-hours.model';
-import { Course, FoodItem, MealType } from '../../models/food-item.model';
+import { Course, FoodItem, MealType } from '../models/food-item.model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 
 import { Store } from '@ngrx/store';
 
-import { FoodService } from '../food.service';
+import { FoodService } from './food.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UIService } from 'src/app/shared/ui.service';
-import * as fromApp from '../../../app.reducer';
-import { AddFoodComponent } from '../add-food/add-food.component';
+import * as fromApp from '../../app.reducer';
+import { AddFoodComponent } from './add-food/add-food.component';
 import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
-import { AddCourseComponent } from '../add-course/add-course.component';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 @Component({
-  selector: 'app-dinner',
-  templateUrl: './dinner.component.html',
-  styleUrls: ['./dinner.component.scss']
+  selector: 'app-food',
+  templateUrl: './food.component.html',
+  styleUrls: ['./food.component.scss']
 })
-export class DinnerComponent implements OnInit {
+export class FoodComponent implements OnInit {
 
   
   openingHours: OpeningHours
@@ -53,12 +53,20 @@ export class DinnerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.foodService.checkForMealtypeDb(this.mealType);
-    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
+    this.store.subscribe(data => {
+      if(!data.ui.selectedLink) {
+        this.onSelectMealType('dinner')
+      } else {
+        this.onSelectMealType(data.ui.selectedLink);
+      }
+    })
+    // this.foodService.checkForMealtypeDb(this.mealType);
+    // this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
+    // this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges('dinner')
+    // this.foodService.fetchMealTypeSnapshotChangesForLocalUse(this.mealType);    
+    
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth);
 
-    this.foodService.fetchMealTypeSnapshotChangesForLocalUse(this.mealType);    
-    
     this.store.select(fromApp.getSelectedLanguage).subscribe((language: string) => {
       this.language = language
     });
@@ -67,19 +75,10 @@ export class DinnerComponent implements OnInit {
     })
   }
 
-  onSelectSnacks() {
-    this.mealType = 'snacks';
-    this.foodService.checkForMealtypeDb('snacks')
-    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
-  }
-  onSelectLunch() {
-    this.mealType = 'lunch';
-    this.foodService.checkForMealtypeDb('lunch')
-    this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
-  }
-  onSelectDinner() {
-    this.foodService.checkForMealtypeDb('dinner')
-    this.mealType = 'dinner';
+  onSelectMealType(mealType) {
+    this.mealType = mealType;
+    this.foodService.checkForMealtypeDb(mealType)
+    this.foodService.fetchMealTypeSnapshotChangesForLocalUse(this.mealType);   
     this.dinner$ = this.foodService.fetchMealTypeSnapshotChanges(this.mealType)
   }
 
@@ -87,12 +86,12 @@ export class DinnerComponent implements OnInit {
     const dialogRef = this.dialog.open(AddCourseComponent, {
       data: {
         mealType: this.mealType,
+        editMode: false
       },
       width: '300px'
     })
     dialogRef.afterClosed().subscribe((course: Course) => {
       if(course) {
-        console.log(course);
         course.foodItems = [];
         this.foodService.addCourse(this.mealType, course);
       }
@@ -100,31 +99,22 @@ export class DinnerComponent implements OnInit {
     })
   }
 
-  onEditCourse(
-    courseId, 
-    courseNameDutch, 
-    courseNameEnglish,
-    remarkDutch,
-    remarkEnglish, 
-    listPosition) {
+  onEditCourse(course: Course) {
     const dialogRef = this.dialog.open(AddCourseComponent, {
       data: {
-        courseId,
-        courseNameDutch,
-        courseNameEnglish,
-        remarkDutch,
-        remarkEnglish,
-        listPosition
+       course: course,
+       editMode: true
       }
     })
     dialogRef.afterClosed().subscribe((course: Course) => {
-      course.id = courseId
-      this.foodService.editCourse(this.mealType, course);
+      if(course) {
+        this.foodService.editCourse(this.mealType, course);
+      }
+      return
     })
   }
 
   onDeleteCourse(courseId) {
-    console.log(courseId);
     const dialogRef =  this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(data => {
       if(data) {
@@ -148,7 +138,6 @@ export class DinnerComponent implements OnInit {
         if(!foodItem) {
           this.uiService.addingFailed('')
         } else {
-          console.log(foodItem);
           this.foodService.addFoodItem(this.mealType, courseId, foodItem)
         }
       })
@@ -174,7 +163,6 @@ export class DinnerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((foodItem: FoodItem) => {
       if(foodItem) {
-        console.log(foodItem);
         this.foodService.editFoodItem(this.mealType, courseId, foodItem)
       }
       return
