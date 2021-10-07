@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { UIService } from 'src/app/shared/ui.service';
 import { FoodItem } from '../../models/food-item.model';
 
@@ -22,11 +23,12 @@ export class AddFoodComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public passedData: any,
     private fb : FormBuilder,
     private uiService: UIService,
-    public dialogRef: MatDialogRef<AddFoodComponent>
+    private dialogRef: MatDialogRef<AddFoodComponent>,
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
+    // this.updateDialogSize();
+    this.initForm();  
     if(this.passedData.foodItem) {
       this.foodItem = this.passedData.foodItem
       if(!this.foodItem.amount) {
@@ -49,6 +51,9 @@ export class AddFoodComponent implements OnInit {
       });
     } 
   }
+  private updateDialogSize() {
+    this.dialogRef.updateSize('100%', '95%')
+  }
 
   initForm() {
     
@@ -62,7 +67,7 @@ export class AddFoodComponent implements OnInit {
         vegetarian: new FormControl(false),
         amount: new FormControl(0),
         price: new FormControl(0, Validators.required),
-        listPosition: new FormControl(null, Validators.required),
+        listPosition: new FormControl(null),
       })
     
   }

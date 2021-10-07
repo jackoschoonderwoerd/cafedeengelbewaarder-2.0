@@ -7,6 +7,7 @@ import  { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from "@angular/material/input";
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -17,7 +18,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
+    
     
     
   ],
@@ -28,7 +31,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
   ]
 })
 

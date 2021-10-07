@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Beverage, BeverageType, Drink, DrinkCategory, DrinkItem, WineItem } from './drink.model';
+import { Component, OnInit } from '@angular/core';
+import { Drink, DrinkCategory, DrinkItem, WineItem } from './drink.model';
 import { DrinksService } from './drinks.service';
 import * as fromApp from './../../app.reducer';
 import { Store } from '@ngrx/store';
@@ -9,12 +9,13 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import { MatDialog } from '@angular/material/dialog';
 
 import { AddDrinkComponent } from './add-drink/add-drink.component';
-// import { drinksService } from '../consumptions.service';
 import { UIService } from 'src/app/shared/ui.service';
 import { Observable } from 'rxjs';
 import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
@@ -25,13 +26,15 @@ import { AddCategoryComponent } from './add-category/add-category.component';
   templateUrl: './drinks.component.html',
   styleUrls: ['./drinks.component.scss']
 })
-export class DrinksComponent implements OnInit , AfterViewInit {
+export class DrinksComponent implements OnInit {
 
   faCircle = faCircle;
   faWineGlass = faWineGlass;
   faWineBottle = faWineBottle;
   faTrash = faTrash;
   faEdit = faEdit;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
 
   language: string = 'dutch';
   coffeeAndTeas: DrinkItem[] = [];
@@ -118,12 +121,17 @@ export class DrinksComponent implements OnInit , AfterViewInit {
     })
   }
 
+  onMoveDrinkCategory(direction: string, categoryName: string) {
+    this.drinksService.moveCategory(direction, categoryName)
+  }
+
   onAddDrink(categoryId: string, categoryName: string) {
     console.log(categoryId, categoryName);
     const dialogRef = this.dialog.open(AddDrinkComponent, {
       data: {
         categoryName: categoryName
-      }
+      },
+      panelClass: 'dialog-dimensions'
     })
     dialogRef.afterClosed().subscribe((drink: Drink) => {
       if(drink) {
@@ -140,7 +148,8 @@ export class DrinksComponent implements OnInit , AfterViewInit {
       data: {
         drink: drink,
         category: category
-      }
+      },
+      panelClass: 'dialog-dimensions'
     })
     dialogRef.afterClosed().subscribe((drink: Drink) => {
       console.log(drink);
@@ -158,57 +167,7 @@ export class DrinksComponent implements OnInit , AfterViewInit {
     return
   }
 
-  // onAddDrink() {
-    
-  //   const dialogRef = this.dialog.open(AddDrinkComponent);
-  //   dialogRef.afterClosed().subscribe((drink: Drink) => {
-  //     if(drink) {
-  //       this.drinksService.storeDrink(drink)
-  //     } else {
-  //       this.uiService.showSnackbar('no drinks were added', null, 5000);
-  //     }
-  //   });
-  // }
-
-  // onDelete(event, drinkItem: DbDrink) {
-  //   event.stopPropagation();
-  //   const dialogRef = this.dialog.open(ConfirmDeleteComponent)
-  //   dialogRef.afterClosed().subscribe(data => {
-  //     if(data) {
-  //       this.drinksService.deleteDrink(drinkItem)
-  //       .subscribe(res => {
-  //       })
-  //     } else {
-  //       return
-  //     }
-  //   })
-  // }
-
-  ngAfterViewInit() {
-    // Hack: Scrolls to top of Page after page view initialized
-    let top = document.getElementById('top');
-    if (top !== null) {
-      top.scrollIntoView();
-      top = null;
-    }
+  onMoveDrink(direction: string, categoryId: string, drinkId: string) {
+    this.drinksService.moveDrink(direction,categoryId, drinkId)
   }
-  // onEdit(drink: DbDrink) {
-  //   this.store.select(fromApp.getIsAuth).subscribe((isAuth: boolean) => {
-  //     console.log(isAuth)
-  //     if(isAuth) {
-  //       const dialogRef = this.dialog.open(AddDrinkComponent, {data: {drink: drink}})
-  //       dialogRef.afterClosed().subscribe((drinkInfo: any) => {
-          
-  //         if(!drinkInfo) {
-  //           this.uiService.showSnackbar('no drinks have been deleted or edited', null, 5000);
-  //           return;
-  //         } else {
-  //           this.drinksService.editDrink(drinkInfo.formValue).subscribe(res => {
-  //             this.uiService.editingSucceeded(drinkInfo.formValue.nameEnglish);
-  //           })
-  //         }
-  //       })
-  //     }
-  //   })
-  // }
 }

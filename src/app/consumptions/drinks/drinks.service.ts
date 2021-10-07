@@ -102,6 +102,7 @@ export class DrinksService {
 
 
   deleteCategory(id: string) {
+    console.log(this.allDrinks)
     const index = this.allDrinks.categories.findIndex((categorie: DrinkCategory) => {
       return categorie.id === id
     })
@@ -110,10 +111,43 @@ export class DrinksService {
     this.updateDrinks()
   }
 
+  moveCategory(direction: string, categoryId: string) {
+    console.log(direction, categoryId);
+    const targetedIndex = this.allDrinks.categories.findIndex((category: DrinkCategory) => {
+      return category.id === categoryId;
+    })
+    console.log(targetedIndex);
+    const listPositionTargetedIndex = this.allDrinks.categories[targetedIndex].listPosition;
+    if(direction === 'down') {
+      // EXCLUDE THE LAST ELEMENT IN THE CATEGORIES-ARRAY
+      if(targetedIndex + 1 === this.allDrinks.categories.length) {
+        alert( 'you are already at the bottom')
+        return;
+      } else {
+        // SWAP THE LISTPOSITION WITH THE LP OF THE NEXT ELEMENT IN THE ARRAY
+        this.allDrinks.categories[targetedIndex].listPosition = this.allDrinks.categories[targetedIndex +1].listPosition;
+        this.allDrinks.categories[targetedIndex +1].listPosition = listPositionTargetedIndex;
+
+      }
+    } else if(direction === 'up') {
+      // EXCLUDE THE FIRST ELEMENT
+      if(targetedIndex === 0) {
+        alert('you are already at the top');
+        return
+      } else {
+        this.allDrinks.categories[targetedIndex].listPosition = this.allDrinks.categories[targetedIndex -1].listPosition;
+        this.allDrinks.categories[targetedIndex -1].listPosition = listPositionTargetedIndex;
+      }
+    }
+    this.allDrinks.categories = this.sortAndOrderArray(this.allDrinks.categories)
+    this.updateDrinks();
+  }
+
   addDrink(categoryId: string, drink: Drink) {
-    console.log(drink)
+    
     this.allDrinks.categories.forEach((category: DrinkCategory) => {
       if(category.id === categoryId) {
+        drink.listPosition = category.drinks.length;
         category.drinks.push(drink)
         category.drinks.sort((a, b) =>(a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
       }
@@ -138,6 +172,7 @@ export class DrinksService {
       }
     })
   }
+
   deleteDrink(categoryId: string, drinkId: string) {
     this.allDrinks.categories.forEach((category: DrinkCategory) => {
       if(category.id === categoryId) {
@@ -150,6 +185,7 @@ export class DrinksService {
       }
     })
   }
+  
 
   updateDrinks() {
     this.db.collection('drinks').doc(this.allDrinks.id).update(this.allDrinks)
@@ -158,26 +194,51 @@ export class DrinksService {
       })
       .catch(err => console.log(err));
   }
-  private storeAllNewDrinks() {
-    console.log(this.allDrinks);
-    const myObject = {
-      name: 'jacko',
-      age: 20
-    }
-    // this.db.collection('new drinks').add(myObject);
+  
+
+  moveDrink(direction: string, categoryId: string, drinkId: string) {
+    console.log(direction,categoryId, drinkId)
+    this.allDrinks.categories.forEach((category: DrinkCategory) => {
+      if(category.id === categoryId) {
+        const targetedIndex = category.drinks.findIndex((drink: Drink) => {
+          return drink.id === drinkId
+        })
+        const targetedListPosistion = category.drinks[targetedIndex].listPosition
+        console.log(targetedIndex, targetedListPosistion);
+        if(direction === 'down') {
+          if(targetedIndex +1 === category.drinks.length) {
+            alert('you are already at the bottom');
+            return
+          } else {
+            category.drinks[targetedIndex].listPosition = category.drinks[targetedListPosistion + 1].listPosition
+            category.drinks[targetedIndex + 1].listPosition = targetedListPosistion;
+          }
+        } else if(direction === 'up') {
+          if(targetedIndex === 0) {
+            alert('you are already at the top');
+            return
+          } else {
+            category.drinks[targetedIndex].listPosition = category.drinks[targetedListPosistion - 1].listPosition
+            category.drinks[targetedIndex - 1].listPosition = targetedListPosistion;
+          }
+        }
+      }
+      category.drinks = this.sortAndOrderArray(category.drinks)
+    })
+    this.updateDrinks();
   }
 
-  storeDrink(drinkInfo: any) {
-    return this.db.collection(`drinks/categories/${drinkInfo.formValue.category}`).add(drinkInfo.formValue)
-      .then(res => {
-        this.uiService.showSnackbar('drink added' + res, null, 5000)
-      })
-      .catch(err => {
-        this.uiService.showSnackbar('no drink added' + err, null, 5000);
-      })
+
+  private sortAndOrderArray(array: any[]) {
+    array.sort((a,b) => (a.listPosition > b.listPosition) ? 1 : ((b.listPosition > a.listPosition) ? -1 : 0))
+          // 6 ASSIGN CONSECUTIVE ASCENDING NUMBERS TO THE LISTPOSITION OF THE ARRAY
+          let i = 0
+    array.forEach((item: any) => {
+      item.listPosition = i
+       i = i + 1
+    })
+    return array
   }
-
-
 
 
 

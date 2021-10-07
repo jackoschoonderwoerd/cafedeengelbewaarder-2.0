@@ -75,25 +75,32 @@
       formControlName="price">
     </mat-form-field>
     <mat-form-field
-      appearance="fill" class="amount">
+      appearance="fill" class="amount"
+      matTooltip="Optional, use for dishes that contain multiple items such as 'bitterballen'">
       <mat-label>AMOUNT</mat-label>
       <input
         type="number"
         matInput
         formControlName="amount"
-        placeholder="amount">
+        placeholder="amount"
+       >
     </mat-form-field>
-    <mat-form-field class="list-position" appearance="fill">
+    <!-- <mat-form-field class="list-position" appearance="fill">
       <mat-label>LIST</mat-label>
       <input
       type="number"
       matInput
       formControlName="listPosition">
-    </mat-form-field>
+    </mat-form-field> -->
     <!-- <mat-checkbox class="vega" formControlName="vegetarian">VEGA</mat-checkbox> -->
   </div>
-  <button
-    [disabled]="addFoodItemForm.invalid"
-    mat-raised-button
-    [mat-dialog-close]="addFoodItemForm.value">SUBMIT</button>
+  <div class="buttons" fxLayout fxLayoutGap="1rem" fxLayoutAlign="space-between">
+    <button mat-raised-button mat-dialog-close>cancel</button>
+    <button
+      [disabled]="addFoodItemForm.invalid"
+      mat-raised-button
+      [mat-dialog-close]="addFoodItemForm.value"
+      matTooltip="hi there">SUBMIT
+    </button>
+  </div>
 </form>

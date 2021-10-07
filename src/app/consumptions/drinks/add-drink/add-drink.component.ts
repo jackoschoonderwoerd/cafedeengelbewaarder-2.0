@@ -28,14 +28,14 @@ export class AddDrinkComponent implements OnInit {
     private fb: FormBuilder,
     private consuptionsService: ConsumptionsService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<any>,
+    private dialogRef: MatDialogRef<any>,
     // private drinksService: DrinksService
   ) { }
 
   ngOnInit(): void {
     
     this.initForm()
-    this.dialogRef.updateSize('350px');
+    this.updateDialogSize()
     if(this.data.drink) {
       console.log(this.data);
       this.categoryName = this.data.category.nameEnglish
@@ -55,6 +55,9 @@ export class AddDrinkComponent implements OnInit {
       this.categoryName = this.data.categoryName
       console.log(this.categoryName);
     }
+  }
+  private updateDialogSize() {
+    this.dialogRef.updateSize('100%', '95%')
   }
 
   initForm() {

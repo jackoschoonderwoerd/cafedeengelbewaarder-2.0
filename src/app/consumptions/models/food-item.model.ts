@@ -8,11 +8,11 @@ export interface MealType { // dinner lunch snacks
 export interface Course { // meat fish omabob
   nameDutch: string;
   nameEnglish: string;
-  listPosition: number;
   foodItems: FoodItem[];
+  showCourseName: boolean;
+  listPosition?: number;
   remarkDutch?: string;
   remarkEnglish?: string;
-  showCourseName: boolean;
   id?: any;
 }
 
@@ -21,8 +21,8 @@ export interface FoodItem { // steak nuts
   ingredientsDutch: string;
   nameEnglish: string;
   ingredientsEnglish: string
-  listPosition: number;
   price: number;
+  listPosition?: number;
   id?: string;
   amount?: number;
   section?: string;

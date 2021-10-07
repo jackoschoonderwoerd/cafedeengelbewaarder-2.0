@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { validateBasis } from '@angular/flex-layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Course } from '../../models/food-item.model';
 
 @Component({
@@ -22,7 +22,8 @@ export class AddCourseComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private data
+    @Inject(MAT_DIALOG_DATA) private data,
+    public dialogRef: MatDialogRef<any>
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +58,7 @@ export class AddCourseComponent implements OnInit {
       nameDutch: new FormControl(null, Validators.required),
       nameEnglish: new FormControl(null, Validators.required),
       showCourseName: new FormControl(null),
-      listPosition: new FormControl(null, Validators.required),
+      listPosition: new FormControl(null),
       remarkDutch: new FormControl(null),
       remarkEnglish: new FormControl(null),
       foodItems: new FormControl(null)

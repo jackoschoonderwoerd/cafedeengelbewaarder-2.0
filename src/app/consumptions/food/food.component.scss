@@ -54,7 +54,7 @@
             .edit-name {
               // border: 1px solid green;
               .edit {
-                color: white;
+                color: yellow;
               }
               .name {
                 // border-bottom: 1px solid var(--text-color-orange);
@@ -68,6 +68,12 @@
                 padding: 0 .2rem;
                 background-color: lightgreen;
                 
+              }
+              .chevrons {
+                color: yellow;
+              }
+              .chevrons:hover {
+                cursor: pointer;
               }
               .trash {
                 color: red;
@@ -89,7 +95,7 @@
                       text-transform: uppercase;
                       margin-bottom: .3rem;
                       .amount {
-                        padding-left: .5rem;
+                        // padding-left: .2em;
                         // border: 1px solid lightgreen;
                         color: var(--text-color-bright-orange)
                       }
@@ -105,6 +111,13 @@
                   // border: 1px solid pink;
                   .price {
                     color: var(--text-color-bright-orange)
+                  }
+                  .chevrons {
+                    color: white;
+                    // border: 1px solid white
+                  }
+                  .chevrons:hover {
+                    cursor: pointer;
                   }
                   .list {
                     padding: 0 .2rem;

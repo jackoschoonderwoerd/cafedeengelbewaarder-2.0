@@ -48,7 +48,7 @@
           margin-bottom: 1rem;
           .edit-name {
             .edit{
-              color: white;
+              color: yellow;
             }
             .category-name {
               text-transform: uppercase;
@@ -56,6 +56,11 @@
             }
           }
           .list-trash {
+            .chevrons {
+              fa-icon {
+                color: yellow;
+              }
+            }
             .list{
               background-color: lightgreen;
               color: var(--header-blue);
@@ -70,13 +75,16 @@
           .drink-list-item {
 
             .drink {
-
+              // border: 1px solid pink;
               .edit-name {
+                // border: 1px solid red;
                 .edit {
                   color: white;
                 }
                 .name {
                   // border: 1px solid pink;
+                  padding-left: 1rem;
+                  text-indent: -1rem;
                 }
                 .type {
                   // margin-right: .5rem;
@@ -87,6 +95,13 @@
                 }
               }
               .price-list-trash {
+                // border: 1px solid lightgreen;
+                padding-left: .5rem;
+                .chevrons {
+                  fa-icon {
+                    color: white;
+                  }
+                }
                 .price {}
                 .list{
                   color: lightgreen

@@ -16,14 +16,15 @@
     <hr class="hr">
   </div>
   <ul>
-    <li class="nav-list-item nested-list-item"  *ngFor="let mealType of mealTypes">
-      <a 
+    <li   *ngFor="let mealType of mealTypes">
+      <a
+      class="nav-list-item nested-list-item" 
         routerLink="food"
         (click)="mealTypeSelected(mealType)">
         {{mealType}}
       </a>
+      <hr class="hr">
     </li>
-    <hr class="hr">
   </ul>
 
 

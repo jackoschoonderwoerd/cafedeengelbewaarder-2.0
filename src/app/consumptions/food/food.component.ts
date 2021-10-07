@@ -4,6 +4,8 @@ import { OpeningHours } from 'src/app/shared/opening-hours.model';
 import { Course, FoodItem, MealType } from '../models/food-item.model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 
 import { Store } from '@ngrx/store';
@@ -37,6 +39,8 @@ export class FoodComponent implements OnInit {
   sides$: Observable<FoodItem[]>;
   faTrash = faTrash;
   faEdit = faEdit;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
   isAuthenticated$: Observable<boolean>;
   dinner: MealType;
   
@@ -57,6 +61,7 @@ export class FoodComponent implements OnInit {
       if(!data.ui.selectedLink) {
         this.onSelectMealType('dinner')
       } else {
+        this.mealType = data.ui.selectedLink
         this.onSelectMealType(data.ui.selectedLink);
       }
     })
@@ -86,9 +91,9 @@ export class FoodComponent implements OnInit {
     const dialogRef = this.dialog.open(AddCourseComponent, {
       data: {
         mealType: this.mealType,
-        editMode: false
+        editMode: false,
       },
-      width: '300px'
+      panelClass: 'dialog-dimensions',
     })
     dialogRef.afterClosed().subscribe((course: Course) => {
       if(course) {
@@ -104,7 +109,8 @@ export class FoodComponent implements OnInit {
       data: {
        course: course,
        editMode: true
-      }
+      },
+      panelClass: 'dialog-dimensions'
     })
     dialogRef.afterClosed().subscribe((course: Course) => {
       if(course) {
@@ -124,6 +130,11 @@ export class FoodComponent implements OnInit {
     })
   }
 
+  onMoveCourse(direction: string, courseId: string, mealType: string) {
+    console.log(direction, courseId, mealType)
+    this.foodService.moveCourse(direction, courseId, this.mealType);
+  }
+
   onAddFoodItem(courseId, courseNameDutch, courseNameEnglish) {
     if(courseId) {
       const dialogRef =  this.dialog.open(AddFoodComponent, {
@@ -132,7 +143,7 @@ export class FoodComponent implements OnInit {
           courseNameDutch: courseNameDutch,
           courseNameEnglish: courseNameEnglish, 
         },
-        minWidth: '350px'
+        panelClass: 'dialog-dimensions'
       });
       dialogRef.afterClosed().subscribe((foodItem: FoodItem) => {
         if(!foodItem) {
@@ -146,6 +157,7 @@ export class FoodComponent implements OnInit {
   }
 
   onDeleteFoodItem(courseId, foodItemId) {
+    console.log(courseId, foodItemId);
     const dialogRef = this.dialog.open(ConfirmDeleteComponent)
     dialogRef.afterClosed().subscribe(data => {
       if(data) {
@@ -167,5 +179,9 @@ export class FoodComponent implements OnInit {
       }
       return
     })
+  }
+  onMoveFoodItem(direction, courseId, foodItemId) {
+    console.log(this.mealType, direction, courseId, foodItemId);
+    this.foodService.moveFoodItem(this.mealType, direction, courseId, foodItemId)
   }
 }

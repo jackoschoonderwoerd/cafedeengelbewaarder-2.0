@@ -7,6 +7,7 @@ import  { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from "@angular/material/input";
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
     
     
   ],
@@ -28,7 +30,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ]
 })
 

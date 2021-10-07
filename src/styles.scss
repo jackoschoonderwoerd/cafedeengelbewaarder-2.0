@@ -36,3 +36,9 @@ ul {
 button {
   text-transform: uppercase;
 }
+
+.dialog-dimensions .mat-dialog-container {
+  width: 100vw !important;
+  max-width: 400px;
+  max-height: 95vh;
+}

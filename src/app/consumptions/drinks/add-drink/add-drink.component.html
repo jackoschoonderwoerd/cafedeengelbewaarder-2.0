@@ -45,10 +45,10 @@
     <input type="number" matInput formControlName="price" placeholder="PRICE" />
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>List Position</mat-label>
     <input type="number" matInput formControlName="listPosition" placeholder="LIST POSITION" />
-  </mat-form-field>
+  </mat-form-field> -->
 
   <button mat-raised-button type="submit" [disabled]="addDrinkForm.invalid" [mat-dialog-close]="addDrinkForm.value">
     {{ editMode ? "update" : "add" }}
