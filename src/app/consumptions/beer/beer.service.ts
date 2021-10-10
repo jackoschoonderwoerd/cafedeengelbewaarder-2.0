@@ -12,6 +12,8 @@ import { Beer } from './beer.model';
 export class BeerService {
 
   beers: Beer[];
+  beersArray: Beer[]
+  beersArrayId: string;
 
   constructor(
     private db: AngularFirestore,
@@ -19,22 +21,93 @@ export class BeerService {
   ) { }
   
   
+  addBeerToArray (beer: Beer) {
+    beer.id = new Date().getTime().toString();
+    console.log(beer);
+    this.beersArray.push(beer);
+    this.updateBeerArray()
+  }
+  deleteBeerFromArray(id: string) {
+    const index = this.beersArray.findIndex((beer: Beer) => {
+      return beer.id === id
+    })
+    this.beersArray.splice(index, 1);
+    this.updateBeerArray();
+  }
+
+  updateBeerArray() {
+    this.beersArray.forEach((beer: Beer) => {
+      let i = 0
+      if(beer.id === null) {
+        beer.id = (new Date().getTime() + i).toString()
+        i++
+      }
+    })
+    this.db.collection('beerArray').doc(this.beersArrayId).update({
+      beerArray: this.beersArray
+    })
+      .then(result => {
+        console.log('beerArray updated')
+      })
+      .catch(err => console.log(err));
+  }
+
   storeBeer(beer: Beer) {
     return this.db.collection('beers').add(beer)
   }
+  
+  editBeer(updatedBeer: Beer) {
+    const index = this.beersArray.findIndex((beer: Beer) => {
+      return beer.id === updatedBeer.id
+    })
+    this.beersArray[index] = updatedBeer;
+    this.updateBeerArray();
 
-  editBeer(beer: Beer) {
-    beer.listPosition = this.beers.length + 1;
-    return from(this.db.doc(`beers/${beer.id}`).update(beer));
   }
 
-  deleteBeer(beerItem: Beer) {
-    console.log('deleting' + beerItem.id);
-    // return from(this.db.doc(`beers/${beerItem.id}`).delete());
-    this.db.doc(`beers/${beerItem.id}`).delete()
-    .then(() => {
-      this.assingConsecutiveListPositionToEveryBeer()
-    });
+  // deleteBeer(beerItem: Beer) {
+  //   this.db.doc(`beers/${beerItem.id}`).delete()
+  //   .then(() => {
+  //   });
+  // }
+
+  fetchBeerArray() {
+    return this.db
+      .collection('beerArray')
+      .snapshotChanges()
+      .pipe(
+        map(docArray => {
+          return docArray.map((doc: any) => {
+            return {
+              id: doc.payload.doc.id,
+              beerArray: doc.payload.doc.data().beerArray
+            }
+          }) 
+        })
+      )
+      // .subscribe((beerArray: any) => {
+      //   console.log(beerArray)
+      // })
+      
+  }
+  fetchBeerArrayForLocalUse() {
+    return this.db
+      .collection('beerArray')
+      .snapshotChanges()
+      .pipe(
+        map(docArray => {
+          return docArray.map((doc: any) => {
+            return {
+              id: doc.payload.doc.id,
+              beerArray: doc.payload.doc.data().beerArray
+            }
+          }) 
+        })
+      )
+      .subscribe((beerArray: any) => {
+        this.beersArray = beerArray[0].beerArray;
+        this.beersArrayId = beerArray[0].id
+      })
   }
 
 
@@ -83,53 +156,37 @@ export class BeerService {
     )
     .subscribe((beers: Beer[]) => {
       this.beers = beers
-      console.log(this.beers);
       // this.assingConsecutiveListPositionToEveryBeer();
+      // this.storeBeerArray()
     })
   }
 
-  moveBeer(direction: string, selectedBeer: Beer) {
-    const selectedId = selectedBeer.id
-    const selectedIndex = this.beers.findIndex((beer: Beer) => {
-      return beer.id === selectedBeer.id;
+  moveBeer(direction: string, beerId: string) {
+    console.log(direction, beerId)
+    const targetedIndex = this.beersArray.findIndex((beer: Beer) => {
+      return beer.id === beerId
     })
-    console.log(selectedIndex)
+    console.log(targetedIndex);
     if(direction === 'up') {
-      if(selectedIndex === 0) {
-        console.log('already at the top');
-        return
+      if(targetedIndex === 0) {
+        console.log('already at the top')
       } else {
-        const swapBeer = this.beers[selectedIndex - 1]
-        const selectedPosition = selectedBeer.listPosition
-        const swapPosition = swapBeer.listPosition
-        selectedBeer.listPosition = swapPosition;
-        swapBeer.listPosition = selectedPosition;
-        this.db.doc(`beers/${selectedBeer.id}`).update(selectedBeer);
-        this.db.doc(`beers/${swapBeer.id}`).update(swapBeer);  
+        const beerMovingUp = this.beersArray[targetedIndex]
+        const beerMovingDown = this.beersArray[targetedIndex -1]
+        this.beersArray[targetedIndex] = beerMovingDown
+        this.beersArray[targetedIndex -1] = beerMovingUp;
       }
     } else if(direction === 'down') {
-      if(selectedIndex + 1 === this.beers.length) {
+      if(targetedIndex === this.beersArray.length -1) {
         console.log('already at the bottom')
       } else {
-        const swapBeer = this.beers[selectedIndex + 1]
-        const selectedPosition = selectedBeer.listPosition
-        const swapPosition = swapBeer.listPosition
-        selectedBeer.listPosition = swapPosition;
-        swapBeer.listPosition = selectedPosition;
-        this.db.doc(`beers/${selectedBeer.id}`).update(selectedBeer);
-        this.db.doc(`beers/${swapBeer.id}`).update(swapBeer);
+        const beerMovingUp = this.beersArray[targetedIndex]
+        const beerMovingDown = this.beersArray[targetedIndex +1]
+        this.beersArray[targetedIndex] = beerMovingDown
+        this.beersArray[targetedIndex +1] = beerMovingUp;
       }
     }
-  }
-
-  assingConsecutiveListPositionToEveryBeer() {
-    let i = 0;
-    this.beers.forEach((beer: Beer) => {
-      beer.listPosition = i;
-      i++
-      this.db.doc(`beers/${beer.id}`).update(beer);
-    })
-    console.log(this.beers);
+    this.updateBeerArray();
   }
 }
 

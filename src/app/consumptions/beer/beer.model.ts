@@ -1,4 +1,7 @@
 
+export interface BeerArray {
+  beerArray: Beer[]
+}
 
 export interface Beer {
   id: string
@@ -6,8 +9,8 @@ export interface Beer {
   price: number
   content: number;
   percentage: number;
-  listPosition: number;
   draught: boolean;
+  // listPosition?: number;
   descriptionDutch?: string;
   descriptionEnglish?: string;
 }

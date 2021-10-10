@@ -20,7 +20,66 @@
   </div>
 </section>
 
-<div class="beer-container">
+<ul class="beer-array-list-container">
+  <li *ngFor="let content of beerArray$ | async">
+    <ul class="beer-list">
+      <li
+      class="beer-list-item"
+      *ngFor="let beer of content.beerArray" 
+      
+      fxLayout="column" fxLayoutAlign="center">
+      <div class="edit-draught-name-price-chevrons-trash" fxLayout fxLayoutAlign="space-between" fxLayoutGap=".5rem">
+        <div class="edit-draught-name" fxLayout fxLayoutGap=".5rem" fxLayoutAlign="center center">
+          <fa-icon *ngIf="isAuthenticated$ | async" (click)="onEdit($event, beer)" [icon]="faEdit" class="edit-icon"></fa-icon>
+          <div class="draught" fxLayout="column" fxLayoutAlign="center">
+            <fa-icon class="glass" *ngIf="beer.draught" [icon]="faWineGlass"></fa-icon>
+            <fa-icon class="bottle" *ngIf="!beer.draught" [icon]="faWineBottle"></fa-icon>
+          </div>
+          <div
+            class="name"
+            (click)="onShowBeer(beer)">
+            {{beer.name}}
+          </div>
+        </div>
+        <div class="price-chevrons-trash" fxLayout fxLayoutGap="1rem" fxLayoutAlign="center center">
+          <div class="price">
+            {{beer.price | currency:"EUR"}}
+          </div>
+          <div *ngIf="isAuthenticated$ | async" class="chevrons" fxLayout="column" fxLayoutGap=".6rem">
+            <fa-icon 
+              [ngClass]="{'invalid-chevron': i === 0}"
+              
+              [icon]="faChevronLeft" 
+              (click)="onMoveBeer($event, 'up', beer.id)"
+              fxLayoutAlign="end" 
+              matTooltip="moves the beer up the list">
+            </fa-icon>
+            <fa-icon
+             
+              
+              [icon]="faChevronRight" 
+              fxLayoutAlign="end"
+              (click)="onMoveBeer($event, 'down', beer.id)" 
+              matTooltip="moves the beer down the list">
+            </fa-icon>
+          </div>
+          <fa-icon
+            *ngIf="isAuthenticated$ | async"
+            class="trash" 
+            [icon]="faTrash"
+            (click)="onDeleteFromBeerArray(beer.id)"></fa-icon>
+        </div>
+      </div>
+    </li>
+    <li
+      (click)="onAddToBeerArray()" 
+      class="beer-list-item add-beer">
+      ADD BEER
+    </li>
+   </ul>
+</ul>
+
+<!-- <div class="beer-container">
   <div *ngFor="let beer of beers$ | async; let i = index" class="beer-accordion">
     <mat-accordion class="mat-accordion">
       <mat-expansion-panel class="mat-expansion-panel" hideToggle (opened)="panelOpenState = true"
@@ -46,31 +105,13 @@
                 <div class="price-list-trash" fxLayout fxLayoutGap=".5rem">
                   <div class="beer-price">{{ beer.price | currency: "EUR" }}</div>
                   <div *ngIf="isAuthenticated$ | async" class="beer-list">{{beer.listPosition}}</div>
-                  <div class="chevrons" fxLayout="column" fxLayoutGap=".6rem">
-                    <fa-icon 
-                      [ngClass]="{'invalid-chevron': i === 0}"
-                      
-                      [icon]="faChevronLeft" 
-                      (click)="onMoveBeer($event, 'up', beer)"
-                      fxLayoutAlign="end" 
-                      matTooltip="moves the dish up the list">
-                    </fa-icon>
-                    <fa-icon
-                     
-                      
-                      [icon]="faChevronRight" 
-                      fxLayoutAlign="end"
-                      (click)="onMoveBeer($event, 'down', beer)" 
-                      matTooltip="moves the dish down the list">
-                    </fa-icon>
-                  </div>
+                 
                   <div *ngIf="isAuthenticated$ | async" class="beer-trash" (click)="onDelete($event, beer)">
                     <fa-icon [icon]="faTrash"></fa-icon>
                   </div>
                 </div>
               </div>
             </div>
-
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="beer-description">
@@ -85,4 +126,4 @@
   <div *ngIf="isAuthenticated$ | async" class="button-container">
     <button class="add-beer" mat-raised-button (click)="onAddBeer()">ADD BEER</button>
   </div>
-</div>
+</div> -->

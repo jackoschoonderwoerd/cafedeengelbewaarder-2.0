@@ -37,7 +37,7 @@ export class AddBeerComponent implements OnInit {
         price: beer.price,
         content: beer.content,
         percentage: beer.percentage,
-        listPosition: beer.listPosition,
+        // listPosition: beer.listPosition,
         descriptionDutch: beer.descriptionDutch,
         descriptionEnglish: beer.descriptionEnglish
       });
@@ -52,7 +52,7 @@ export class AddBeerComponent implements OnInit {
       price: new FormControl(1, Validators.required),
       content: new FormControl(1, Validators.required),
       percentage: new FormControl(5, Validators.required),
-      listPosition: new FormControl(1, Validators.required),
+      // listPosition: new FormControl(1, Validators.required),
       descriptionDutch: new FormControl(null, Validators.required),
       descriptionEnglish: new FormControl(null, Validators.required),   
     })

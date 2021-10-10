@@ -1,0 +1,29 @@
+<div class="container" mat-dialog-close fxLayout="column" fxLayoutGap="1rem" >
+  <div class="name">{{beer.name}}</div>  
+  <div class="description">
+    <div
+      *ngIf="language === 'english'"
+      class="english">
+      {{beer.descriptionEnglish}}
+    </div>
+    <div
+      class="dutch"
+      *ngIf="language ==='dutch'">
+      {{beer.descriptionDutch}}
+    </div>
+  </div>
+  <div class="content">
+    <div class="english" *ngIf="language === 'english'">
+      content: {{beer.content}} cl.
+    </div>
+    <div class="dutch" *ngIf="language === 'dutch'">
+      inhoud: {{beer.content}} cl.
+    </div>
+  </div>
+  <div class="percentage">
+    percentage: {{beer.percentage}}%
+  </div>
+  <div class="window-close" >
+    <fa-icon [icon]="faWindowClose" fxLayout fxLayoutAlign="end"></fa-icon>
+  </div>
+</div>

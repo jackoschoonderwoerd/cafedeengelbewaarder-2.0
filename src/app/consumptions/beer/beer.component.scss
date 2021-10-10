@@ -22,6 +22,80 @@
   // }
 }
 
+.beer-array-list-container {
+  // border: 1px solid red;
+  li {
+    .beer-list {
+      // border: 1px solid greenyellow;
+      display: grid;
+      @media (min-width: 481px) and (max-width: 767px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    
+      @media (min-width: 768px) and (max-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    
+      @media (min-width: 1025px) and (max-width: 1280px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    
+      @media (min-width: 1281px) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+      // grid-template-columns: repeat(4, 1fr);
+      .beer-list-item {
+        // border: 1px solid yellow;
+        padding: 1rem;
+        margin: .3rem;
+        background-color: var(--header-blue);
+        color: var(--text-color-bright-orange);
+        border-radius: .3rem;
+        .edit-draught-name-price-chevrons-trash {
+          .edit-draught-name {
+            // border: 1px solid red;
+            .edit-icon {
+              color: white;
+            }
+            .draught {
+              .glass {}
+              .bottle {}
+            }
+            .name {
+              
+            }
+          }
+          .price-chevrons-trash {
+            // border: 1px solid yellow;
+            .price {
+
+            }
+            .chevrons {
+              fa-icon {
+                color: white;
+              }
+              fa-icon:hover {
+                cursor: pointer;
+              }
+            }
+            .trash {
+              color: red;
+            }
+          }
+
+        }
+        
+      }
+      .add-beer {
+        background-color: var(--text-color-orange);
+        border: 2px solid var(--header-blue);
+        color: var(--header-blue);
+      }
+    }
+
+  }
+}
+
 .beer-container {
   @media (min-width: 481px) and (max-width: 767px) {
     grid-template-columns: repeat(2, 1fr);
@@ -38,6 +112,8 @@
   @media (min-width: 1281px) {
     grid-template-columns: repeat(5, 1fr);
   }
+
+
 
   background-color: var(--text-color-orange);
   padding: 3px;

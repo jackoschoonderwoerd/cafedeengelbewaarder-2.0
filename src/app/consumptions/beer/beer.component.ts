@@ -18,6 +18,7 @@ import { AddBeerComponent } from './add-beer/add-beer.component';
 import { Observable } from 'rxjs';
 import { UIService } from 'src/app/shared/ui.service';
 import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
+import { ShowBeerComponent } from './show-beer/show-beer.component';
 
 @Component({
   selector: 'app-beer',
@@ -29,6 +30,7 @@ export class BeerComponent implements OnInit {
   beers: Beer[] = [];
   panelOpenState: boolean = true;
   beers$: Observable<any>;
+  beerArray$: Observable<any>
   isAuthenticated$: Observable<any>;
   isAuthenticated: boolean = false
 
@@ -51,8 +53,9 @@ export class BeerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
-    this.beerService.fetchBeersForLocalUse();
+    this.beerService.fetchBeerArrayForLocalUse()
+    this.beerService.fetchBeerArray();
+    // this.beerService.fetchBeersForLocalUse();
     this.store
       .select(fromApp.getSelectedLanguage)
       .subscribe((language: string) => {
@@ -63,21 +66,52 @@ export class BeerComponent implements OnInit {
       .subscribe((isAuthenticated: boolean) => {
         this.isAuthenticated = isAuthenticated
       })
-    this.beers$ = this.beerService.fetchBeers();
+    // this.beers$ = this.beerService.fetchBeers();
+    this.beerArray$ = this.beerService.fetchBeerArray();
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth);
   }
 
-
-  onAddBeer() {
-    const dialogRef = this.dialog.open(AddBeerComponent, { width: '500px' });
+  onAddToBeerArray() {
+    const dialogRef  = this.dialog.open(AddBeerComponent);
     dialogRef.afterClosed().subscribe((beer: Beer) => {
-      if (beer) {
-        this.beerService.storeBeer(beer);
+      if(!beer) {
+        return
       } else {
-        this.uiService.showSnackbar('nothing was added', null, 5000);
+        this.beerService.addBeerToArray(beer);
       }
-    });
+    })
   }
+  
+  onDeleteFromBeerArray(beerId: string) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent)
+    dialogRef.afterClosed().subscribe(confirmation => {
+      if(!confirmation) {
+        return
+      } else {
+        console.log(beerId)
+        this.beerService.deleteBeerFromArray(beerId);
+      }
+    })
+  }
+
+  onShowBeer(beer: Beer) {
+    this.dialog.open(ShowBeerComponent, { 
+    data: {
+      beer: beer
+    },
+    panelClass: 'dialog-dimensions'})
+  }
+
+  // onAddBeer() {
+  //   const dialogRef = this.dialog.open(AddBeerComponent, { width: '500px' });
+  //   dialogRef.afterClosed().subscribe((beer: Beer) => {
+  //     if (beer) {
+  //       this.beerService.storeBeer(beer);
+  //     } else {
+  //       this.uiService.showSnackbar('nothing was added', null, 5000);
+  //     }
+  //   });
+  // }
 
   onEdit(event, beer: Beer) {
     if(this.isAuthenticated) {
@@ -89,9 +123,7 @@ export class BeerComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((beer: Beer) => {
         if(beer) {
-          this.beerService.editBeer(beer).subscribe(res => {
-            this.uiService.showSnackbar('database updated', null, 5000)
-          });
+          this.beerService.editBeer(beer)
         } else {
           this.uiService.showSnackbar('nothing was edited', null, 5000);
         }
@@ -99,21 +131,21 @@ export class BeerComponent implements OnInit {
     }
   }
 
-  onDelete(event, beerItem: Beer) {
+  // onDelete(event, beerItem: Beer) {
+  //   event.stopPropagation();
+  //   console.log(beerItem);
+  //   const dialogRef = this.dialog.open(ConfirmDeleteComponent);
+  //   dialogRef.afterClosed().subscribe(confirmation => {
+  //     if (confirmation) {
+  //       this.beerService.deleteBeer(beerItem)
+  //     } else {
+  //       this.uiService.showSnackbar('nothing was deleted', null, 5000);
+  //     }
+  //   })
+  // }
+  onMoveBeer(event: Event, direction: string, beerId: string) {
     event.stopPropagation();
-    console.log(beerItem);
-    const dialogRef = this.dialog.open(ConfirmDeleteComponent);
-    dialogRef.afterClosed().subscribe(confirmation => {
-      if (confirmation) {
-        this.beerService.deleteBeer(beerItem)
-      } else {
-        this.uiService.showSnackbar('nothing was deleted', null, 5000);
-      }
-    })
-  }
-  onMoveBeer(event: Event, direction: string, beer: Beer) {
-    event.stopPropagation();
-    console.log(direction)
-    this.beerService.moveBeer(direction, beer)
+    
+    this.beerService.moveBeer(direction, beerId)
   }
 }

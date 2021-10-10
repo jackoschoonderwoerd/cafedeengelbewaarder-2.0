@@ -55,41 +55,26 @@ export class DrinksService {
       )
       .subscribe((allDrinks: AllDrinks) => {
         this.allDrinks = allDrinks[0];
-        // console.log(this.allDrinks);
       });
   }
   
-    // fetchDrinks() {
-    //   return this.db
-    //     .collection('drinks')
-    //     .snapshotChanges()
-    //     .pipe(
-    //       map((docArray: any) => {
-    //         return docArray.map((doc: any) => {
-    //           return {
-    //             id: doc.payload.doc.id,
-    //             categories: doc.payload.doc.data().categories.sort((a, b) => (a.listPosition > b.listPosition) ? 1 : (b.listPosition > a.listPosition) ? -1 : 0),
-    //           }
-    //         })
-    //       })
-    //     )
-    // }
 
-    fetchDrinks() {
-      return this.db
-        .collection('drinks')
-        .snapshotChanges()
-        .pipe(
-          map((docArray: any) => {
-            return docArray.map((doc: any) => {
-              return {
-                id: doc.payload.doc.id,
-                categories: doc.payload.doc.data().categories
-              }
-            })
+
+  fetchDrinks() {
+    return this.db
+      .collection('drinks')
+      .snapshotChanges()
+      .pipe(
+        map((docArray: any) => {
+          return docArray.map((doc: any) => {
+            return {
+              id: doc.payload.doc.id,
+              categories: doc.payload.doc.data().categories
+            }
           })
-        )
-    }
+        })
+      )
+  }
 
   addCategory(drinkCategory: DrinkCategory) {
     console.log(drinkCategory.nameDutch);
@@ -243,36 +228,6 @@ export class DrinksService {
     })  
   }
 
-
-  // moveDrink(direction: string, categoryId: string, drinkId: string, index) {
-  //   console.log(direction,categoryId, drinkId)
-  //   this.allDrinks.categories.forEach((category: DrinkCategory) => {
-  //     if(category.id === categoryId) {
-  //       const targetedIndex = category.drinks.findIndex((drink: Drink) => {
-  //         return drink.id === drinkId
-  //       })
-  //       const targetedListPosistion = category.drinks[targetedIndex].listPosition
-  //       console.log(targetedIndex, targetedListPosistion);
-  //       if(direction === 'down') {
-  //         if(targetedIndex +1 === category.drinks.length) {
-  //           return
-  //         } else {
-  //           category.drinks[targetedIndex].listPosition = category.drinks[targetedListPosistion + 1].listPosition
-  //           category.drinks[targetedIndex + 1].listPosition = targetedListPosistion;
-  //         }
-  //       } else if(direction === 'up') {
-  //         if(targetedIndex === 0) {
-  //           return
-  //         } else {
-  //           category.drinks[targetedIndex].listPosition = category.drinks[targetedListPosistion - 1].listPosition
-  //           category.drinks[targetedIndex - 1].listPosition = targetedListPosistion;
-  //         }
-  //       }
-  //     }
-  //     category.drinks = this.sortAndOrderArray(category.drinks)
-  //   })
-  //   this.updateDrinks();
-  // }
 
 
   private sortAndOrderArray(array: any[]) {

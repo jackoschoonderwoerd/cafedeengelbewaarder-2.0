@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Drink } from '../drink.model';
@@ -7,7 +7,8 @@ import { Drink } from '../drink.model';
 @Component({
   selector: 'app-add-drink',
   templateUrl: './add-drink.component.html',
-  styleUrls: ['./add-drink.component.scss']
+  styleUrls: ['./add-drink.component.scss'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class AddDrinkComponent implements OnInit {
 

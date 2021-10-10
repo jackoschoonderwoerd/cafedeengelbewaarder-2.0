@@ -11,6 +11,7 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddBeerComponent } from './add-beer/add-beer.component';
+import { ShowBeerComponent } from './show-beer/show-beer.component';
 
 
 
@@ -18,7 +19,8 @@ import { AddBeerComponent } from './add-beer/add-beer.component';
   declarations: [
     BeerComponent,
     // BeerDialogComponent,
-    AddBeerComponent
+    AddBeerComponent,
+    ShowBeerComponent
   ],
   imports: [
     CommonModule,
