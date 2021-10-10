@@ -51,7 +51,6 @@
                   (click)="onMoveDrinkCategory('up', category.id)"
                   fxLayoutAlign="end"
                   matTooltip="moves the category up the list"></fa-icon>
-                  <!-- {{i}} -->
                 <fa-icon
                   *ngIf="i !== drink.categories.length -1"
                   [icon]="faChevronDown" 
@@ -60,7 +59,6 @@
                   matTooltip="moves the category down the list">
                 </fa-icon>
               </div>
-              <!-- <div class="list">{{category.listPosition}}</div> -->
               <fa-icon class="trash" (click)="onDeleteCategory(category.id)" [icon]="faTrash"></fa-icon>
             </div>
           </div>
@@ -88,20 +86,35 @@
                 </div>
                 <div class="price-list-trash" fxLayout fxLayoutGap="1rem">
                   <div class="price" fxLayoutAlign="end">{{drink.price | currency:"EUR"}}</div>
-                  <!-- <div *ngIf="isAuthenticated$ | async" class="list" fxLayoutAlign="end">{{drink.listPosition}}</div> -->
-                  <div *ngIf="isAuthenticated$ | async"  class="chevrons" fxLayout="row" fxLayoutGap="1rem">
+                  <!-- <div *ngIf="isAuthenticated$ | async"  class="chevrons" fxLayout="row" fxLayoutGap="1rem">
                     <fa-icon 
                       *ngIf="i !== 0"
                       [icon]="faChevronUp" 
                       (click)="onMoveDrink('up', category.id, drink.id)"
                       fxLayoutAlign="end"
                       matTooltip="moves the drink up the list"></fa-icon>
-                      <!-- {{i}} -->
                     <fa-icon
                       *ngIf="i !== category.drinks.length -1"
                       [icon]="faChevronDown" 
                       fxLayoutAlign="end" 
                       (click)="onMoveDrink('down', category.id, drink.id)"
+                      matTooltip="moves the drink down the list">
+                    </fa-icon>
+                  </div> -->
+                  <div *ngIf="isAuthenticated$ | async"  class="chevrons" fxLayout="row" fxLayoutGap="1rem">
+                    <fa-icon 
+                      
+                      [ngClass]="{'invalid-chevron' : i === 0}"
+                      [icon]="faChevronUp" 
+                      (click)="onMoveDrink('up', category.id, drink.id, i)"
+                      fxLayoutAlign="end"
+                      matTooltip="moves the drink up the list"></fa-icon>
+                    <fa-icon
+                    [ngClass]="{'invalid-chevron' : i === category.drinks.length -1}"
+                      
+                      [icon]="faChevronDown" 
+                      fxLayoutAlign="end" 
+                      (click)="onMoveDrink('down', category.id, drink.id, i)"
                       matTooltip="moves the drink down the list">
                     </fa-icon>
                   </div>

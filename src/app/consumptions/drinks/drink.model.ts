@@ -15,7 +15,7 @@ export interface Drink {
   nameDutch: string;
   nameEnglish: string;
   price: number;
-  listPosition: number;
+  // listPosition?: number;
   id?: string,
   comment?: string;
   wineType?: string;

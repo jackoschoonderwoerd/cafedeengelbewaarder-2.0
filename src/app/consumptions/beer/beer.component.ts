@@ -10,13 +10,10 @@ import { faWineBottle } from '@fortawesome/free-solid-svg-icons';
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ConsumptionsService } from '../consumptions.service';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { AddBeerComponent } from './add-beer/add-beer.component';
 import { Observable } from 'rxjs';
 import { UIService } from 'src/app/shared/ui.service';
@@ -29,11 +26,8 @@ import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-de
 })
 export class BeerComponent implements OnInit {
   language: string = 'dutch';
-  // draughtBeers: BeerItem[] = [];
-  // bottledBeers: BeerItem[] = [];
   beers: Beer[] = [];
   panelOpenState: boolean = true;
-  addBeerForm: FormGroup;
   beers$: Observable<any>;
   isAuthenticated$: Observable<any>;
   isAuthenticated: boolean = false
@@ -43,18 +37,22 @@ export class BeerComponent implements OnInit {
   faWineBottle = faWineBottle;
   faWineGlass = faWineGlass;
   faEdit = faEdit;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight
 
   constructor(
     private store: Store<fromApp.GlobalState>,
     private beerService: BeerService,
     private dialog: MatDialog,
-    private fb: FormBuilder,
-    // private consumptionsService: ConsumptionsService,
     private uiService: UIService,
     
   ) {}
 
   ngOnInit(): void {
+    
+    this.beerService.fetchBeersForLocalUse();
     this.store
       .select(fromApp.getSelectedLanguage)
       .subscribe((language: string) => {
@@ -107,15 +105,15 @@ export class BeerComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(confirmation => {
       if (confirmation) {
-        this.beerService.deleteBeer(beerItem).subscribe(data => {
-          this.uiService.deletingSucceeded(beerItem.name);
-        })
+        this.beerService.deleteBeer(beerItem)
       } else {
         this.uiService.showSnackbar('nothing was deleted', null, 5000);
       }
     })
   }
-
-
-
+  onMoveBeer(event: Event, direction: string, beer: Beer) {
+    event.stopPropagation();
+    console.log(direction)
+    this.beerService.moveBeer(direction, beer)
+  }
 }

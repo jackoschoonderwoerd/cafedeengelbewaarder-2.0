@@ -1,11 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons'
-import { ConsumptionsService } from '../../consumptions.service';
 import { Beer } from '../beer.model';
-import { BeerService } from '../beer.service';
+
 
 
 @Component({
@@ -23,13 +22,10 @@ export class AddBeerComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private consumptionsService: ConsumptionsService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<any>
   ) { }
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('350px');
     this.initForm()
     if(this.data) {
       const beer: Beer = this.data.beer
@@ -44,10 +40,7 @@ export class AddBeerComponent implements OnInit {
         listPosition: beer.listPosition,
         descriptionDutch: beer.descriptionDutch,
         descriptionEnglish: beer.descriptionEnglish
-      })
-    } else {
-      this.editMode = false;
-      console.log('new');
+      });
     }  
   }
   
@@ -64,9 +57,4 @@ export class AddBeerComponent implements OnInit {
       descriptionEnglish: new FormControl(null, Validators.required),   
     })
   }
-  // submit() {
-    
-  //   this.consumptionsService.storeBeer(this.addBeerForm.value);
-  //   this.dia
-  // }
 }

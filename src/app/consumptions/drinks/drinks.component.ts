@@ -69,9 +69,9 @@ export class DrinksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.drinksService.initializeDrinks();
     this.drinksService.fetchDrinksForLocalUse();
+    
     this.isAuthenticated$ = this.store.select(fromApp.getIsAuth)
 
     
@@ -167,7 +167,16 @@ export class DrinksComponent implements OnInit {
     return
   }
 
-  onMoveDrink(direction: string, categoryId: string, drinkId: string) {
-    this.drinksService.moveDrink(direction,categoryId, drinkId)
+  onMoveDrink(direction: string, categoryId: string, drinkId: string, index: number) {
+    this.drinksService.moveDrink(direction,categoryId, drinkId, index)
+    // if(direction === 'up') {
+    //   if(index === 0) {
+    //     console.log('at the top already')
+    //     return 
+    //   } else {
+    //   }
+    // } else if(direction === 'down') {
+    //   console.log('going down')
+    // }
   }
 }

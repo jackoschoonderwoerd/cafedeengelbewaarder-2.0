@@ -122,14 +122,16 @@
                   <div *ngIf="isAuthenticated$ | async" class="chevrons" fxLayout="row" fxLayoutAlign="end"
                     fxLayoutGap="1rem">
                     <fa-icon 
-                      *ngIf="i !== 0" 
+                      [ngClass]="{'invalid-chevron': i === 0}"
+                      
                       [icon]="faChevronUp" 
                       (click)="onMoveFoodItem('up', course.id, foodItem.id)"
                       fxLayoutAlign="end" 
                       matTooltip="moves the dish up the list">
                     </fa-icon>
                     <fa-icon
-                      *ngIf="i !== course.foodItems.length -1" 
+                    [ngClass]="{'invalid-chevron': i === course.foodItems.length -1}"
+                      
                       [icon]="faChevronDown" 
                       fxLayoutAlign="end"
                       (click)="onMoveFoodItem('down', course.id, foodItem.id)" 

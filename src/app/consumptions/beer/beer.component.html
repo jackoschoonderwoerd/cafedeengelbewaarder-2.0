@@ -21,7 +21,7 @@
 </section>
 
 <div class="beer-container">
-  <div *ngFor="let beer of beers$ | async" class="beer-accordion">
+  <div *ngFor="let beer of beers$ | async; let i = index" class="beer-accordion">
     <mat-accordion class="mat-accordion">
       <mat-expansion-panel class="mat-expansion-panel" hideToggle (opened)="panelOpenState = true"
         (closed)="panelOpenState = false" [ngClass]="(isAuthenticated$ | async) ? 'edit-mode' : ''">
@@ -46,6 +46,24 @@
                 <div class="price-list-trash" fxLayout fxLayoutGap=".5rem">
                   <div class="beer-price">{{ beer.price | currency: "EUR" }}</div>
                   <div *ngIf="isAuthenticated$ | async" class="beer-list">{{beer.listPosition}}</div>
+                  <div class="chevrons" fxLayout="column" fxLayoutGap=".6rem">
+                    <fa-icon 
+                      [ngClass]="{'invalid-chevron': i === 0}"
+                      
+                      [icon]="faChevronLeft" 
+                      (click)="onMoveBeer($event, 'up', beer)"
+                      fxLayoutAlign="end" 
+                      matTooltip="moves the dish up the list">
+                    </fa-icon>
+                    <fa-icon
+                     
+                      
+                      [icon]="faChevronRight" 
+                      fxLayoutAlign="end"
+                      (click)="onMoveBeer($event, 'down', beer)" 
+                      matTooltip="moves the dish down the list">
+                    </fa-icon>
+                  </div>
                   <div *ngIf="isAuthenticated$ | async" class="beer-trash" (click)="onDelete($event, beer)">
                     <fa-icon [icon]="faTrash"></fa-icon>
                   </div>

@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConsumptionsService } from '../../consumptions.service';
 import { Drink } from '../drink.model';
 
 
@@ -18,7 +17,6 @@ export class AddDrinkComponent implements OnInit {
   categories: string[];
   wineSelected: boolean = false;
   categoryName: string;
-  listPositions: number[] = []
   drink: Drink;
   
   
@@ -26,10 +24,8 @@ export class AddDrinkComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private consuptionsService: ConsumptionsService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<any>,
-    // private drinksService: DrinksService
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +42,6 @@ export class AddDrinkComponent implements OnInit {
         id: this.drink.id,
         nameDutch: this.drink.nameDutch,
         nameEnglish: this.drink.nameEnglish,
-        listPosition: this.drink.listPosition,
         wineType: this.categoryName === 'wine' ? this.drink.wineType : null,
         wineContainer: this.categoryName === 'wine' ? this.drink.wineContainer : null,
         price: this.drink.price
@@ -61,22 +56,13 @@ export class AddDrinkComponent implements OnInit {
   }
 
   initForm() {
-    // this.categories = this.drinksService.getCategories()
     this.addDrinkForm = this.fb.group({
       id: new FormControl(null),
       nameDutch: new FormControl(null, Validators.required),
       nameEnglish: new FormControl(null, Validators.required),
-      listPosition: new FormControl(null, Validators.required),
       wineType: new FormControl(null),
       wineContainer: new FormControl(null),
       price: new FormControl(null, Validators.required),
     })
   }
-  // onSelectionChange(e) {
-  //   if(e.value === 'wine') {
-  //     this.category = 'wine';
-  //   } else {
-  //     this.category = 'general';
-  //   }
-  // }
 }

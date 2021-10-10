@@ -101,6 +101,9 @@
                   fa-icon {
                     color: white;
                   }
+                  .invalid-chevron {
+                    color: transparent;
+                  }
                 }
                 .price {}
                 .list{
@@ -125,6 +128,9 @@
     }
   }
 }
+// .invalid-chevron {
+//   color: red;
+// }
   
 .red-circle {
   color: red;
