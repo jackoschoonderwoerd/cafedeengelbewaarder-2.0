@@ -27,7 +27,7 @@ export class AddFoodComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.updateDialogSize();
+    this.updateDialogSize();
     this.initForm();  
     if(this.passedData.foodItem) {
       this.foodItem = this.passedData.foodItem
@@ -52,7 +52,7 @@ export class AddFoodComponent implements OnInit {
     } 
   }
   private updateDialogSize() {
-    this.dialogRef.updateSize('100%', '95%')
+    this.dialogRef.updateSize('100%', '100%')
   }
 
   initForm() {

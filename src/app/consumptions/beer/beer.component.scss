@@ -25,6 +25,7 @@
 .beer-array-list-container {
   // border: 1px solid red;
   li {
+    // border: 1px solid gray;
     .beer-list {
       // border: 1px solid greenyellow;
       display: grid;
@@ -45,14 +46,16 @@
       }
       // grid-template-columns: repeat(4, 1fr);
       .beer-list-item {
-        // border: 1px solid yellow;
+        // border: 5px solid yellow;
         padding: 1rem;
         margin: .3rem;
         background-color: var(--header-blue);
         color: var(--text-color-bright-orange);
         border-radius: .3rem;
         .edit-draught-name-price-chevrons-trash {
+          // border: 1px solid lightblue;
           .edit-draught-name {
+            
             // border: 1px solid red;
             .edit-icon {
               color: white;
@@ -62,7 +65,8 @@
               .bottle {}
             }
             .name {
-              
+              // border: 1px solid pink;
+              width: 100%;
             }
           }
           .price-chevrons-trash {

@@ -1,16 +1,17 @@
-<div class="" *ngIf="!editMode">
-  Add course to {{mealType}}{{mealTypeId}}
-</div>
+<div class="container">
+  <div class="" *ngIf="!editMode">
+    Add course to {{mealType}}{{mealTypeId}}
+  </div>
 
-<form [formGroup]="form" fxLayout="column">
-  <mat-form-field>
-    <input type="text" matInput formControlName="nameDutch" placeholder="Course name Dutch">
-  </mat-form-field>
-  <mat-form-field>
-    <input type="text" matInput formControlName="nameEnglish" placeholder="Course name English">
-  </mat-form-field>
-  
-  <!-- <mat-radio-group formControlName="showCourseName" fxLayout="column" fxLayoutGap="20px">
+  <form [formGroup]="form" fxLayout="column">
+    <mat-form-field>
+      <input type="text" matInput formControlName="nameDutch" placeholder="Course name Dutch">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput formControlName="nameEnglish" placeholder="Course name English">
+    </mat-form-field>
+
+    <!-- <mat-radio-group formControlName="showCourseName" fxLayout="column" fxLayoutGap="20px">
     <div class="radio-buttons" fxLayout fxLayoutGap="2rem">
       <mat-radio-button value="true" [checked]="course.showCourseName">
         <div class="show">show</div>
@@ -21,32 +22,32 @@
     </div>
   </mat-radio-group> -->
 
-  <mat-radio-group formControlName="showCourseName" fxLayout="column" fxLayoutGap="20px">
-    
-      <mat-radio-button value="true"
-        >
-       show
+    <mat-radio-group formControlName="showCourseName" fxLayout="column" fxLayoutGap="20px">
+
+      <mat-radio-button value="true">
+        show
       </mat-radio-button>
       <mat-radio-button value="false">
         hide
       </mat-radio-button>
-    
-  </mat-radio-group>
 
-  <mat-form-field>
-    <textarea type="text" matInput formControlName="remarkDutch" placeholder="Opmerkingen">
+    </mat-radio-group>
+
+    <mat-form-field>
+      <textarea type="text" matInput formControlName="remarkDutch" placeholder="Opmerkingen">
     </textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <textarea type="text" matInput formControlName="remarkEnglish" placeholder="Remark">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea type="text" matInput formControlName="remarkEnglish" placeholder="Remark">
     </textarea>
-  </mat-form-field>
-  <!-- <mat-form-field>
+    </mat-form-field>
+    <!-- <mat-form-field>
     <input type="number" matInput formControlName="listPosition" placeholder="list position">
   </mat-form-field> -->
 
-</form>
-<div class="buttons" fxLayout="column" fxLayoutGap="1rem">
-  <button mat-raised-button [mat-dialog-close]="form.value">Submit</button>
-  <button mat-raised-button mat-dialog-close>Cancel</button>
+  </form>
+  <div class="buttons" fxLayout="column" fxLayoutGap="1rem">
+    <button mat-raised-button [mat-dialog-close]="form.value">Submit</button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </div>
 </div>

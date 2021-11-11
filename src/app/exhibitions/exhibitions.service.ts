@@ -12,6 +12,84 @@ export class ExhibitionsService {
 
   exhibitions: Exhibition[] = [
     {
+      id: 'frans-schellekens',
+      title: 'Ode aan Frans Schellekens',
+      date: 'From September 13th till December 31st',
+      artistNames: [],
+      descriptionPath:'./../assets/exhibitions/ode-aan-frans-schellekens/frans-schellekens.html',
+      slides: [
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/Bergin_Sean_94.jpg',
+          caption: 'Sean Bergin \'84',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/Bley_Carla_89-2_copy.jpg',
+          caption: 'Carla Bley \'89',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/BROOD_HOOKER.jpg',
+          caption: 'Brood / Hooker',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/Clark-Murray_87.jpg',
+          caption: 'Clark / Murray \'87',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/COBB_Arnett-_Little.jpg',
+          caption: 'Arnett Cobb',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/DAVIS_MILES_84-1P_copy.jpg',
+          caption: 'Miles Davis \'84',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/HOLLEY-STEWART_83_copy.jpg',
+          caption: 'Clark / Murray \'87',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/Mengelberg_Misha_98_copy.jpg',
+          caption: 'Misha Mengelberg \'98',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/SHEPP_Archie_89.jpg',
+          caption: 'Archie Shepp \'89',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/Taylor_Cecil_91_copy.jpg',
+          caption: 'Cecil Taylor',
+          copyright: '',
+          price: null
+        },
+        {
+          imagePath: './../assets/exhibitions/ode-aan-frans-schellekens/images/Wierbos_Wolter_95.jpg',
+          caption: 'Wolter Wierbos \'95',
+          copyright: '',
+          price: null
+        },
+      ],
+      aspectRatio: 66,
+      emailAddresses: [],
+      websites: ['https://indd.adobe.com/view/5164d0c0-b8ba-4ade-8fa7-ed964585ff5f']
+    },
+    {
       id: 'exhibition-jazzsession',
       title: 'Exhibition Jazzsession',
       date: 'From September 1st till November 1st 2019',

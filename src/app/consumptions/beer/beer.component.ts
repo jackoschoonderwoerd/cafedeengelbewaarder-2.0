@@ -82,7 +82,8 @@ export class BeerComponent implements OnInit {
     })
   }
   
-  onDeleteFromBeerArray(beerId: string) {
+  onDeleteFromBeerArray(e: Event, beerId: string) {
+    e.stopPropagation();
     const dialogRef = this.dialog.open(ConfirmDeleteComponent)
     dialogRef.afterClosed().subscribe(confirmation => {
       if(!confirmation) {
@@ -102,17 +103,7 @@ export class BeerComponent implements OnInit {
     panelClass: 'dialog-dimensions'})
   }
 
-  // onAddBeer() {
-  //   const dialogRef = this.dialog.open(AddBeerComponent, { width: '500px' });
-  //   dialogRef.afterClosed().subscribe((beer: Beer) => {
-  //     if (beer) {
-  //       this.beerService.storeBeer(beer);
-  //     } else {
-  //       this.uiService.showSnackbar('nothing was added', null, 5000);
-  //     }
-  //   });
-  // }
-
+  
   onEdit(event, beer: Beer) {
     if(this.isAuthenticated) {
       event.stopPropagation();
@@ -131,18 +122,7 @@ export class BeerComponent implements OnInit {
     }
   }
 
-  // onDelete(event, beerItem: Beer) {
-  //   event.stopPropagation();
-  //   console.log(beerItem);
-  //   const dialogRef = this.dialog.open(ConfirmDeleteComponent);
-  //   dialogRef.afterClosed().subscribe(confirmation => {
-  //     if (confirmation) {
-  //       this.beerService.deleteBeer(beerItem)
-  //     } else {
-  //       this.uiService.showSnackbar('nothing was deleted', null, 5000);
-  //     }
-  //   })
-  // }
+  
   onMoveBeer(event: Event, direction: string, beerId: string) {
     event.stopPropagation();
     

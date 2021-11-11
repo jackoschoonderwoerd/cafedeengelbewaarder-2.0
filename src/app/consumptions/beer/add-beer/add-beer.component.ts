@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons'
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons'
 import { Beer } from '../beer.model';
@@ -23,9 +23,11 @@ export class AddBeerComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<any>
   ) { }
 
   ngOnInit(): void {
+    this.updateDialogSize()
     this.initForm()
     if(this.data) {
       const beer: Beer = this.data.beer
@@ -42,6 +44,10 @@ export class AddBeerComponent implements OnInit {
         descriptionEnglish: beer.descriptionEnglish
       });
     }  
+  }
+
+  private updateDialogSize() {
+    this.dialogRef.updateSize('400px', '95%')
   }
   
   initForm() {

@@ -26,7 +26,7 @@
       <li
       class="beer-list-item"
       *ngFor="let beer of content.beerArray" 
-      
+      (click)="onShowBeer(beer)"
       fxLayout="column" fxLayoutAlign="center">
       <div class="edit-draught-name-price-chevrons-trash" fxLayout fxLayoutAlign="space-between" fxLayoutGap=".5rem">
         <div class="edit-draught-name" fxLayout fxLayoutGap=".5rem" fxLayoutAlign="center center">
@@ -36,8 +36,9 @@
             <fa-icon class="bottle" *ngIf="!beer.draught" [icon]="faWineBottle"></fa-icon>
           </div>
           <div
+            
             class="name"
-            (click)="onShowBeer(beer)">
+            >
             {{beer.name}}
           </div>
         </div>
@@ -67,7 +68,7 @@
             *ngIf="isAuthenticated$ | async"
             class="trash" 
             [icon]="faTrash"
-            (click)="onDeleteFromBeerArray(beer.id)"></fa-icon>
+            (click)="onDeleteFromBeerArray($event, beer.id)"></fa-icon>
         </div>
       </div>
     </li>

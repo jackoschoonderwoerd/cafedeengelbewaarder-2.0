@@ -98,6 +98,7 @@
                     (click)="onEditFoodItem(course.id, foodItem)">
                     <fa-icon [icon]="faEdit" matTooltip="edit name, price, ingredients and amount of the dish"></fa-icon>
                   </div>
+
                   <div class="name-ingredients" *ngIf="language === 'dutch'">
                     <div class="food-item-name">
                       {{foodItem.nameDutch}}
@@ -106,17 +107,18 @@
                     </div>
                     <div class="ingredients">{{foodItem.ingredientsDutch}}</div>
                   </div>
-                  <div class="name-ingredients" *ngIf="language ==='english'" fxLayout fxLayoutAlign="space">
+
+                  <div class="name-ingredients" *ngIf="language ==='english'">
                     <div class="food-item-name">
                       {{foodItem.nameEnglish}}
                       <span class="amount" *ngIf="foodItem.amount > 1">({{foodItem.amount}}X)</span>
                     </div>
                     <div class="ingredients">{{foodItem.ingredientsEnglish}}</div>
-
                   </div>
+
                 </div>
                 <div class="price-list-trash" fxLayout="column" fxLayoutGap=".5rem">
-                  <div fxLayout fxLayoutAlign="end" class="price">
+                  <div *ngIf="foodItem.price !== 0" fxLayout fxLayoutAlign="end" class="price">
                     {{foodItem.price | currency:"EUR"}}
                   </div>
                   <div *ngIf="isAuthenticated$ | async" class="chevrons" fxLayout="row" fxLayoutAlign="end"

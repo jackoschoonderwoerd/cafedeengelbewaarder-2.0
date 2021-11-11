@@ -1,14 +1,14 @@
+<div class="container">
+  <div class="english">
+    Adding dish to {{passedData.courseNameEnglish}}
+  </div>
+  <div class="dutch">
+    Voeg gerecht toe aan {{passedData.courseNameDutch}}
+  </div>
 
-<div class="english">
-  Adding dish to {{passedData.courseNameEnglish}}
-</div>
-<div class="dutch">
-  Voeg gerecht toe aan {{passedData.courseNameDutch}}
-</div>
-
-<form [formGroup]="addFoodItemForm"
-  fxLayout="column">
-  <!-- <mat-form-field style="display: none;">
+  <form [formGroup]="addFoodItemForm"
+    fxLayout="column">
+    <!-- <mat-form-field style="display: none;">
     <input
       type="text"
       matInput
@@ -32,75 +32,75 @@
       readonly
       placeholder="CATEGORY">
   </mat-form-field> -->
-  <div class="dutch-section" fxLayout="column">
-    <mat-form-field appearance="fill">
-      <input
-        type="text"
-        matInput
-        formControlName="nameDutch"
-        placeholder="NAME DUTCH">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <textarea
-        type="text"
-        matInput
-        formControlName="ingredientsDutch"
-        placeholder="INGREDIENTS DUTCH">
+    <div class="dutch-section" fxLayout="column">
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          formControlName="nameDutch"
+          placeholder="NAME DUTCH">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <textarea
+          type="text"
+          matInput
+          formControlName="ingredientsDutch"
+          placeholder="INGREDIENTS DUTCH">
       </textarea>
-    </mat-form-field>
-  </div>
-  <div class="english-section" fxLayout="column">
-    <mat-form-field appearance="fill">
-      <input
-        type="text"
-        matInput
-        formControlName="nameEnglish"
-        placeholder="NAME ENGLISH">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <textarea
-        type="text"
-        matInput
-        formControlName="ingredientsEnglish"
-        placeholder="INGREDIENTS ENGLISH"></textarea>
-    </mat-form-field>
-  </div>
+      </mat-form-field>
+    </div>
+    <div class="english-section" fxLayout="column">
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          formControlName="nameEnglish"
+          placeholder="NAME ENGLISH">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <textarea
+          type="text"
+          matInput
+          formControlName="ingredientsEnglish"
+          placeholder="INGREDIENTS ENGLISH"></textarea>
+      </mat-form-field>
+    </div>
 
-  <div class="amount-vegetarian-price-list" fxLayout fxLayoutAlign="space-between center center">
-    <mat-form-field appearance="fill" class="price">
-      <mat-label>PRICE</mat-label>
-      <input
-      type="number"
-      matInput
-      formControlName="price">
-    </mat-form-field>
-    <mat-form-field
-      appearance="fill" class="amount"
-      matTooltip="Optional, use for dishes that contain multiple items such as 'bitterballen'">
-      <mat-label>AMOUNT</mat-label>
-      <input
-        type="number"
-        matInput
-        formControlName="amount"
-        placeholder="amount"
-       >
-    </mat-form-field>
-    <!-- <mat-form-field class="list-position" appearance="fill">
+    <div class="amount-vegetarian-price-list" fxLayout fxLayoutAlign="space-between center center">
+      <mat-form-field appearance="fill" class="price">
+        <mat-label>PRICE</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="price">
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill" class="amount"
+        matTooltip="Optional, use for dishes that contain multiple items such as 'bitterballen'">
+        <mat-label>AMOUNT</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="amount"
+          placeholder="amount">
+      </mat-form-field>
+      <!-- <mat-form-field class="list-position" appearance="fill">
       <mat-label>LIST</mat-label>
       <input
       type="number"
       matInput
       formControlName="listPosition">
     </mat-form-field> -->
-    <!-- <mat-checkbox class="vega" formControlName="vegetarian">VEGA</mat-checkbox> -->
-  </div>
-  <div class="buttons" fxLayout fxLayoutGap="1rem" fxLayoutAlign="space-between">
-    <button mat-raised-button mat-dialog-close>cancel</button>
-    <button
-      [disabled]="addFoodItemForm.invalid"
-      mat-raised-button
-      [mat-dialog-close]="addFoodItemForm.value"
-      matTooltip="hi there">SUBMIT
-    </button>
-  </div>
-</form>
+      <!-- <mat-checkbox class="vega" formControlName="vegetarian">VEGA</mat-checkbox> -->
+    </div>
+    <div class="buttons" fxLayout fxLayoutGap="1rem" fxLayoutAlign="space-between">
+      <button mat-raised-button mat-dialog-close>cancel</button>
+      <button
+        [disabled]="addFoodItemForm.invalid"
+        mat-raised-button
+        [mat-dialog-close]="addFoodItemForm.value"
+        matTooltip="hi there">SUBMIT
+      </button>
+    </div>
+  </form>
+</div>

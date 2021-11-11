@@ -16,11 +16,11 @@
     <div class="english" *ngIf="language === 'english'">
       content: {{beer.content}} cl.
     </div>
-    <div class="dutch" *ngIf="language === 'dutch'">
+    <div class="dutch" *ngIf="language === 'dutch' && beer.content !== -1">
       inhoud: {{beer.content}} cl.
     </div>
   </div>
-  <div class="percentage">
+  <div class="percentage" *ngIf="beer.percentage !== -1">
     percentage: {{beer.percentage}}%
   </div>
   <div class="window-close" >

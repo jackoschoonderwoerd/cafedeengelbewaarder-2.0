@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
 
   initForm() {
     this.loginForm = this.fb.group({
-        email: new FormControl('jackoboes@gmail.com', {
+        email: new FormControl(null, {
         validators: [Validators.required, Validators.email]
       }),
-        password: new FormControl('123456', { 
+        password: new FormControl(null, { 
         validators: [Validators.required] })
     });
   }
