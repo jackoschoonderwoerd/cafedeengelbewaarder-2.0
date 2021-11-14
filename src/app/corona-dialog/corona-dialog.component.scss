@@ -1,0 +1,25 @@
+.flags {
+  width: 100%;
+  background-color: var(--header-blue);
+  text-align: right;
+  height: 2.5rem;
+  padding: .2rem;
+  .flag {
+    height: 100%;
+    border: 3px solid var(--text-color-orange);
+  }
+}
+.container-dutch, .container-english {
+  padding: 1rem;
+  background-color: var(--header-blue);
+  color: white;
+  .openingstijden {
+
+  }
+  .keuken {
+
+  }
+  .jazzengel {
+
+  }
+}

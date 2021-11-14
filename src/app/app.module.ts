@@ -26,6 +26,7 @@ import { AuthGuard } from './auth/auth-guard';
 import { AuthAdminGuard } from './auth/auth-admin.guard';
 import { ConfirmDeleteComponent } from './shared/confirm-delete/confirm-delete.component';
 import { ConfirmDeleteModule } from './shared/confirm-delete/confirm-delete.module';
+import { CoronaDialogComponent } from './corona-dialog/corona-dialog.component';
 
 
 // import { FoodModule } from './food/food.module';
@@ -42,6 +43,7 @@ import { ConfirmDeleteModule } from './shared/confirm-delete/confirm-delete.modu
     SidenavComponent,
     
     FooterComponent,
+          CoronaDialogComponent,
     
   ],
   imports: [

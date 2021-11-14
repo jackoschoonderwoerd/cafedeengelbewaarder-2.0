@@ -27,12 +27,12 @@ const initialState: UIState = {
   selectedLanguage: 'dutch',
   openingHours: {
     openingHoursOpen: '12:00',
-    openingHoursClose: '00:00',
+    openingHoursClose: '20:00',
     openingHoursWeekendOpen: '12:00',
-    openingHoursWeekendClose: '00:00',
-    snacks: '12:00 - 22:30',
+    openingHoursWeekendClose: '20:00',
+    snacks: '12:00 - 19:00',
     lunch: '12:00 - 17:00',
-    dinner: '17:00 - 21.30',
+    dinner: '17:00 - 19.00',
   },
   isShowcaseActive: false,
   selectedLink: null

@@ -1,9 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 
 import { Store } from '@ngrx/store'
 import * as fromRoot from './app.reducer';
 import { AuthService } from './auth/auth.service';
+import { CoronaDialogComponent } from './corona-dialog/corona-dialog.component';
 import * as UI from './shared/ui.actions';
 
 @Component({
@@ -19,11 +21,14 @@ export class AppComponent implements OnInit {
   constructor(
     private store: Store<fromRoot.GlobalState>,
     private authService: AuthService,
-    private swUpdate: SwUpdate
-
+    private swUpdate: SwUpdate,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
+    this.dialog.open(CoronaDialogComponent, {
+      width: '320px'
+    });
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
         if (confirm('New version available. Load new version?')) {
