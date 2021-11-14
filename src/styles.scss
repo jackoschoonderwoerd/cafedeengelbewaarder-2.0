@@ -39,6 +39,11 @@ ul {
 .panelClassSuccess {
   border: 10px solid lightgreen
 }
+
+.corona-dialog .mat-dialog-container {
+  border-color: var(--text-color-orange !important);
+}
+
 button {
   text-transform: uppercase;
 }

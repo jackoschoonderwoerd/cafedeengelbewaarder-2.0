@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.dialog.open(CoronaDialogComponent, {
+      panelClass: 'corona-dialog',
       width: '320px'
     });
     if (this.swUpdate.isEnabled) {

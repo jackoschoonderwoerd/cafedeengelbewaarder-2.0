@@ -1,9 +1,10 @@
 <div class="flags">
-  <img class="flag" *ngIf="language ==='english'" src="./../../assets/images/nl-flag.png" alt="" (click)="onSelectLanguage('dutch')">
-  <img class="flag" *ngIf="language === 'dutch'" src="./../../assets/images/uk-flag.png" alt="" (click)="onSelectLanguage('english')"> 
+  <img class="flag" [ngClass]="{'language-selected': language === 'english'}" src="./../../assets/images/uk-flag.png" alt="" (click)="onSelectLanguage('english')"> 
+  <img class="flag" [ngClass]="{'language-selected': language === 'dutch'}" src="./../../assets/images/nl-flag.png" alt="" (click)="onSelectLanguage('dutch')">
 </div>
 
 <div *ngIf="language ==='dutch'" class="container-dutch"
+  
   fxLayout="column" fxLayoutGap="1rem">
   <div class="openingstijden">
     Wegens corona is het café dagelijks open van 12:00&nbsp;tot&nbsp;20:00.

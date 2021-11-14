@@ -5,8 +5,9 @@
   height: 2.5rem;
   padding: .2rem;
   .flag {
+    width: 50px;
     height: 100%;
-    border: 3px solid var(--text-color-orange);
+    margin-left: .5rem;
   }
 }
 .container-dutch, .container-english {
@@ -22,4 +23,7 @@
   .jazzengel {
 
   }
+}
+.language-selected {
+  border: 3px solid var(--text-color-orange);
 }
