@@ -30,7 +30,7 @@ const initialState: UIState = {
     openingHoursClose: '17:00',
     openingHoursWeekendOpen: '12:00',
     openingHoursWeekendClose: '17:00',
-    snacks: '12:00 - 19:30',
+    snacks: '12:00 - 17:00',
     lunch: '12:00 - 17:00',
     dinner: 'closed',
   },
