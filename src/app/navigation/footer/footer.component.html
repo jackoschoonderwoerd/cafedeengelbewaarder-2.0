@@ -1,80 +1,81 @@
-<section>
+<div class="section">
   <div class="top-footer">
-    <div class="footer-section">
-      <p class="footer-section-title">
+
+    <!-- CONTACT -->
+
+    <div class="contact">
+      <div class="contact-title">
         Contact
-      </p>
-      <p class="footer-section-content">
+      </div>
+      <div class="address-phone">
         Café de Engelbewaarder<br>
         Kloveniersburgwal 59 HS<br>
         1011 JZ Amsterdam<br>
-        020.625.37.72
-      </p>
+        020.625.37.72 <br>
+      </div>
+      <div class="email">cafedeengelbewaarder@gmail.com</div>
+      
       <div class="social-media">
-        <span class="instagram">
-          <a 
-            href="https://www.instagram.com/cafedeengelbewaarder/" 
+        <a
+          class="instagram"
+          href="https://www.instagram.com/cafedeengelbewaarder/"
+          target="_blank">
+          <img src="./../../../assets/images/instagram-logo-svg-vector-for-print.svg" alt="Istagram">
+        </a>
+        <span>
+          <a
+            class="facebook"
+            href="https://www.facebook.com/cafedeengelbewaarder"
             target="_blank">
-            <img src="./../../../assets/images/instagram-logo-svg-vector-for-print.svg" alt="Istagram">
-          </a>
-        </span>
-        <span class="facebook">
-          <a href="https://www.facebook.com/cafedeengelbewaarder" target="_blank">
             <img src="./../../../assets/images/1200px-Facebook_icon.svg.png" alt="Facebook">
           </a>
         </span>
       </div>
     </div>
 
-    <span *ngIf="language === 'dutch'">
-      <div class="footer-section">
-        <p class="footer-section-title">
-          Openingstijden
-        </p>
-        <div class="footer-section-content">
-          <p>
-            Wij zijn dagelijks geopend van {{openingHours.openingHoursOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursClose}}
-          </p>
-          <p>
-            Op vrijdag en zaterdag van {{openingHours.openingHoursWeekendOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursWeekendClose}}
-          </p>
-          <p>Lunch: {{openingHours.lunch}}</p>
-          <p>Snacks: {{openingHours.snacks}}</p>
-          <p>Diner: {{openingHours.dinner}}</p>
-          <!-- {{openingHours | json}}
-          Op dit moment is het terras iedere dag geopend van {{openingHours.openingHours}}.<br>
-          De openingstijden zullen worden aangepast in overeenstemming met het huidige regeringsbeleid. -->
-          </div>
-      </div>
-    </span>
+    <!-- OPENING HOURS -->
 
-    <span *ngIf="language === 'english'">
-      <div class="footer-section">
-        <p class="footer-section-title">
-          Opening Hours
-        </p>
-        <div class="footer-section-content">
-          <p>
-            We are opened daily from {{openingHours.openingHoursOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursClose}}
-          </p>
-          <p>
-            On fridays and saturdays from {{openingHours.openingHoursWeekendOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursWeekendClose}}
-          </p>
-          <p>Lunch: {{openingHours.lunch}}</p>
-          <p>Snacks: {{openingHours.snacks}}</p>
-          <p>Dinner: {{openingHours.dinner}}</p>
+    <div class="opening-hours">
+      <div class="opening-hours-title">
+        <span *ngIf="language === 'dutch'">Openingstijden</span>
+        <span *ngIf="language === 'english'">Opening Hours</span>
+      </div>
+      <div class="opening-hours-content">
+        <div>
+          <span *ngIf="language === 'dutch'">Wij zijn dagelijks geopend van</span>
+          <span *ngIf="language === 'english'">We are opened daily from</span>
+          {{openingHours.openingHoursOpen}}&nbsp;
+          <span *ngIf="language === 'dutch'">tot</span>
+          <span *ngIf="language === 'english'">until</span>
+          &nbsp;{{openingHours.openingHoursClose}}
         </div>
-      </div>
-    </span>
+        <div>
+          <span *ngIf="language === 'dutch'">Op vrijdag en zaterdag van</span>
+          <span *ngIf="language === 'english'">On fridays and saturdays from</span>
 
-    <span *ngIf="language === 'dutch'">
-      <div class="footer-section">
-        <p class="footer-section-title">
-          Jazz op zondag
-        </p>
-        <p class="footer-section-content">
-          I.V.M Corona voorlopig geen jazzsession
-        </p>
+          {{openingHours.openingHoursWeekendOpen}}&nbsp;
+          <span *ngIf="language === 'dutch'">tot</span>
+          <span *ngIf="language === 'english'">until</span>
+          &nbsp;{{openingHours.openingHoursWeekendClose}}
+        </div>
+        <div>Lunch: {{openingHours.lunch}}</div>
+        <div>Snacks: {{openingHours.snacks}}</div>
+        <span *ngIf="language === 'dutch'">Diner: {{openingHours.dinner}}</span>
+        <span *ngIf="language === 'english'">Dinner: {{openingHours.dinner}}</span>
+      </div>
+    </div>
+
+    <!-- JAZZENGEL-->
+
+    <div class="jazzengel">
+        <div class="jazzengel-title">
+          <span *ngIf="language === 'dutch'">Jazz op zondag</span>
+          <span *ngIf="language === 'english'">Jazz on Sundays</span>
+        </div>
+        <div class="jazzengel-content">
+          <span *ngIf="language === 'dutch'">I.V.M Corona voorlopig geen jazzsession</span>
+          <span *ngIf="language === 'english'">Sessions cancelled due to corona</span>
+        </div>
         <!-- <p class="footer-section-content">
           Jazz engel jamt normaliter elke zondag tussen
           <span style="white-space:nowrap">16:30 – 19:00</span>.<br>
@@ -82,26 +83,14 @@
           <a href="http://www.jazzengel.nl" rel="noreferrer" class="jazz-engel-link" target="_blank">JAZZENGEL</a>
           voor meer informatie en het programma.
         </p> -->
-      </div>
-    </span>
-
-    <span *ngIf="language === 'english'">
-      <div class="footer-section">
-        <p class="footer-section-title">
-          Jazz on Sundays
-        </p>
-        <p class="footer-section-content">Sessions cancelled due to corona</p>
-        <!-- <p class="footer-section-content">
-          Every sunday there's is a jazz-jamm session between <span style="white-space:nowrap">16:30 – 19:00</span>.<br>
-          For the latest information about the progam, visit <a rel="noreferrer" class="jazz-engel-link" href="www.jazzengel.nl">JAZZENGEL</a>
-        </p> -->
-      </div>
-    </span>
-
+    </div>
   </div>
+
+  <!-- BOTTOM FOOTER -->
+
   <div class="bottom-footer" fxLayout fxLayoutAlign="center">
-    <p class="bottom-footer-content">
+ 
       &copy; De Engelbewaarder 2020.
-    </p>
+    
   </div>
-</section>
+</div>

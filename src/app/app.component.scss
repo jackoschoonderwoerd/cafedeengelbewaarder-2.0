@@ -19,13 +19,12 @@ app-header {
   z-index: 100;
 }
 mat-sidenav-content {
-  background-color: var(--text-color-orange);
+  // background-color: var(--text-color-orange);
+  background-color: var(--header-blue);
 }
 main {
   
   
   // height: 100%;
 }
-router-outlet {
-  
-}
+

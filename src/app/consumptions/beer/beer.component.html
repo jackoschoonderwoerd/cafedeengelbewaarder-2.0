@@ -72,7 +72,7 @@
         </div>
       </div>
     </li>
-    <li
+    <li *ngIf="isAuthenticated$ | async"
       (click)="onAddToBeerArray()" 
       class="beer-list-item add-beer">
       ADD BEER
