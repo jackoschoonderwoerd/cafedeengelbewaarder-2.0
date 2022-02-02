@@ -46,7 +46,7 @@
       }
       // grid-template-columns: repeat(4, 1fr);
       .beer-list-item {
-        // border: 5px solid yellow;
+        border: 3px solid var(--text-color-orange);;
         padding: 1rem;
         margin: .3rem;
         background-color: var(--header-blue);
