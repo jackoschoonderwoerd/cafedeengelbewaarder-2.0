@@ -19,6 +19,7 @@
       <div class="tijden">
         <p class="openingHours">
           Het café is iedere dag open van {{openingHours.openingHoursOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursClose}}<br>
+          Op vrijdag en zaterdag van {{openingHours.openingHoursWeekendOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursWeekendClose}}
         </p>
         <!-- <p class="openingHours">
           Het café is open van {{openingHours.openingHoursOpen}}&nbsp;tot&nbsp;{{openingHours.openingHoursClose}}<br>
@@ -46,7 +47,8 @@
     <div *ngIf="language === 'english'" class="openingstijden" fxLayout="column" fxLayoutAlign="center center">
       <div class="tijden">
         <p class="openingHours">
-          Our cafe is opened daily from {{openingHours.openingHoursOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursClose}}
+          Our cafe is opened daily from {{openingHours.openingHoursOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursClose}}<br>
+          On fridays and saturdays from  {{openingHours.openingHoursWeekendOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursWeekendClose}}
         </p>
         <!-- <p class="openingHoursWeekend">
           Fridays and Saturdays from {{openingHours.openingHoursWeekendOpen}}&nbsp;until&nbsp;{{openingHours.openingHoursWeekendClose}}
