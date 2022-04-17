@@ -1,0 +1,23 @@
+.page-container {
+    height: 100vh;
+    background-color: #ccc;
+    .image-container {
+        width: 100vw;
+        img {
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+        img.contain {
+            object-fit: contain;
+        }
+        img.cover {
+            object-fit: cover;
+        }
+        img.scale {
+            object-fit: scale-down;
+        }
+        img.fill {
+            object-fit: fill;
+        }
+    }
+}

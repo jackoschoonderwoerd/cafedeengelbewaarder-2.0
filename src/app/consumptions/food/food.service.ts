@@ -52,7 +52,9 @@ export class FoodService {
   }
 
   deleteCourse(mealType: string, courseId: string) {
+    console.log(mealType, courseId);
     const index = this.newDinner.courses.findIndex((course: Course) => {
+      console.log(course.id, courseId)
       return course.id === courseId
     });
     this.newDinner.courses.splice(index, 1);
@@ -265,9 +267,11 @@ export class FoodService {
     this.newDinner.name = mealType
     this.db.collection(mealType).doc(this.newDinner.id).update(this.newDinner)
     .then(data => {
+      console.log(data);
       this.uiService.showSnackbar('database updated', null, 5000)
     })
     .catch(err => {
+      console.log(err);
       this.uiService.showSnackbar(err, null, 5000);
     });
   }

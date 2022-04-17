@@ -1,0 +1,52 @@
+<div class="image-form-container">
+  <div class="image-edit-mode" *ngIf="editMode">editing</div>
+  <input class="file-input" type="file" (change)="onChange($event)">
+  <div class="preview-container">
+      <img class="preview" [src]="filePath" alt="">
+  </div>
+  <form class="image-form" [formGroup]="form" fxLayout="column">
+      <mat-form-field>
+          <label for="orderNumber">order number</label>
+          <input
+              matInput
+              type="number"
+              formControlName="orderNumber">
+      </mat-form-field>
+      <mat-form-field>
+          <label for="title">title</label>
+          <input
+              matInput
+              type="text"
+              formControlName="title">
+      </mat-form-field>
+      <mat-form-field>
+          <label for="artist">artist</label>
+          <input
+              matInput
+              type="text"
+              formControlName="artistName">
+      </mat-form-field>
+      <mat-form-field>
+          <label for="copyrichtOwner">copyright owner</label>
+          <input
+              matInput
+              type="text"
+              formControlName="copyrightOwner">
+      </mat-form-field>
+      <mat-form-field>
+          <label for="price">price</label>
+          <input
+              matInput
+              type="let"
+              formControlName="price">
+      </mat-form-field>
+      <button
+          [disabled]="!imageSelected || form.invalid"
+          mat-raised-button (click)="onAddImageToExhibition()">
+          {{editMode ? 'save edits' : 'add image to exhibition'}}
+
+      </button>
+      <button mat-raised-button (click)="onCancelImage()">cancel image</button>
+  </form>
+  
+</div>

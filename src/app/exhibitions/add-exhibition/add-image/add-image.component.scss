@@ -1,0 +1,17 @@
+.image-form-container {
+  padding: 1rem;
+  border: 3px solid orange;
+  .file-input {
+      
+  }
+  .image-form {
+      display: flex;
+      flex-direction: column;
+  }
+  .preview-container {
+      width: 150px;
+      .preview {
+          width: 100%;
+      }
+  }
+}

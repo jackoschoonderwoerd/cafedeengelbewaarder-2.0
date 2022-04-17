@@ -10,6 +10,9 @@ import { AddExhibitionComponent } from './add-exhibition/add-exhibition.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExhibitionsMaterialModule } from './exhibitions-material.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AddImageComponent } from './add-exhibition/add-image/add-image.component';
+
 
 
 
@@ -20,7 +23,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     
     ExhibitionsComponent,
     ShowCaseComponent,
-    AddExhibitionComponent
+    AddExhibitionComponent,
+    AddImageComponent,
+
   ],
   imports: [
     CommonModule,
@@ -29,7 +34,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCarouselModule,
     ReactiveFormsModule,
     ExhibitionsMaterialModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AngularFireStorageModule
 
     
     // FontAwesomeModule

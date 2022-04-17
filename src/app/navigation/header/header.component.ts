@@ -14,72 +14,74 @@ import { User } from 'src/app/auth/user.model';
 import { NavigationService } from '../navigation.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  mealTypes: string[];
-  userEmail$: Observable<string>
-  isAdmin$: Observable<boolean>
-  selectedLanguage$: Observable<string>
-  language: string = 'dutch';
-  expositionId: string;
-  isShowcaseActive: boolean = false;
-  lunchActive = 'no';
-  linkSelected: string;
-  selectedMealType: string;
+    mealTypes: string[];
+    userEmail$: Observable<string>
+    isAdmin$: Observable<boolean>
+    selectedLanguage$: Observable<string>
+    language: string = 'dutch';
+    expositionId: string;
+    isShowcaseActive: boolean = false;
+    lunchActive = 'no';
+    linkSelected: string;
+    selectedMealType: string;
+    isAuth$: Observable<boolean>;
 
-  constructor(
-    private store: Store<fromRoot.GlobalState>,
-    private authService: AuthService,
-    private router: Router,
-    private dialog: MatDialog,
-    private navigationService: NavigationService
-  ) { }
+    constructor(
+        private store: Store<fromRoot.GlobalState>,
+        private authService: AuthService,
+        private router: Router,
+        private dialog: MatDialog,
+        private navigationService: NavigationService
+    ) { }
 
-  ngOnInit(): void {
-    this.mealTypes = this.navigationService.getMealTypes();
-    this.store.select(fromRoot.getSelectedLanguage).subscribe((language: string) => {
-      this.language = language;
-    });
-    this.store.select(fromRoot.getIsShowcaseActive).subscribe((isShowcaseActive: boolean) => {
-      this.isShowcaseActive = isShowcaseActive
-    });
-    this.store.select(fromRoot.getIsDinnerOrLunchOrSnacks).subscribe((dinnerOrLunchOrSnacks) => {
-      this.linkSelected = dinnerOrLunchOrSnacks
-    });
-    this.userEmail$ = this.store.select(fromRoot.getUserEmail);
-    this.isAdmin$ = this.store.select(fromRoot.getIsAdmin);
-    this.selectedLanguage$ = this.store.select(fromRoot.getSelectedLanguage);
-  }
-  onOpenSidenav() {
-    this.store.dispatch(new UI.OpenSidenav);
-  }
-  onLogOut() {
-    this.authService.logOut();
-  }
+    ngOnInit(): void {
+        this.mealTypes = this.navigationService.getMealTypes();
+        this.store.select(fromRoot.getSelectedLanguage).subscribe((language: string) => {
+            this.language = language;
+        });
+        this.isAuth$ = this.store.select(fromRoot.getIsAuth)
+        this.store.select(fromRoot.getIsShowcaseActive).subscribe((isShowcaseActive: boolean) => {
+            this.isShowcaseActive = isShowcaseActive
+        });
+        this.store.select(fromRoot.getIsDinnerOrLunchOrSnacks).subscribe((dinnerOrLunchOrSnacks) => {
+            this.linkSelected = dinnerOrLunchOrSnacks
+        });
+        this.userEmail$ = this.store.select(fromRoot.getUserEmail);
+        this.isAdmin$ = this.store.select(fromRoot.getIsAdmin);
+        this.selectedLanguage$ = this.store.select(fromRoot.getSelectedLanguage);
+    }
+    onOpenSidenav() {
+        this.store.dispatch(new UI.OpenSidenav);
+    }
+    onLogOut() {
+        this.authService.logOut();
+    }
 
-  selectedLanguage(language: string) {
-    this.store.dispatch(new UI.SelectedLanguage(language))
-  }
+    selectedLanguage(language: string) {
+        this.store.dispatch(new UI.SelectedLanguage(language))
+    }
 
-  mealTypeSelected(mealType) {
-    this.selectedMealType = mealType;
-    this.store.dispatch(new UI.SelectedLink(mealType))
-  }
-  
-  expositionSelected() {
-    this.store.dispatch(new EXPOSITION.SetExhibitionId(null))
-  }
-  onLogIn() {
-    const dialogRef = this.dialog.open(LoginComponent);
-    dialogRef.afterClosed().subscribe((user: User) => {
-      if(user) {
-        this.authService.login(user);
-      }
-      return;
-    });
-  }
+    mealTypeSelected(mealType) {
+        this.selectedMealType = mealType;
+        this.store.dispatch(new UI.SelectedLink(mealType))
+    }
+
+    expositionSelected() {
+        this.store.dispatch(new EXPOSITION.SetExhibitionId(null))
+    }
+    onLogIn() {
+        const dialogRef = this.dialog.open(LoginComponent);
+        dialogRef.afterClosed().subscribe((user: User) => {
+            if (user) {
+                this.authService.login(user);
+            }
+            return;
+        });
+    }
 }

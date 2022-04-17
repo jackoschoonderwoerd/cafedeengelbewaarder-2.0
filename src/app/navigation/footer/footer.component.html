@@ -51,7 +51,7 @@
         </div>
         <div>
           <span *ngIf="language === 'dutch'">Op vrijdag en zaterdag van</span>
-          <span *ngIf="language === 'english'">On fridays and saturdays from</span>
+          <span *ngIf="language === 'english'">On Fridays and Saturdays from</span>
 
           {{openingHours.openingHoursWeekendOpen}}&nbsp;
           <span *ngIf="language === 'dutch'">tot</span>
@@ -76,12 +76,19 @@
           <span *ngIf="language === 'dutch'">I.V.M Corona voorlopig geen jazzsession</span>
           <span *ngIf="language === 'english'">Sessions cancelled due to corona</span>
         </div> -->
-        <p class="footer-section-content">
+        <p *ngIf="language === 'dutch'" class="footer-section-content">
           Jazzengel jamt elke zondag van
           <span style="white-space:nowrap">16:30&nbsp;tot&nbsp;19:00</span>.<br>
           Ga naar de website van
           <a href="http://www.jazzengel.nl" rel="noreferrer" class="jazz-engel-link" target="_blank">JAZZENGEL</a>
           voor meer informatie en het programma.
+        </p>
+        <p *ngIf="language === 'english'" class="footer-section-content">
+          Jazzengel jams every Sunday from
+          <span style="white-space:nowrap">16:30&nbsp;tot&nbsp;19:00</span>.<br>
+          For more information about the program visit:
+          <a href="http://www.jazzengel.nl" rel="noreferrer" class="jazz-engel-link" target="_blank">JAZZENGEL</a>
+          
         </p>
     </div>
   </div>

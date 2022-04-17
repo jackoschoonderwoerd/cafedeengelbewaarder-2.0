@@ -3,6 +3,7 @@ import { MatInputModule } from "@angular/material/input";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from '@angular/material/icon'
 
 
 @NgModule({
@@ -10,13 +11,15 @@ import { MatButtonModule } from "@angular/material/button";
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 

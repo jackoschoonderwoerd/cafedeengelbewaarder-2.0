@@ -1,0 +1,40 @@
+.page-container {
+    padding: 1rem;
+    margin-top: 64px;
+    background-color: white;
+    .form_app-new-add-image {
+        .form {
+            max-width: 500px;
+            border: 2px solid blue;
+            padding: 1rem;
+        }
+    }
+    .images {
+        grid-template-columns: 5;
+        padding: .3rem;
+        border: 2px solid #ccc;
+        
+        .image {
+            border: 1px solid #ccc;
+            padding: .3rem;
+            margin: .2rem;
+            display: inline-block;
+            max-width: 150px;
+            .orderNumber {display: inline-block;}
+            .title {display: inline-block;}
+            .artistName {display: inline-block;}
+            .copyrightOwner {display: inline-block;}
+            .price {display: inline-block;}
+            .image-container {
+                width: 100px;
+                img {
+                    width: 100%;
+                }
+            }
+            .buttons .button {
+                border: 1px solid black;
+                cursor: pointer;
+            }
+        }
+    }
+}

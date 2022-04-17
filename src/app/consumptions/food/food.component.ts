@@ -121,6 +121,7 @@ export class FoodComponent implements OnInit {
   }
 
   onDeleteCourse(courseId) {
+    console.log(courseId);
     const dialogRef =  this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(data => {
       if(data) {

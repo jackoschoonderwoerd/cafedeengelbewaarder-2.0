@@ -1,0 +1,138 @@
+.filler {
+    height: 56px;
+    @media (min-width: 600px) {
+        height: 64px;
+    }
+}
+.main-container {
+    // background-color: black;
+    mat-drawer-container {
+        // height: calc(1.3 * 100vh);
+        height: 100vh;
+        
+        mat-drawer {
+            // border: 1px solid var(--text-color-bright-orange);
+            max-width: 500px;
+            min-width: 300px;
+            .drawer-title {
+            }
+            background-color: var(--header-blue);
+            padding: 1rem;
+            hr {
+                border-color: var(--text-color-bright-orange);
+            }
+            .drawer-title {
+                display: inline-block;
+                padding: .3rem;
+                border: 1px solid var(--text-color-bright-orange);
+                border-radius: .3rem;
+                color: var(--text-color-bright-orange);
+                font-size: 1.3rem;
+            }
+            .drawer-artist-names {
+                .drawer-artist-name {
+                    color: var(--text-color-bright-orange);
+                    font-size: 1.1rem;
+                }
+            }
+            .description {
+                // border-top: .3rem solid var(--text-color-orange);
+                color: var(--text-color-bright-orange);
+            }
+            hr {
+                border-color: var(--text-color-bright-orange);
+            }
+            .emailAddress {
+                color: var(--text-color-bright-orange);
+                margin-bottom: .3rem;
+            }
+            .link {
+                // border: 3px solid pink;
+                color: var(--text-color-bright-orange);
+            }
+            .close-container {
+                .close {
+                    cursor: pointer;
+                    color: var(--text-color-bright-orange);
+                }
+            }
+        }
+        mat-drawer-content {
+            background-color: var(--header-blue);
+            height: 100vh;
+
+            hr {
+                border-color: var(--text-color-orange);
+                padding:0;
+                margin:0;
+            }
+            .header {
+                padding: .5rem;
+                .title_info {
+                    .title {
+                        background-color: var(--header-blue);
+                        border: 2px solid var(--text-color-orange);
+                        color: var(--text-color-bright-orange);
+                        padding: 0.3rem 0.5rem;
+                        border-radius: 0.3rem;
+                        font-size: 1.5rem;
+                    }
+                    .info-button {
+                        background-color: var(--text-color-orange);
+                        color: var(--header-blue);
+                        margin-right: 0.3rem;
+                        .info {
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+                .navigation {
+                    border: 1px solid var(--text-color-orange);
+                    padding: 0.3rem;
+                    border-radius: 0.3rem;
+                    .previous {
+                        background-color: var(--text-color-orange);
+                        color: var(--header-blue);
+                    }
+
+                    .orderNumber {
+                        // border: 1px solid red;
+                        color: var(--text-color-bright-orange);
+                        margin: auto;
+                    }
+                    .next {
+                        background-color: var(--text-color-orange);
+                        color: var(--header-blue);
+                        // border: 2px solid white;
+                        // font-size: 50px;
+                    }
+                }
+            }
+            .images {
+                
+                // width: 100%;
+                .figure {
+                    .image {
+                        
+                        max-height: calc(100vh - 215px);
+                        max-width: 100vw;
+                    }
+                    figcaption {
+                        padding-right: .3rem;
+                        // border: 1px solid white;
+                        background-color: var(--header-blue);
+                        // position:fixed;
+                        right:0;
+                        color: var(--text-color-bright-orange);
+                    }
+                }
+            }
+            .artist-name {
+                margin-right: 1rem;
+                color: var(--text-color-bright-orange);
+            }
+        }
+    }
+}
+
+

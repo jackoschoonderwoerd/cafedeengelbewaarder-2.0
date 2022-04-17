@@ -1,0 +1,70 @@
+<div class="main-container">
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" [opened]="opened"  (click)="onClose()">
+            <div class="filler"></div>
+            <hr>
+            <div class="drawer-title">{{exhibition?.title}}</div>
+            <ul class="drawer-artist-names">
+                <li fxLayout fxLayoutAlign="end" class="drawer-artist-name" *ngFor="for let artistName of exhibition?.artistNames">
+                    {{artistName}}
+                </li>
+            </ul>
+            <div class="description" [innerHTML]="exhibition?.description"></div>
+            <hr>
+            <div class="emailAddress">{{exhibition?.emailAddress}}</div>
+            <div class="link">{{exhibition?.link}}</div>
+            <div class="close-container" fxLayout fxLayoutAlign="end">
+
+                <mat-icon class="close">close</mat-icon>
+            </div>
+        </mat-drawer>
+        <mat-drawer-content>
+            <div class="filler"></div>
+            <hr>
+            <div class="header" fxLayout="column" fxLayoutAlign="space-around" fxLayoutGap=".5rem">
+                <div class="title_info" fxLayout fxLayoutAlign="space-between" fxLayoutGap=".3rem">
+                    <div class="title">
+                        {{exhibition?.title}}
+                    </div>
+                    <button mat-raised-button class="info-button" (click)="onInfo()">
+                        <mat-icon class="info">info</mat-icon>
+                    </button>
+                </div>
+                <!-- <div class="start-end_info" fxLayout fxLayoutAlign="space-between">
+                    <div class="start-end">
+                        {{exhibition?.startExhibition|date}} - 
+                        {{exhibition?.endExhibition|date}}
+                    </div>
+                </div> -->
+                <!-- {{exhibition?.images.length}} -->
+                <div
+                    *ngIf="exhibition?.images.length > 1" 
+                    class="navigation" 
+                    fxLayout fxLayoutAlign="space-between">
+                    <button class="previous" mat-raised-button (click)="onPrevious()">
+                       
+                        <mat-icon>arrow_back_ios</mat-icon>
+                    </button>
+                    <div
+                        class="orderNumber">
+                        {{exhibition?.images[activeImageIndex].orderNumber}} /
+                        {{exhibition?.images.length}}
+                    </div>
+                    <button class="next"  mat-raised-button (click)="onNext()">
+                       
+                        <mat-icon>arrow_forward_ios</mat-icon>
+                       
+                    </button>
+                </div>
+            </div>
+            <div (click)="onShowFullSize(exhibition?.images[activeImageIndex].filePath)" class="images" fxLayout fxLayoutAlign="center center center">
+                <figure class="figure">
+                    <img class="image" [src]="exhibition?.images[activeImageIndex].filePath" alt="">
+                    <figcaption fxLayout fxLayoutAlign="end">{{exhibition?.images[activeImageIndex].artistName}}</figcaption>
+                </figure>
+            </div>
+            <!-- <div class="artist-name" fxLayout fxLayoutAlign="end">{{exhibition?.images[activeImageIndex].artistName}}</div> -->
+
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

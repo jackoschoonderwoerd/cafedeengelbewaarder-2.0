@@ -1,0 +1,53 @@
+<div class="main">
+    
+    <div class="exhibitions" *ngFor="let exhibition of exhibitions$|async">
+        <div class="exhibition">
+            <div class="start_end_icon" fxLayout fxLayoutAlign="space-between center center">
+                <div
+                    *ngIf="exhibition.startExhibition != 631148400000"
+                    class="start_end"
+                    fxLayout fxLayoutGap=".3rem">
+                    <div class="start-exhibition">{{exhibition.startExhibition|date}}</div><span>-</span>
+                    <div class="end-exhibition">{{exhibition.endExhibition|date}}</div>
+                </div>
+                <!-- <div class="icon" (click)="onShowExhibition(exhibition.id)">
+                    <mat-icon>photo_library</mat-icon>
+                </div> -->
+            </div>
+            <div (click)="onShowExhibition(exhibition.id)" class="title">
+                <div class="title">{{exhibition.title}}</div>
+            </div>
+            <ul class="artist-names">
+                <li
+                    class="artist-name"
+                    *ngFor="let artistName of exhibition.artistNames">
+                    {{artistName|capitalizename}}
+                </li>
+            </ul>
+            <button
+                *ngIf="isAuthenticated$|async"
+                mat-raised-button
+                (click)="onEditExhibition(exhibition.id)">
+                edit exhibition
+            </button>
+            <button
+                *ngIf="isAuthenticated$|async"
+                mat-raised-button
+                (click)="onDeleteExhibition(exhibition.id)">
+                delete exhibition
+            </button>
+        </div>
+
+
+
+        <!-- {{exhibitions$|async|json}} -->
+    </div>
+    <button
+        class="add-exhibition"
+        *ngIf="isAuthenticated$|async"
+        mat-raised-button
+        (click)="onAddExhibition()">
+        add exhibition
+    </button>
+</div>
+    <!-- https://firebasestorage.googleapis.com/v0/b/cafede…=media&token=5b3a90b7-72f3-43fb-b054-5f77dd41550a -->
