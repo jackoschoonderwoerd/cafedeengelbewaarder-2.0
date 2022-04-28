@@ -65,11 +65,6 @@ export class BeerService {
 
   }
 
-  // deleteBeer(beerItem: Beer) {
-  //   this.db.doc(`beers/${beerItem.id}`).delete()
-  //   .then(() => {
-  //   });
-  // }
 
   fetchBeerArray() {
     return this.db
@@ -133,6 +128,7 @@ export class BeerService {
       })
     )
   }
+  
   fetchBeersForLocalUse() {
     return this.db
     .collection('beers', ref => ref.orderBy('listPosition'))

@@ -31,8 +31,8 @@ const initialState: UIState = {
     openingHoursWeekendOpen: '12:00',
     openingHoursWeekendClose: '02:00',
     snacks: '12:00 - 22:00',
-    lunch: '12:00 - 17:00',
-    dinner: '18:00 - 21:30',
+    lunch: '12:00 - 16:00',
+    dinner: '17:30 - 21:30',
   },
   isShowcaseActive: false,
   selectedLink: null

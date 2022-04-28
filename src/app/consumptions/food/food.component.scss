@@ -31,6 +31,14 @@
     background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
   }
 }
+.meal-type {
+  padding: 1rem 1rem 0rem 1.5rem;
+  
+  .header {
+    text-transform: uppercase;
+    color: var(--text-color-bright-orange)
+  }
+}
 .courses {
   .first-list {
     // border: 1px solid red;

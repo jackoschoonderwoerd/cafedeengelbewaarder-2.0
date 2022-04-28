@@ -81,6 +81,7 @@ export class FoodComponent implements OnInit {
   }
 
   onSelectMealType(mealType) {
+    console.log(mealType)
     this.mealType = mealType;
     this.foodService.checkForMealtypeDb(mealType)
     this.foodService.fetchMealTypeSnapshotChangesForLocalUse(this.mealType);   

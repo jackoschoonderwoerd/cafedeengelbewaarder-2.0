@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 
@@ -20,8 +20,9 @@ export class AppComponent implements OnInit {
     title = 'cafedeengelbewaarder';
     isOpened: boolean = true;
     // loaded: number = 0;
-    
+    isNotScrolling: boolean = false
 
+   
 
     constructor(
         private store: Store<fromRoot.GlobalState>,
@@ -32,17 +33,16 @@ export class AppComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const imagePaths: string[] = []
-        // this.newEhibitionsService.getAllImagePaths()
-        //     .subscribe((exhibitions: Exhibition[]) => {
-        //         console.log(exhibitions);
-        //         exhibitions.forEach((exhibition: Exhibition) => {
-        //             exhibition.images.forEach((image: NewImage) => {
-        //                 imagePaths.push(image.filePath);
-        //             })
-        //         })
-        //         this.preloadImages(imagePaths)
-        //     })
+        const imagePaths: string[] = [];
+
+        // this.dialog.open(CoronaDialogComponent, {
+        //     minWidth: '350px',
+        //     panelClass: 'kingsday',
+        //     height: '535px'
+        // })
+
+
+
 
         if (this.swUpdate.isEnabled) {
             this.swUpdate.available.subscribe(() => {
@@ -56,31 +56,10 @@ export class AppComponent implements OnInit {
             this.isOpened = isOpened;
         })
         this.authService.initAuthListener();
-        
+
     }
     closed() {
         this.store.dispatch(new UI.CloseSidenav);
     }
-    
-    // preloadImages(imagePaths) {
-    //     // console.log(imagePaths);
-    //     const imagePathsLength = imagePaths.length
-    //     for(let i = 0; i < imagePaths.length; i++) {
-    //         let img = new Image();
-    //         img.onload = () => {
-    //             this.imageLoaded(imagePathsLength)
-    //         }
-    //         img.src = imagePaths[i]
-    //     }
-    // }
-
-    // imageLoaded(imagePathsLength) {
-    //     this.loaded ++
-    //     console.log(this.loaded)
-    //     if(imagePathsLength === this.loaded) {
-    //         alert('all images are loaded')
-    //     }
-
-    // }
 }
 

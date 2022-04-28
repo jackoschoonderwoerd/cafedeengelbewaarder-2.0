@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Exhibition } from '../exhibitions/exhibition.model';
 import { convertSnaps } from '../utils/db.utils';
@@ -12,9 +12,13 @@ import { NewExhibition, NewImage } from './new-exhibition.model';
 })
 export class NewExhibitionsService {
 
+    
+
     constructor(
         private storage: AngularFireStorage,
         private db: AngularFirestore) {}
+
+  
 
     getExhibitions() {
         return this.db.collection('exhibitions', ref => ref.orderBy('startExhibition', "desc"))

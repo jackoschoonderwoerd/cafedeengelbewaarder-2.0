@@ -6,6 +6,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressBar, MatProgressBarModule } from "@angular/material/progress-bar";
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    OverlayModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    OverlayModule,
   ],
   exports: [
     MatInputModule,
@@ -25,6 +29,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatProgressBar,
     OverlayModule
   ]
 })

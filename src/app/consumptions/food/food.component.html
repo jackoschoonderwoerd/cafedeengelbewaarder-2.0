@@ -31,23 +31,29 @@
   </div>
 </section>
 <!-- {{newDinner$ | async | json}} -->
+<div class="meal-type">
+  <div class="header" *ngIf="mealType === 'lunch'">lunch: {{openingHours.lunch}}</div>
+  <div class="header" *ngIf="mealType === 'dinner' && language === 'english'">dinner: {{openingHours.dinner}}</div>
+  <div class="header" *ngIf="mealType === 'dinner' && language === 'dutch'">diner: {{openingHours.dinner}}</div>
+  <div class="header" *ngIf="mealType === 'snacks'">snacks: {{openingHours.snacks}}</div>
+</div>
 <div class="courses">
   <ul class="first-list">
     <li *ngFor="let dinner of dinner$ | async">
       <!-- <div class="">DINNER: {{dinner.name | json}}</div> -->
       <button 
-        *ngIf="isAuthenticated$ | async" 
-        class="add-course" 
-        mat-raised-button
-        (click)="onAddCourse()"
-        matTooltip="add a course to the menu">
-        add course
-      </button>
-      <ul class="courses-list">
+      *ngIf="isAuthenticated$ | async" 
+      class="add-course" 
+      mat-raised-button
+      (click)="onAddCourse()"
+      matTooltip="add a course to the menu">
+      add course
+    </button>
+    <ul class="courses-list">
+        
         <li fxLayout="column" class="edit-name-list-trash__list-item" *ngFor="let course of dinner.courses; let i = index">
           <div class="edit-name__list-trash" fxLayout fxLayoutAlign="space-between">
             <div class="edit-name" fxLayout fxLayoutGap=".5rem">
-
               <fa-icon 
                 *ngIf="isAuthenticated$ | async" 
                 class="edit" 
@@ -89,6 +95,7 @@
           </div>
 
           <ul class="food-item-list" *ngIf="course.foodItems">
+ 
             <hr *ngIf="isAuthenticated$ | async">
             <li class="food-item-list-item" *ngFor="let foodItem of course.foodItems; let i = index">
               

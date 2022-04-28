@@ -22,7 +22,9 @@ const routes: Routes = [
   { path: 'food', loadChildren: () => import('./consumptions/food/food.module').then(m => m.FoodModule)},
   { path: 'beers', loadChildren: () => import('./consumptions/beer/beer.module').then(m => m.BeerModule)},
   { path: 'exhibitions', loadChildren: () => import('./exhibitions/exhibitions.module').then(m => m.ExhibitionsModule)},
-  { path: 'new-exhibitions', loadChildren: () => import('./new-exhibitions/new-exhibitions.module').then(m => m.NewExhibitionsModule)},
+  { path: 'new-exhibitions',
+    loadChildren: () => import('./new-exhibitions/new-exhibitions.module').then(m => m.NewExhibitionsModule),
+  },
   
   { path: 'drinks', loadChildren: () => import('./consumptions/drinks/drinks.module').then(m => m.DrinksModule)},
 

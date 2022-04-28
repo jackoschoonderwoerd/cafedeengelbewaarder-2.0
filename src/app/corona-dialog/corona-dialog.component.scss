@@ -1,29 +1,52 @@
-.flags {
-  width: 100%;
-  background-color: var(--header-blue);
-  text-align: right;
-  height: 2.5rem;
-  padding: .2rem;
-  .flag {
-    width: 50px;
-    height: 100%;
-    margin-left: .5rem;
-  }
+.body {
+    background-color: var(--text-color-orange);
+    color: var(--header-blue);
+    border: 1rem solid var(--header-blue);
+    padding: 1rem;
+    .date {
+    }
+    .hours {
+    }
+    .title {
+        h2 {
+            font-weight: bolder;
+        }
+        h3 {
+            padding: .5rem;
+            border: 3px solid var(--header-blue);
+            font-weight: bold;
+        }
+    }
+    ul {
+        li {
+        }
+    }
 }
-.container-dutch, .container-english {
-  padding: 1rem;
-  background-color: var(--header-blue);
-  color: white;
-  .openingstijden {
 
-  }
-  .keuken {
-
-  }
-  .jazzengel {
-
-  }
-}
-.language-selected {
-  border: 3px solid var(--text-color-orange);
-}
+// .flags {
+//     width: 100%;
+//     background-color: var(--header-blue);
+//     text-align: right;
+//     height: 2.5rem;
+//     padding: 0.2rem;
+//     .flag {
+//         width: 50px;
+//         height: 100%;
+//         margin-left: 0.5rem;
+//     }
+// }
+// .container-dutch,
+// .container-english {
+//     padding: 1rem;
+//     background-color: var(--header-blue);
+//     color: white;
+//     .openingstijden {
+//     }
+//     .keuken {
+//     }
+//     .jazzengel {
+//     }
+// }
+// .language-selected {
+//     border: 3px solid var(--text-color-orange);
+// }

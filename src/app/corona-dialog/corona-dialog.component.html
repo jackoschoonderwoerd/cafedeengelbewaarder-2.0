@@ -1,47 +1,21 @@
-<div class="flags">
-  <img class="flag" [ngClass]="{'language-selected': language === 'english'}" src="./../../assets/images/uk-flag.png" alt="" (click)="onSelectLanguage('english')"> 
-  <img class="flag" [ngClass]="{'language-selected': language === 'dutch'}" src="./../../assets/images/nl-flag.png" alt="" (click)="onSelectLanguage('dutch')">
-</div>
-
-<div *ngIf="language ==='dutch'" class="container-dutch"
-  
-  fxLayout="column" fxLayoutGap="1rem">
-  <div class="openingstijden">
-    Wegens corona is het café tot 14 januari gesloten.
+<div class="body" mat-dialog-close>
+  <div class="date" fxLayout fxLayoutAlign="center">
+    <h4>27 APRIL KONINGSDAG</h4>
   </div>
-  <!-- <div class="keuken">
-    Onze keuken sluit om 19:00
-  </div> -->
-  <div class="snacks">
-    <!-- Snacks & Lunch tot 17:00 -->
+  <div class="hours" fxLayout fxLayoutAlign="center">
+    <h3>van 16:00 tot 18:00</h3></div>
+  <div class="title" fxLayout="column" fxLayoutAlign="center center">
+    <h2>JAZZENGEL</h2>
+    <!-- <div class="royal-edition"> -->
+      <h3> ROYAL EDITION</h3>
+    <!-- </div> -->
   </div>
-  <div class="jazzengel">
-    <!-- Voorlopig geen jazz op zondagmiddag. -->
-  </div>
-  <button 
-    mat-raised-button
-    mat-dialog-close>
-    OK
-  </button>
-</div>
-
-<div *ngIf="language === 'english'" class="container-english"
-  fxLayout="column" fxLayoutGap="1rem">
-  <div class="openingstijden">
-    Due to corona, our café is closed until Januari 14th.
-  </div>
-  <!-- <div class="keuken">
-    Our kitchen closes at 19:00
-  </div> -->
-  <div class="snacks">
-    <!-- Snacks & Lunch untill 17:00 -->
-  </div>
-  <div class="jazzengel">
-    <!-- No jazz on Sunday afternoons. -->
-  </div>
-  <button 
-    mat-raised-button
-    mat-dialog-close>
-    OK
-  </button>
+  <ul>
+    <li fxLayout fxLayoutAlign="space-between"><span>Una Bergin</span><span>vocals</span> </li>
+    <li  fxLayout fxLayoutAlign="space-between"><span>Laura Polence</span>  <span>vocals</span></li>
+    <li  fxLayout fxLayoutAlign="space-between"><span>Lucas Figueiredo</span>  <span>sax</span></li>
+    <li  fxLayout fxLayoutAlign="space-between"><span>Leo Bouwmeester</span>  <span>piano</span></li>
+    <li  fxLayout fxLayoutAlign="space-between"><span>Jacko Schoonderwoerd</span>  <span>bas</span></li>
+    <li  fxLayout fxLayoutAlign="space-between"><span>Victor de Boo</span>  <span></span>drums</li>
+  </ul>
 </div>
