@@ -1,0 +1,54 @@
+
+<div class="page-container">
+	<div class="flags">
+		<div
+			class="flag-container"
+			(click)="onFlag('english')"
+			[ngClass]="{'language-selected': language == 'english'}">
+			<img src="./../../../../assets/images/uk-flag.png" alt="">
+		</div>
+		<div
+			class="flag-container" 
+			(click)="onFlag('dutch')"
+			[ngClass]="{'language-selected': language == 'dutch'}">
+			<img src="./../../../../assets/images/nl-flag.png" alt="">
+		</div>
+	</div>
+	<div class="content-english" *ngIf="language === 'english'">
+		<div class="header">Dear customer,</div>
+		<div class="content-english">
+			<p>
+				Outside on the terrace we serve a custom menu.
+			</p>
+			<p>
+				By checking an option you will be directed to the appropriate selection.
+			</p>
+		</div>
+	</div>
+	
+	<div class="content-english" *ngIf="language === 'dutch'">
+		<div class="header">Beste klant,</div>
+		<div class="content-dutch">
+			<p>
+				Leuk dat je bij ons komt eten.
+			</p>
+			<p>
+				Let op: wij hebben BUITEN een aangepast menu.
+			</p>
+		</div>
+	</div>
+	
+	
+		<div class="buttons">
+
+			<div class="buttons-english" *ngIf="language === 'english'">
+				<button mat-raised-button [mat-dialog-close]="'inside'">inside</button>
+				<button mat-raised-button [mat-dialog-close]="'outside'">outside</button>
+			</div>
+			<div class="buttons-dutch" *ngIf="language === 'dutch'">
+				<button mat-raised-button [mat-dialog-close]="'inside'">binnen</button>
+				<button mat-raised-button [mat-dialog-close]="'outside'">buiten</button>
+			</div>
+		</div>
+	
+</div>

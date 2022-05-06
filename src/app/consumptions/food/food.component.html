@@ -1,172 +1,243 @@
 <section>
-  <div class="background-image">
-    <div class="banner">
-      <p *ngIf="language === 'dutch'" class="banner-header">KEUKEN & DRANKEN</p>
-      <p *ngIf="language === 'english'" class="banner-header">KITCHEN & DRINKS</p>
+    <div class="background-image">
+        <div class="banner">
+            <p *ngIf="language === 'dutch'" class="banner-header">KEUKEN & DRANKEN</p>
+            <p *ngIf="language === 'english'" class="banner-header">KITCHEN & DRINKS</p>
 
-      <div *ngIf="linkSelected ==='dinner'" class="link-selected">
-        <p *ngIf="language === 'dutch'" class="banner-course-name">Diner</p>
-        <p *ngIf="language === 'english'" class="banner-course-name">Dinner</p>
-      </div>
+            <div *ngIf="linkSelected ==='dinner'" class="link-selected">
+                <p *ngIf="language === 'dutch'" class="banner-course-name">Diner</p>
+                <p *ngIf="language === 'english'" class="banner-course-name">Dinner</p>
+            </div>
 
-      <div *ngIf="linkSelected ==='lunch'" class="link-selected">
-        <p class="banner-course-name">Lunch</p>
-      </div>
-      <div *ngIf="linkSelected ==='snacks'" class="link-selected">
-        <p class="banner-course-name">Snacks</p>
-      </div>
+            <div *ngIf="linkSelected ==='lunch'" class="link-selected">
+                <p class="banner-course-name">Lunch</p>
+            </div>
+            <div *ngIf="linkSelected ==='snacks'" class="link-selected">
+                <p class="banner-course-name">Snacks</p>
+            </div>
 
 
-      <p *ngIf="language === 'dutch'" class="banner-text-content">De keuken is 7 dagen per week geopend.<br>
-        Lunch: {{openingHours.lunch}}<br>
-        Diner: {{openingHours.dinner}}<br>
-        Snacks: {{openingHours.snacks}}
-      </p>
-      <p *ngIf="language === 'english'" class="banner-text-content">Our kitchen is opened 7 days a week.<br>
-        Lunch: {{openingHours.lunch}}<br>
-        Dinner: {{openingHours.dinner}}<br>
-        Snacks: {{openingHours.snacks}}
-      </p>
+            <p *ngIf="language === 'dutch'" class="banner-text-content">De keuken is alle dagen geopend van:<br>
+                Lunch: {{openingHours.lunch}}<br>
+                Diner: {{openingHours.dinner}}<br>
+                Snacks: {{openingHours.snacks}}
+            </p>
+            <p *ngIf="language === 'english'" class="banner-text-content">Our kitchen is opened 7 days a week.<br>
+                Lunch: {{openingHours.lunch}}<br>
+                Dinner: {{openingHours.dinner}}<br>
+                Snacks: {{openingHours.snacks}}
+            </p>
+        </div>
     </div>
-  </div>
 </section>
 <!-- {{newDinner$ | async | json}} -->
 <div class="meal-type">
-  <div class="header" *ngIf="mealType === 'lunch'">lunch: {{openingHours.lunch}}</div>
-  <div class="header" *ngIf="mealType === 'dinner' && language === 'english'">dinner: {{openingHours.dinner}}</div>
-  <div class="header" *ngIf="mealType === 'dinner' && language === 'dutch'">diner: {{openingHours.dinner}}</div>
-  <div class="header" *ngIf="mealType === 'snacks'">snacks: {{openingHours.snacks}}</div>
+    <div class="header" *ngIf="mealType === 'lunch'">lunch: {{openingHours.lunch}}</div>
+    <div class="header" *ngIf="mealType === 'dinner' && language === 'english'">dinner: {{openingHours.dinner}}</div>
+    <div class="header" *ngIf="mealType === 'dinner' && language === 'dutch'">diner: {{openingHours.dinner}}</div>
+    <div class="header" *ngIf="mealType === 'snacks'">snacks: {{openingHours.snacks}}</div>
+    <div class="inside_outside" *ngIf="mealType === 'dinner'">
+        <div *ngIf="language ==='english'" class="location">
+            <div
+                class="location-btn"
+                [ngClass]="{'location-btn-selected': !isOutside}"
+                (click)="onChangeLocation()">
+                
+                MENU INSIDE
+            </div>
+            <div 
+                class="location-btn"
+                [ngClass]="{'location-btn-selected': isOutside}"
+                (click)="onChangeLocation()">
+                MENU OUTSIDE
+            </div>
+        </div>
+        <div class="location" *ngIf="language === 'dutch'">
+            <div
+                class="location-btn"
+                [ngClass]="{'location-btn-selected': !isOutside}"
+                (click)="onChangeLocation()">
+                MENU BINNEN
+            </div>
+            <div 
+                class="location-btn"
+                [ngClass]="{'location-btn-selected': isOutside}"
+                (click)="onChangeLocation()">
+                MENU BUITEN
+            </div>
+        </div>
+    </div>
 </div>
 <div class="courses">
-  <ul class="first-list">
-    <li *ngFor="let dinner of dinner$ | async">
-      <!-- <div class="">DINNER: {{dinner.name | json}}</div> -->
-      <button 
-      *ngIf="isAuthenticated$ | async" 
-      class="add-course" 
-      mat-raised-button
-      (click)="onAddCourse()"
-      matTooltip="add a course to the menu">
-      add course
-    </button>
-    <ul class="courses-list">
-        
-        <li fxLayout="column" class="edit-name-list-trash__list-item" *ngFor="let course of dinner.courses; let i = index">
-          <div class="edit-name__list-trash" fxLayout fxLayoutAlign="space-between">
-            <div class="edit-name" fxLayout fxLayoutGap=".5rem">
-              <fa-icon 
-                *ngIf="isAuthenticated$ | async" 
-                class="edit" 
-                [icon]="faEdit" 
-                (click)="onEditCourse(course)"
-                matTooltip="edit the course">
-              </fa-icon>
-              <div class="courseNames" *ngIf="course.showCourseName === 'true'">
-                <div *ngIf="language ==='dutch'" class="name">{{ course.nameDutch}}</div>
-                <div *ngIf="language ==='english'" class="name">{{ course.nameEnglish}}</div>
+    <ul class="first-list">
+        <li *ngFor="let dinner of dinner$ | async">
+            <!-- <div class="">DINNER: {{dinner.name | json}}</div> -->
+            <button
+                *ngIf="isAuthenticated$ | async"
+                class="add-course"
+                mat-raised-button
+                (click)="onAddCourse()"
+                matTooltip="add a course to the menu">
+                add course
+            </button>
+            <ul class="courses-list">
 
-              </div>
-            </div>
-            <div *ngIf="isAuthenticated$ | async" class="list-trash" fxLayout fxLayoutGap="1rem">
-              <!-- <div class="list">{{course.listPosition}}</div> -->
-              <div *ngIf="isAuthenticated$ | async"  class="chevrons" fxLayout="row" fxLayoutGap="1rem">
-                <fa-icon 
-                  *ngIf="i !== 0"
-                  [icon]="faChevronUp" 
-                  (click)="onMoveCourse('up', course.id, dinner.mealType)"
-                  
-                  matTooltip="moves the course up the list"></fa-icon>
-                  <!-- {{i}} -->
-                <fa-icon
-                  *ngIf="i !== dinner.courses.length -1" 
-                  [icon]="faChevronDown" 
-                  
-                  (click)="onMoveCourse('down', course.id)"
-                  matTooltip="moves the course down the list">
-                </fa-icon>
-              </div>
-              <fa-icon
-                class="trash" 
-                (click)="onDeleteCourse(course.id)" 
-                [icon]="faTrash" 
-                matTooltip="click to remove entry">
-              </fa-icon>
-            </div>
-          </div>
+                <li fxLayout="column" class="edit-name-list-trash__list-item"
+                    *ngFor="let course of dinner.courses; let i = index">
+                    <div class="edit-name__list-trash" fxLayout fxLayoutAlign="space-between">
+                        <div class="edit-name" fxLayout fxLayoutGap=".5rem">
+                            <fa-icon
+                                *ngIf="isAuthenticated$ | async"
+                                class="edit"
+                                [icon]="faEdit"
+                                (click)="onEditCourse(course)"
+                                matTooltip="edit the course">
+                            </fa-icon>
 
-          <ul class="food-item-list" *ngIf="course.foodItems">
- 
-            <hr *ngIf="isAuthenticated$ | async">
-            <li class="food-item-list-item" *ngFor="let foodItem of course.foodItems; let i = index">
-              
-              <div fxLayout fxLayoutAlign="space-between" class="food-item" fxLayout>
-                <div class="edit-name-ingredients" fxLayout fxLayoutGap=".5rem">
-                  <div *ngIf="isAuthenticated$ | async" class="edit-food-item"
-                    (click)="onEditFoodItem(course.id, foodItem)">
-                    <fa-icon [icon]="faEdit" matTooltip="edit name, price, ingredients and amount of the dish"></fa-icon>
-                  </div>
+                            <div *ngIf="calculateFoodItemsAvailableOutside(course) > 0 || !isOutside">
+                                <div class="courseNames" *ngIf="course.showCourseName === 'true'">
+                                    
+                                    <div *ngIf="language ==='dutch'" class="name">{{ course.nameDutch}}</div>
+                                    <div *ngIf="language ==='english'" class="name">{{ course.nameEnglish}}</div>
+    
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isAuthenticated$ | async" class="list-trash" fxLayout fxLayoutGap="1rem">
+                            <!-- <div class="list">{{course.listPosition}}</div> -->
+                            <div *ngIf="isAuthenticated$ | async" class="chevrons" fxLayout="row" fxLayoutGap="1rem">
+                                <fa-icon
+                                    *ngIf="i !== 0"
+                                    [icon]="faChevronUp"
+                                    (click)="onMoveCourse('up', course.id, dinner.mealType)"
 
-                  <div class="name-ingredients" *ngIf="language === 'dutch'">
-                    <div class="food-item-name">
-                      {{foodItem.nameDutch}}
+                                    matTooltip="moves the course up the list"></fa-icon>
+                                <!-- {{i}} -->
+                                <fa-icon
+                                    *ngIf="i !== dinner.courses.length -1"
+                                    [icon]="faChevronDown"
 
-                      <span class="amount" *ngIf="foodItem.amount > 1">({{foodItem.amount}})</span>
+                                    (click)="onMoveCourse('down', course.id)"
+                                    matTooltip="moves the course down the list">
+                                </fa-icon>
+                            </div>
+                            <fa-icon
+                                class="trash"
+                                (click)="onDeleteCourse(course.id)"
+                                [icon]="faTrash"
+                                matTooltip="click to remove entry">
+                            </fa-icon>
+                        </div>
                     </div>
-                    <div class="ingredients">{{foodItem.ingredientsDutch}}</div>
-                  </div>
 
-                  <div class="name-ingredients" *ngIf="language ==='english'">
-                    <div class="food-item-name">
-                      {{foodItem.nameEnglish}}
-                      <span class="amount" *ngIf="foodItem.amount > 1">({{foodItem.amount}}X)</span>
-                    </div>
-                    <div class="ingredients">{{foodItem.ingredientsEnglish}}</div>
-                  </div>
+                    <ul class="food-item-list" *ngIf="course.foodItems">
+                        <!-- <hr *ngIf="isAuthenticated$ | async"> -->
+                        <li   
+                            class="food-item-list-item" 
+                            *ngFor="let foodItem of course.foodItems; let i = index"
+                            >
 
-                </div>
-                <div class="price-list-trash" fxLayout="column" fxLayoutGap=".5rem">
-                  <div *ngIf="foodItem.price !== 0" fxLayout fxLayoutAlign="end" class="price">
-                    {{foodItem.price | currency:"EUR"}}
-                  </div>
-                  <div *ngIf="isAuthenticated$ | async" class="chevrons" fxLayout="row" fxLayoutAlign="end"
-                    fxLayoutGap="1rem">
-                    <fa-icon 
-                      [ngClass]="{'invalid-chevron': i === 0}"
-                      
-                      [icon]="faChevronUp" 
-                      (click)="onMoveFoodItem('up', course.id, foodItem.id)"
-                      fxLayoutAlign="end" 
-                      matTooltip="moves the dish up the list">
-                    </fa-icon>
-                    <fa-icon
-                    [ngClass]="{'invalid-chevron': i === course.foodItems.length -1}"
-                      
-                      [icon]="faChevronDown" 
-                      fxLayoutAlign="end"
-                      (click)="onMoveFoodItem('down', course.id, foodItem.id)" 
-                      matTooltip="moves the dish down the list">
-                    </fa-icon>
-                    <div *ngIf="isAuthenticated$ | async" (click)="onDeleteFoodItem(course.id, foodItem.id)" fxLayout
-                      fxLayoutAlign="end" fxLayoutGap="1rem" class="trash">
-                      <fa-icon [icon]="faTrash" matTooltip="click to remove entry"></fa-icon>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="hr">
-                <hr>
-              </div>
-            </li>
-          </ul>
-          <div *ngIf="language === 'dutch'" class="remark">{{course.remarkDutch}}</div>
-          <div *ngIf="language === 'english'" class="remark">{{course.remarkEnglish}}</div>
-          <button mat-raised-button *ngIf="isAuthenticated$ | async"
-            (click)="onAddFoodItem(course.id, course.nameDutch, course.nameEnglish)"
-            matTooltip="add a dish to this course">
-            add fooditem
-          </button>
+                            <!-- <div 
+                                class="not-available-outside-container" 
+                                style="color: white;" 
+                                *ngIf="foodItem.availableOutside === false">
+                                <div
+                                    fxLayoutAlign="center center"
+                                    class="not-available-outside-image-container" >
+                                    <img
+                                        class="not-available-outside-image"     
+                                        src="'./../../../../assets/images/not-available-outside.png" alt="">
+                                </div>
+                                <div
+                                    fxLayout
+                                    
+                                    class="" 
+                                    *ngIf="language === 'english'">
+                                    inside only
+                                </div>
+                                <div class="" *ngIf="language === 'dutch'">
+                                    alleen binnen
+                                </div>
+                            </div> -->
+
+                            <div 
+                                fxLayout 
+                                fxLayoutAlign="space-between" 
+                                class="food-item" 
+                                fxLayout
+                                *ngIf="foodItem.availableOutside === true || isOutside === false">
+                                <div class="edit-name-ingredients" fxLayout fxLayoutGap=".5rem">
+                                    <div *ngIf="isAuthenticated$ | async" class="edit-food-item"
+                                        (click)="onEditFoodItem(course.id, foodItem)">
+                                        <fa-icon [icon]="faEdit"
+                                            matTooltip="edit name, price, ingredients and amount of the dish"></fa-icon>
+                                    </div>
+                                    <!-- <ng-template #notAvailable style="color: white;">outsideAvailable is undefined</ng-template> -->
+                                    <div class="name-ingredients" *ngIf="language === 'dutch'">
+                                        <div class="food-item-name">
+                                            {{foodItem.nameDutch}}
+
+                                            <span class="amount"
+                                                *ngIf="foodItem.amount > 1">({{foodItem.amount}})</span>
+                                        </div>
+                                        <div class="ingredients">{{foodItem.ingredientsDutch}}</div>
+                                    </div>
+
+                                    <div class="name-ingredients" *ngIf="language ==='english'">
+                                        <div class="food-item-name">
+                                            {{foodItem.nameEnglish}}
+                                            <span class="amount"
+                                                *ngIf="foodItem.amount > 1">({{foodItem.amount}}X)</span>
+                                        </div>
+                                        <div class="ingredients">{{foodItem.ingredientsEnglish}}</div>
+                                    </div>
+
+                                </div>
+                                <div class="price-list-trash" fxLayout="column" fxLayoutGap=".5rem">
+                                    <div *ngIf="foodItem.price !== 0" fxLayout fxLayoutAlign="end" class="price">
+                                        {{foodItem.price | currency:"EUR"}}
+                                    </div>
+                                    <div *ngIf="isAuthenticated$ | async" class="chevrons" fxLayout="row"
+                                        fxLayoutAlign="end"
+                                        fxLayoutGap="1rem">
+                                        <fa-icon
+                                            [ngClass]="{'invalid-chevron': i === 0}"
+
+                                            [icon]="faChevronUp"
+                                            (click)="onMoveFoodItem('up', course.id, foodItem.id)"
+                                            fxLayoutAlign="end"
+                                            matTooltip="moves the dish up the list">
+                                        </fa-icon>
+                                        <fa-icon
+                                            [ngClass]="{'invalid-chevron': i === course.foodItems.length -1}"
+
+                                            [icon]="faChevronDown"
+                                            fxLayoutAlign="end"
+                                            (click)="onMoveFoodItem('down', course.id, foodItem.id)"
+                                            matTooltip="moves the dish down the list">
+                                        </fa-icon>
+                                        <div *ngIf="isAuthenticated$ | async"
+                                            (click)="onDeleteFoodItem(course.id, foodItem.id)" fxLayout
+                                            fxLayoutAlign="end" fxLayoutGap="1rem" class="trash">
+                                            <fa-icon [icon]="faTrash" matTooltip="click to remove entry"></fa-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="hr">
+                                <hr>
+                            </div> -->
+                        </li>
+                    </ul>
+                    <div *ngIf="language === 'dutch'" class="remark">{{course.remarkDutch}}</div>
+                    <div *ngIf="language === 'english'" class="remark">{{course.remarkEnglish}}</div>
+                    <button mat-raised-button *ngIf="isAuthenticated$ | async"
+                        (click)="onAddFoodItem(course.id, course.nameDutch, course.nameEnglish)"
+                        matTooltip="add a dish to this course">
+                        add fooditem
+                    </button>
+                </li>
+            </ul>
         </li>
-      </ul>
-    </li>
-  </ul>
+    </ul>
 </div>

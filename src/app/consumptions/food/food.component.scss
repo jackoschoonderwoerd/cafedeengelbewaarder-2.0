@@ -1,189 +1,255 @@
 @import "./../../shared/css/banner.scss";
 
 .edit-mode {
-  border: 3px solid red;
-  padding: 10px;
+    border: 3px solid red;
+    padding: 10px;
 }
 
 .background-image {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0% 60%;
-  height: 70vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 60%;
+    height: 70vh;
 
-  @media (max-width: 480px) {
-    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-480.jpg");
-  }
+    @media (max-width: 480px) {
+        background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-480.jpg");
+    }
 
-  @media (min-width: 481px) and (max-width: 767px) {
-    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-767.jpg");
-  }
+    @media (min-width: 481px) and (max-width: 767px) {
+        background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-767.jpg");
+    }
 
-  @media (min-width: 768px) and (max-width: 1024px) {
-    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1024.jpg");
-  }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1024.jpg");
+    }
 
-  @media (min-width: 1025px) and (max-width: 1280px) {
-    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
-  }
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
+    }
 
-  @media (min-width: 1281px) {
-    background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
-  }
+    @media (min-width: 1281px) {
+        background-image: url("./../../../assets/consumptions/food/images/bar-en-achter-1280.jpg");
+    }
 }
 .meal-type {
-  padding: 1rem 1rem 0rem 1.5rem;
-  
-  .header {
-    text-transform: uppercase;
-    color: var(--text-color-bright-orange)
-  }
+    border-top: 1px solid #969696;
+    border-bottom: 1px solid #969696;
+    padding: 1rem 1rem .5rem 1.5rem;
+    top: 56px;
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+    z-index: 50;
+    // background-color: var(--header-blue);
+    background-color: var(--text-color-orange);
+    
+    
+    
+    .header {
+    
+        text-transform: uppercase;
+        color: var(--header-blue);
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+    .inside_outside {
+        .location {
+            .location-btn {
+                padding: .3rem .5rem;
+                border: 1px solid #ccc;
+                // color: #ccc;
+                color: var(--header-blue);
+                text-transform: lowercase;
+                font-style: italic;
+                border-radius: 0.3rem;
+                text-align: center;
+                margin-bottom: .5rem;
+                display: inline-block;
+                margin-right: 1rem;
+            }
+            .location-btn-selected {
+                text-transform: uppercase;
+                border: 3px solid var(--header-blue);
+                font-size: 1.2rem;
+                font-weight: bold;
+                border-radius: 0.3rem;
+                color: var(--header-blue);
+                font-style: normal;
+                padding: .3rem .5rem;
+                display: inline-block;
+            }
+        }
+    }
 }
 .courses {
-  .first-list {
-    // border: 1px solid red;
-    padding: 0;
-    margin: 0.5rem;
-    li {
-      .add-course {
-        margin-bottom: .5rem;
-      }
-      .courses-list {
-        // border: 2px solid black;
-        .edit-name-list-trash__list-item {
-          background-color: var(--header-blue);
-          padding: 1rem;
-          .edit-name__list-trash {
-            // min-width: 350px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            
-            // border: 1px solid blue;
-            .edit-name {
-              // border: 1px solid green;
-              .edit {
-                color: yellow;
-              }
-              .name {
-                // border-bottom: 1px solid var(--text-color-orange);
-                // color: var(--text-color-bright-orange);
+    .first-list {
+        // border: 1px solid red;
+        padding: 0;
+        margin: 0.5rem;
+        li {
+            .add-course {
+                margin-bottom: 0.5rem;
+            }
+            .courses-list {
+                // border: 2px solid black;
+                .edit-name-list-trash__list-item {
+                    background-color: var(--header-blue);
+                    padding: 1rem;
+                    .edit-name__list-trash {
+                        // min-width: 350px;
+                        text-transform: uppercase;
+                        margin-bottom: 1rem;
+
+                        // border: 1px solid blue;
+                        .edit-name {
+                            // border: 1px solid green;
+                            .edit {
+                                color: yellow;
+                            }
+                            .name {
+                                // border-bottom: 1px solid var(--text-color-orange);
+                                // color: var(--text-color-bright-orange);
+                                color: white;
+                                font-size: 1.2rem;
+                            }
+                        }
+                        .list-trash {
+                            .list {
+                                padding: 0 0.2rem;
+                                background-color: lightgreen;
+                            }
+                            .chevrons {
+                                color: yellow;
+                            }
+                            .chevrons:hover {
+                                cursor: pointer;
+                            }
+                            .trash {
+                                color: red;
+                            }
+                        }
+                    }
+                    .food-item-list {
+                        // border: 3px solid white;
+                        .not-available-outside {
+                            // border: 3px solid red;
+                            border: 1px solid white;
+                            padding: 0.3rem;
+                            margin-bottom: 0.5rem;
+                            border-radius: 0.3rem;
+                        }
+                        .food-item-list-item {
+                            .not-available-outside-container {
+                                color: white;
+                                display: flex;
+                                // justify-content: center;
+                                align-items: center;
+                                margin-bottom: 0.2rem;
+                                .not-available-outside-image-container {
+                                    margin-right: 0.5rem;
+                                    background-color: white;
+                                    border-radius: 50%;
+                                    width: 2rem;
+                                    .not-available-outside-image {
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                            .food-item {
+                                border-bottom: 1px solid #969696;
+                                margin-bottom: 0.5rem;
+                                .edit-name-ingredients {
+                                    .edit-food-item {
+                                        color: white;
+                                    }
+                                    .name-ingredients {
+                                        // border: 1px solid red;
+                                        color: var(--text-color-bright-orange);
+                                        .food-item-name {
+                                            text-transform: uppercase;
+                                            margin-bottom: 0.3rem;
+                                            .amount {
+                                                // padding-left: .2em;
+                                                // border: 1px solid lightgreen;
+                                                color: var(--text-color-bright-orange);
+                                            }
+                                        }
+                                        .ingredients {
+                                            padding-left: 1rem;
+                                            font-size: 0.8rem;
+                                            text-transform: lowercase;
+                                            margin-bottom: 0.5rem;
+                                        }
+                                    }
+                                }
+                                .price-list-trash {
+                                    // border: 1px solid pink;
+                                    .price {
+                                        color: var(--text-color-bright-orange);
+                                    }
+                                    .chevrons {
+                                        color: white;
+                                        // border: 1px solid white
+                                    }
+                                    .invalid-chevron {
+                                        color: transparent;
+                                    }
+                                    .chevrons:hover {
+                                        cursor: pointer;
+                                    }
+                                    .list {
+                                        padding: 0 0.2rem;
+                                        color: lightgreen;
+                                    }
+                                    .trash {
+                                        color: red;
+                                    }
+                                }
+                            }
+                        }
+                        .hr {
+                            hr {
+                                width: 80%;
+                                opacity: 0.2;
+                            }
+                        }
+                    }
+                }
+            }
+            .remark {
                 color: white;
-                font-size: 1.2rem;
-              }            
+                margin-bottom: 0.5rem;
             }
-            .list-trash {
-              .list {
-                padding: 0 .2rem;
-                background-color: lightgreen;
-                
-              }
-              .chevrons {
-                color: yellow;
-              }
-              .chevrons:hover {
-                cursor: pointer;
-              }
-              .trash {
-                color: red;
-              }
-            }
-          }
-          .food-item-list {
-            // border: 3px solid white;
-            .food-item-list-item {
-              .food-item {
-                .edit-name-ingredients {
-                  .edit-food-item {
-                    color: white;
-                  }
-                  .name-ingredients {
-                    // border: 1px solid red;
-                    color: var(--text-color-bright-orange);
-                    .food-item-name {
-                      text-transform: uppercase;
-                      margin-bottom: .3rem;
-                      .amount {
-                        // padding-left: .2em;
-                        // border: 1px solid lightgreen;
-                        color: var(--text-color-bright-orange)
-                      }
-                    }
-                    .ingredients {
-                      padding-left: 1rem;
-                      font-size: .8rem;
-                      text-transform: lowercase;
-                    }
-                  }
-                }
-                .price-list-trash {
-                  // border: 1px solid pink;
-                  .price {
-                    color: var(--text-color-bright-orange)
-                  }
-                  .chevrons {
-                    color: white;
-                    // border: 1px solid white
-                  }
-                  .invalid-chevron {
-                    color: transparent;
-                  }
-                  .chevrons:hover {
-                    cursor: pointer;
-                  }
-                  .list {
-                    padding: 0 .2rem;
-                    color: lightgreen;
-                  }
-                  .trash {
-                    color: red;
-                  }
-                }
-              }
-            }
-            .hr {
-              hr {
-                width: 80%;
-                opacity: .2;
-              }
-            }
-          }
         }
-      }
-      .remark {
-        color: white;
-        margin-bottom: .5rem;
-      }
     }
-  }
 }
 
 .courses-list {
-  display: grid;
-  grid-column-gap: 0.5rem;
-  grid-row-gap: 0.5rem;
-  // border: 5px solid var(--text-color-orange);
-  // border: 10px solid green;
+    display: grid;
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 0.5rem;
+    // border: 5px solid var(--text-color-orange);
+    // border: 10px solid green;
 
-  // background-color: var(--text-color-orange);
-  @media (min-width: 320px) and (max-width: 480px) {
-    grid-template-columns: 1fr;
-    grid-column-gap: .5rem;
-    grid-row-gap: .5rem;
-  }
+    // background-color: var(--text-color-orange);
+    @media (min-width: 320px) and (max-width: 480px) {
+        grid-template-columns: 1fr;
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+    }
 
-  @media (min-width: 481px) and (max-width: 767px) {
-    grid-template-columns: 1fr;
-  }
+    @media (min-width: 481px) and (max-width: 767px) {
+        grid-template-columns: 1fr;
+    }
 
-  @media (min-width: 768px) and (max-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
-  }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        grid-template-columns: 1fr 1fr;
+    }
 
-  @media (min-width: 1025px) and (max-width: 1399px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+    @media (min-width: 1025px) and (max-width: 1399px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 
-  @media (min-width: 1400px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
+    @media (min-width: 1400px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }

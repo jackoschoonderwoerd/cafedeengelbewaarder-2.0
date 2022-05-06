@@ -29,6 +29,7 @@ export interface FoodItem { // steak nuts
   category?: string;
   course?: string;
   vegetarian?: boolean;
+  availableOutside?: boolean
 }
 
 export interface Remark {

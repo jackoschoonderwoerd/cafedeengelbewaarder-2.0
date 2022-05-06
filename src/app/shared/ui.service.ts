@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -6,7 +6,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UIService {
 
+  insideOutside = new EventEmitter<string>();
+
   constructor(private snackbar: MatSnackBar) {}
+
+
+  
 
   showSnackbar(message, action, duration) {
     this.snackbar.open(message, action, {

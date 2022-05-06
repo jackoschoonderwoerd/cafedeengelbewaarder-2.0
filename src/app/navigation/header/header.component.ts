@@ -12,6 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 import { User } from 'src/app/auth/user.model';
 import { NavigationService } from '../navigation.service';
+import { InsideOutsideDialogComponent } from 'src/app/consumptions/food/inside-outside-dialog/inside-outside-dialog.component';
+import { UIService } from 'src/app/shared/ui.service';
 
 @Component({
     selector: 'app-header',
@@ -37,7 +39,8 @@ export class HeaderComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private dialog: MatDialog,
-        private navigationService: NavigationService
+        private navigationService: NavigationService,
+        private uiService: UIService
     ) { }
 
     ngOnInit(): void {
@@ -69,6 +72,17 @@ export class HeaderComponent implements OnInit {
 
     mealTypeSelected(mealType) {
         this.selectedMealType = mealType;
+        if(mealType === 'dinner') {
+            const dialogRef = this.dialog.open(InsideOutsideDialogComponent, {
+                panelClass: 'inside-outside-dialog',
+                minWidth: '310px',
+                maxWidth: '400px'
+            });
+            dialogRef.afterClosed().subscribe((insideOutside: string) => {
+                this.uiService.insideOutside.emit(insideOutside);
+
+            })
+        }
         this.store.dispatch(new UI.SelectedLink(mealType))
     }
 

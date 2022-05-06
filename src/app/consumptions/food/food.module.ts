@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FoodComponent } from './food.component';
 
 import { AddCourseComponent } from './add-course/add-course.component';
+import { InsideOutsideDialogComponent } from './inside-outside-dialog/inside-outside-dialog.component';
 
 
 
@@ -21,6 +22,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
     FoodComponent,
     AddFoodComponent,
     AddCourseComponent,
+    InsideOutsideDialogComponent,
 
   ],
   imports: [
